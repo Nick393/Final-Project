@@ -1,6 +1,6 @@
-﻿namespace Final_Project
+﻿namespace Final_Project.TemplateClasses
 {
-    public class CharacterTemplate
+    public class CharacterTemplate : NameList
     {
 
         private string name;
