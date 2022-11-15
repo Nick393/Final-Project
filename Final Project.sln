@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Final Project", "Final Project\Final Project.csproj", "{E45FD283-3051-483C-98A8-5B955A0D3518}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5081F4F-6116-4906-AAB4-23AB652F82CF}"
-	ProjectSection(SolutionItems) = preProject
-		CharacterTemplate.cs = CharacterTemplate.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

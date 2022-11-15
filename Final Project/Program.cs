@@ -7,6 +7,9 @@ namespace Final_Project
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            CharacterTemplate Tom = new CharacterTemplate();
+            Tom.setName("Kevin");
+            Console.WriteLine(Tom.getName());
         }
     }
 }
