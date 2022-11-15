@@ -1,8 +1,17 @@
 ﻿using System;
 
-public class Class1
+public abstract class CharacterTemplate
 {
-	public Class1()
+
+	private string name;
+
+	public string getName()
 	{
+		return name;
 	}
+
+	public string setName(string newName)
+    {
+		name = newName;
+    }
 }
