@@ -1,8 +1,10 @@
 ﻿using System;
 
-public class Class1
+public abstract class CharacterTemplate
 {
-	public Class1()
+
+	public CharacterTemplate()
 	{
+
 	}
 }
