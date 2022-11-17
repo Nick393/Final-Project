@@ -5,12 +5,13 @@ namespace Final_Project.TemplateClasses
 {
     public class NameList
     {
-        private List<string> fNameList;
-        private List<string> lNameList;
-        private List<string> monsterNames;
-        private List<string> cityNames;
-        private List<string> placeNames;
-        private List<string> factions;
+        private List<string> fNameList = new List<string>() { "Tom", "Kevin", "Jerry" };
+        private List<string> lNameList = new List<string>() { "Johnson", "Tomson", "Jerryson" };
+        private List<string> monsterNames = new List<string>() { "Eagle", "Fish", "Dragon" };
+        private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
+        private List<string> placeNames = new List<string>() { "Forest", "Desert", "Ocean" };
+        private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
+        private List<string> factions = new List<string>() { "Good", "Neutral", "Evil" };
 
         public string getFullName()
         {
@@ -50,7 +51,11 @@ namespace Final_Project.TemplateClasses
             {
                 return placeNames;
             }
-            if (index == 5)
+            if (index == 4)
+            {
+                return placeSuffixes;
+            }
+            if (index == 6)
             {
                 return factions;
             }

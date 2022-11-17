@@ -15,6 +15,10 @@ namespace Final_Project
             Console.WriteLine(Tom.getName());
             Console.WriteLine(Tom.getAlignment());
             Console.WriteLine(Tom.getList(-2).Count);
+            foreach (string place in nameList.getList(4))
+            {
+                Console.WriteLine(place);
+            }
         }
     }
 }
