@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Final_Project.TemplateClasses;
+using System;
 
 namespace Final_Project
 {
@@ -8,8 +9,12 @@ namespace Final_Project
         {
             Console.WriteLine("Hello World!");
             CharacterTemplate Tom = new CharacterTemplate();
+            NameList nameList = new NameList();
             Tom.setName("Kevin");
+            Tom.setAlignment("Good");
             Console.WriteLine(Tom.getName());
+            Console.WriteLine(Tom.getAlignment());
+            Console.WriteLine(Tom.getList(-2).Count);
         }
     }
 }

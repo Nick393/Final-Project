@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-KeyWords",
+      "appliesTo": "Final Project/Databases/KeyWords.cs",
+      "type": "launch"
+    }
+  ]
+}

@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Final_Project.TemplateClasses
 {
     public class NameList
     {
-        private string[] fNameList;
-        private string[] lNameList;
-        private string[] monsterNames;
-        private string[] cityNames;
-        private string[] placeNames;
+        private List<string> fNameList;
+        private List<string> lNameList;
+        private List<string> monsterNames;
+        private List<string> cityNames;
+        private List<string> placeNames;
+        private List<string> factions;
 
         public string getFullName()
         {
             Random rand = new Random();
-            string randFName = fNameList[rand.Next(fNameList.Length)];
-            string randLName = lNameList[rand.Next(lNameList.Length)];
+            string randFName = fNameList[rand.Next(fNameList.Count)];
+            string randLName = lNameList[rand.Next(lNameList.Count)];
             return randFName + " " + randLName;
         }
 
@@ -24,10 +24,11 @@ namespace Final_Project.TemplateClasses
         {
             Random rand = new Random();
             string returnValue = mrList[rand.Next(mrList.Length)];
+            return returnValue;
         }
 
         //his name is kevin
-        public string[] getList(int index)
+        public List<string> getList(int index)
         {
             if (index == 0)
             {
@@ -48,9 +49,14 @@ namespace Final_Project.TemplateClasses
             if (index == 4)
             {
                 return placeNames;
-            } else
+            }
+            if (index == 5)
             {
-                string[] mrKevin = new string[0];
+                return factions;
+            }
+            else
+            {
+                List<string> mrKevin = new List<string>(0);
                 return mrKevin;
             }
         }

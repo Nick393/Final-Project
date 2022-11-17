@@ -4,6 +4,7 @@
     {
 
         private string name;
+        private string alignment;
 
         public string getName()
         {
@@ -14,9 +15,21 @@
         {
             name = newName;
         }
+
+        public string getAlignment()
+        {
+            return alignment;
+        }
+
+        public void setAlignment(string Alignment)
+        {
+            alignment = Alignment;
+        }
+
         public CharacterTemplate()
         {
             name = "";
+            alignment = "Neutral";
         }
     }
 }

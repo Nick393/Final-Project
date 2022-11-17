@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Final Project",
+    "\\Final Project\\Databases",
+    "\\Final Project\\TemplateClasses"
   ],
-  "SelectedNode": "\\Final Project.sln",
+  "SelectedNode": "\\Final Project\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
