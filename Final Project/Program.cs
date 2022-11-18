@@ -10,7 +10,8 @@ namespace Final_Project
            
             CharacterTemplate Tom = new CharacterTemplate("Kevin", "Good");
             NameList nameList = new NameList();
-            
+            Keywords keyword = new Keywords();
+            string testKeyword = "n";
             Console.WriteLine(Tom.name);
             Console.WriteLine(Tom.Alignment);
             Console.WriteLine(Tom.getList(-2).Count);
@@ -18,6 +19,11 @@ namespace Final_Project
             {
                 Console.WriteLine(place);
             }
+            if (keyword.isKeyword(testKeyword))
+            {
+                Console.WriteLine(keyword.detectKeyword(testKeyword));
+            }
+            
         }
     }
 }
