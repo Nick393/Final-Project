@@ -9,10 +9,12 @@ namespace Final_Project.TemplateClasses
         private List<string> lNameList = new List<string>() { "Johnson", "Tomson", "Jerryson" };
         private List<string> monsterNames = new List<string>() { "Eagle", "Fish", "Dragon" };
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
-        private List<string> placeNames = new List<string>() { "Savanna","Forest", "Desert", "Ocean" };
+        private List<string> placeNames = new List<string>() { "Deertrack","Sevii", "Kevin", "Typhoon" };
         private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
         private List<string> factions = new List<string>() { "Good", "Neutral", "Evil" };
 
+
+        //Returns a name for NPC characters
         public string getFullName()
         {
             Random rand = new Random();
@@ -21,6 +23,7 @@ namespace Final_Project.TemplateClasses
             return randFName + " " + randLName;
         }
 
+        //returns a random value from a list provided
         public string getValue(string[] mrList)
         {
             Random rand = new Random();
@@ -28,7 +31,16 @@ namespace Final_Project.TemplateClasses
             return returnValue;
         }
 
-       
+        //returns a place name followed by a suffix
+        public string getLocation()
+        {
+            Random rand = new Random();
+            string randPlaceName = placeNames[rand.Next(placeNames.Count)];
+            string randSuffixName = placeSuffixes[rand.Next(placeSuffixes.Count)];
+            return randPlaceName + " " + randSuffixName;
+        }
+
+       //returns a list based on its arbitrary index value
         public List<string> getList(int index)
         {
             switch(index)
@@ -67,39 +79,6 @@ namespace Final_Project.TemplateClasses
                         return Null;
                     }
             }
-            /*if (index == 0)
-            {
-                return fNameList;
-            }
-            if (index == 1)
-            {
-                return lNameList;
-            }
-            if (index == 2)
-            {
-                return monsterNames;
-            }
-            if (index == 3)
-            {
-                return cityNames;
-            }
-            if (index == 4)
-            {
-                return placeNames;
-            }
-            if (index == 4)
-            {
-                return placeSuffixes;
-            }
-            if (index == 6)
-            {
-                return factions;
-            }
-            else
-            {
-                List<string> mrKevin = new List<string>(0);
-                return mrKevin;
-            }*/
         }
     }
 }

@@ -23,7 +23,9 @@ namespace Final_Project
             {
                 Console.WriteLine(keyword.detectKeyword(testKeyword));
             }
-            
+            Console.WriteLine(nameList.getFullName());
+            Console.WriteLine(nameList.getLocation());
+
         }
     }
 }
