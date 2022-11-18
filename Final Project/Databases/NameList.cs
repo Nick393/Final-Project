@@ -28,10 +28,46 @@ namespace Final_Project.TemplateClasses
             return returnValue;
         }
 
-        //his name is kevin
+       
         public List<string> getList(int index)
         {
-            if (index == 0)
+            switch(index)
+            {
+                case 0:
+                    {
+                        return fNameList;
+                    }
+                case 1:
+                    {
+                        return lNameList;
+                    }
+                case 2:
+                    {
+                        return monsterNames;
+                    }
+                case 3:
+                    {
+                        return cityNames;
+                    }
+                case 4:
+                    {
+                        return placeNames;
+                    }
+                case 5:
+                    {
+                        return placeSuffixes;
+                    }
+                case 6:
+                    {
+                        return factions;
+                    }
+                default:
+                    {
+                        List<string> Null = new List<string>();
+                        return Null;
+                    }
+            }
+            /*if (index == 0)
             {
                 return fNameList;
             }
@@ -63,7 +99,7 @@ namespace Final_Project.TemplateClasses
             {
                 List<string> mrKevin = new List<string>(0);
                 return mrKevin;
-            }
+            }*/
         }
     }
 }
