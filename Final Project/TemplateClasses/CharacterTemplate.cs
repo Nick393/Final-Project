@@ -3,10 +3,10 @@
     public class CharacterTemplate : NameList
     {
 
-        private string name;
-        private string alignment;
+        private string _Name;
+        private string _Alignment;
 
-        public string getName()
+        /*public string getName()
         {
             return name;
         }
@@ -24,12 +24,31 @@
         public void setAlignment(string Alignment)
         {
             alignment = Alignment;
+        }*/
+        public CharacterTemplate()//default constructor
+        {
+            _Name = "";
+            _Alignment = "";
+            
         }
 
-        public CharacterTemplate()
+        public CharacterTemplate(string Name, string Alignment)//non-default constructor
         {
-            name = "";
-            alignment = "Neutral";
+            _Name = Name;
+            _Alignment = Alignment;
+            
+        }
+        public string name//gets and sets
+        {
+            get { return _Name; }
+            set { _Name = value; }
+        }
+
+
+        public string Alignment
+        {
+            get { return _Alignment; }
+            set { _Alignment = value; }
         }
     }
 }

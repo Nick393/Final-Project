@@ -7,13 +7,12 @@ namespace Final_Project
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            CharacterTemplate Tom = new CharacterTemplate();
+           
+            CharacterTemplate Tom = new CharacterTemplate("Kevin", "Good");
             NameList nameList = new NameList();
-            Tom.setName("Kevin");
-            Tom.setAlignment("Good");
-            Console.WriteLine(Tom.getName());
-            Console.WriteLine(Tom.getAlignment());
+            
+            Console.WriteLine(Tom.name);
+            Console.WriteLine(Tom.Alignment);
             Console.WriteLine(Tom.getList(-2).Count);
             foreach (string place in nameList.getList(4))
             {

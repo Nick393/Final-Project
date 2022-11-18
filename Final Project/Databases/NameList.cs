@@ -9,7 +9,7 @@ namespace Final_Project.TemplateClasses
         private List<string> lNameList = new List<string>() { "Johnson", "Tomson", "Jerryson" };
         private List<string> monsterNames = new List<string>() { "Eagle", "Fish", "Dragon" };
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
-        private List<string> placeNames = new List<string>() { "Forest", "Desert", "Ocean" };
+        private List<string> placeNames = new List<string>() { "Savanna","Forest", "Desert", "Ocean" };
         private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
         private List<string> factions = new List<string>() { "Good", "Neutral", "Evil" };
 
