@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\Final Project.csproj": {}
+    "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\Final Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\Final Project.csproj": {
+    "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\Final Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\Final Project.csproj",
+        "projectUniqueName": "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\Final Project.csproj",
         "projectName": "Final Project",
-        "projectPath": "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\Final Project.csproj",
-        "packagesPath": "C:\\Users\\nguyette\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\obj\\",
+        "projectPath": "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\Final Project.csproj",
+        "packagesPath": "C:\\Users\\mvsierra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -19,7 +19,7 @@
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\nguyette\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mvsierra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
