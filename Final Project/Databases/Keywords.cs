@@ -4,7 +4,7 @@ namespace Final_Project.TemplateClasses
 {
     public class Keywords
     {
-        private string[] keywords = {"Fight", "Flee", "Recover", "Heal", "Keywords", "Settings", "Exit", "Save", "Reset", "Yes", "Y", "No", "N"};
+        private string[] keywords = {"Fight", "Flee", "Tame", "Kill", "Recover", "Heal", "Keywords", "Settings", "Exit", "Save", "Reset", "Yes", "Y", "No", "N"};
 
 
         //detects if the word is a keyword, should be used before detectKeyword
