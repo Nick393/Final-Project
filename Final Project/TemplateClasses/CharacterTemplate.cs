@@ -5,19 +5,19 @@
 
         private string _Name;
         private string _Alignment;
-        private string _Race;
+        private string _Species;
         public CharacterTemplate()//default constructor
         {
             _Name = "";
             _Alignment = "";
-            _Race = "";
+            _Species = "";
         }
 
-        public CharacterTemplate(string Name, string Alignment, string Race)//non-default constructor
+        public CharacterTemplate(string Name, string Alignment, string Species)//non-default constructor
         {
             _Name = Name;
             _Alignment = Alignment;
-            _Race = Race;
+            _Species = Race;
         }
         public string Name//gets and sets
         {
@@ -25,10 +25,10 @@
             set { _Name = value; }
         }
 
-        public string Race
+        public string Species
         {
-            get { return _Race; }
-            set { _Race = value; }
+            get { return _Species; }
+            set { _Species = value; }
         }
         public string Alignment
         {

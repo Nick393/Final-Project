@@ -7,7 +7,7 @@ namespace Final_Project.TemplateClasses
     class MonsterTemplate : NameList
     {
         private string _Name;
-        private string _Race;
+        private string _Species;
 
         public string Name//gets and sets
         {
@@ -15,10 +15,14 @@ namespace Final_Project.TemplateClasses
             set { _Name = value; }
         }
 
-        public string Race
+        public string Species
         {
-            get { return _Race; }
-            set { _Race = value; }
+            get { return _Species; }
+            set { _Species = value; }
+        }
+        public override string ToString()
+        {
+            return _Name + "*" + _Species;
         }
     }
 }

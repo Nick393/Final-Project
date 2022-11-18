@@ -1,0 +1,5 @@
+C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\publish\Final Project.exe
+C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\publish\Final Project.dll
+C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\publish\Final Project.deps.json
+C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\publish\Final Project.runtimeconfig.json
+C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\publish\Final Project.pdb
