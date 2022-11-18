@@ -7,7 +7,9 @@ namespace Final_Project.TemplateClasses
     {
         private List<string> fNameList = new List<string>() { "Tom", "Kevin", "Jerry" };
         private List<string> lNameList = new List<string>() { "Johnson", "Tomson", "Jerryson" };
-        private List<string> monsterNames = new List<string>() { "Eagle", "Fish", "Dragon" };
+        private List<string> monsterNameList = new List<string>() { "Drakthar", "Boo", "Steve" };
+        private List<string> playerRaces = new List<string>() { "Human", "Elves", "Dwarves" };
+        private List<string> monsterRaces = new List<string>() { "Eagle", "Fish", "Dragon" };
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
         private List<string> placeNames = new List<string>() { "Deertrack","Sevii", "Kevin", "Typhoon" };
         private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
@@ -24,10 +26,10 @@ namespace Final_Project.TemplateClasses
         }
 
         //returns a random value from a list provided
-        public string getValue(string[] mrList)
+        public string getValue(List<string> mrList)
         {
             Random rand = new Random();
-            string returnValue = mrList[rand.Next(mrList.Length)];
+            string returnValue = mrList[rand.Next(mrList.Count)];
             return returnValue;
         }
 
@@ -55,21 +57,29 @@ namespace Final_Project.TemplateClasses
                     }
                 case 2:
                     {
-                        return monsterNames;
+                        return monsterNameList;
                     }
                 case 3:
                     {
-                        return cityNames;
+                        return playerRaces;
                     }
                 case 4:
                     {
-                        return placeNames;
+                        return monsterRaces;
                     }
                 case 5:
                     {
-                        return placeSuffixes;
+                        return cityNames;
                     }
                 case 6:
+                    {
+                        return placeNames;
+                    }
+                case 7:
+                    {
+                        return placeSuffixes;
+                    }
+                case 8:
                     {
                         return factions;
                     }
