@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Final_Project.TemplateClasses
+﻿namespace Final_Project.TemplateClasses
 {
     class PetTemplate : MonsterTemplate
     {

@@ -1,6 +1,6 @@
-﻿using Final_Project.TemplateClasses;
+﻿using Final_Project.Commands;
 using Final_Project.Databases;
-using Final_Project.Commands;
+using Final_Project.TemplateClasses;
 using System;
 
 namespace Final_Project
@@ -9,7 +9,7 @@ namespace Final_Project
     {
         static void Main(string[] args)
         {
-           
+
             CharacterTemplate Tom = new CharacterTemplate("Kevin", "Good", "Human");
             PetTemplate Kevin = new PetTemplate();
             NameList nameList = new NameList();
@@ -32,7 +32,7 @@ namespace Final_Project
             {
                 if (keyword.detectKeyword(testKeyword) == "Save")
                 {
-                    object data=saveData.getSaveData();
+                    object data = saveData.getSaveData();
 
                 }
             }

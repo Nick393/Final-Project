@@ -11,9 +11,11 @@ namespace Final_Project.TemplateClasses
         private List<string> playerSpecies = new List<string>() { "Human", "Elves", "Dwarves" };
         private List<string> monsterSpecies = new List<string>() { "Eagle", "Fish", "Dragon" };
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
-        private List<string> placeNames = new List<string>() { "Deertrack","Sevii", "Kevin", "Typhoon" };
+        private List<string> placeNames = new List<string>() { "Deertrack", "Sevii", "Kevin", "Typhoon" };
         private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
         private List<string> factions = new List<string>() { "Good", "Neutral", "Evil" };
+        private double defaultHealth = 15;
+        private double defaultStrength = 15;
 
 
         //Returns a name for NPC characters
@@ -42,10 +44,19 @@ namespace Final_Project.TemplateClasses
             return randPlaceName + " " + randSuffixName;
         }
 
-       //returns a list based on its arbitrary index value
+        public double getHealth()
+        {
+            return defaultHealth;
+        }
+        public double getStrength()
+        {
+            return defaultStrength;
+        }
+
+        //returns a list based on its arbitrary index value
         public List<string> getList(int index)
         {
-            switch(index)
+            switch (index)
             {
                 case 0:
                     {
@@ -88,6 +99,47 @@ namespace Final_Project.TemplateClasses
                         List<string> Null = new List<string>();
                         return Null;
                     }
+            }
+        }
+
+
+        //sets default values based on the stage of the game
+        public void determineDefault(int stage)
+        {
+            int newStage = stage - 1;
+            switch (newStage)
+            {
+                case 0:
+                    defaultHealth = 15;
+                    defaultStrength = 20;
+                    break;
+                case 1:
+                    defaultHealth = 22.5;
+                    defaultStrength = 30;
+                    break;
+                case 2:
+                    defaultHealth = 30;
+                    defaultStrength = 40;
+                    break;
+                case 3:
+                    defaultHealth = 37.5; 
+                    defaultStrength = 50;
+                    break;
+                case 4:
+                    defaultHealth = 45; 
+                    defaultStrength = 60;
+                    break;
+                case 5:
+                    defaultHealth = 52.5; 
+                    defaultStrength = 70;
+                    break;
+                case 6:
+                    defaultHealth = 60; 
+                    defaultStrength = 80;
+                    break;
+                default:
+                    determineDefault(1);
+                    break;
             }
         }
     }

@@ -1,28 +1,24 @@
 ﻿namespace Final_Project.TemplateClasses
 {
-    public class CharacterTemplate : NameList
+    public class CharacterTemplate : LifeformTemplate
     {
-
-        private string _Name;
         private string _Alignment;
         private string _Species;
         public CharacterTemplate()//default constructor
         {
-            _Name = "";
+            this.Name = "";
             _Alignment = "";
             _Species = "";
+            this.HealthPoints = getHealth();
         }
 
-        public CharacterTemplate(string Name, string Alignment, string Species)//non-default constructor
+        public CharacterTemplate(string Name, string Alignment, string Species, double healthPoints, double strength)//non-default constructor
         {
-            _Name = Name;
+            this.Name = Name;
             _Alignment = Alignment;
-            _Species = Race;
-        }
-        public string Name//gets and sets
-        {
-            get { return _Name; }
-            set { _Name = value; }
+            _Species = Species;
+            this.HealthPoints = healthPoints;
+            this.Strength = strength;
         }
 
         public string Species
@@ -34,6 +30,11 @@
         {
             get { return _Alignment; }
             set { _Alignment = value; }
+        }
+
+        public override string ToString()
+        {
+            return "Character*" + this.Name + "*" + _Alignment + "*" +;
         }
     }
 }
