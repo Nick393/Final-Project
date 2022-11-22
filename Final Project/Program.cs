@@ -20,10 +20,11 @@ namespace Final_Project
             Console.WriteLine(Tom.Name);
             Console.WriteLine(Tom.Alignment);
             Console.WriteLine(Tom.getList(-2).Count);
+            Console.WriteLine(Tom.HealthPoints);
             Kevin.Name = Kevin.getValue(Kevin.getList(2));
             Console.WriteLine(Kevin.Name);
             saveData.addObject(Kevin);
-            save.getObjects = saveData.getSaveData();
+            //save.getObjects = saveData.getSaveData();
             foreach (string place in nameList.getList(4))
             {
                 Console.WriteLine(place);

@@ -12,24 +12,23 @@
             this.Strength = 0;
         }
 
-        public MonsterTemplate(string name, string species)
+        public MonsterTemplate(string name, string species, int strengthValue)
         {
             this.Name = name;
             this.Species = species;
-            string speciesStrength = runStrength(species);
             double multiplier = 1;
-            switch (speciesStrength)
+            switch (strengthValue)
             {
-                case ("BOSS"):
+                case 3:
                     multiplier = 4;
                     break;
-                case ("STRONG"):
+                case 2:
                     multiplier = 2;
                     break;
-                case ("MEDIUM"):
+                case 1:
                     multiplier = 1;
                     break;
-                case ("WEAK"):
+                case 0:
                     multiplier = 0.5;
                     break;
                 default:
@@ -49,21 +48,6 @@
             return "Monster*" + this.Name + "*" + _Species;
         }
 
-        //there is almost certainly a better way to do this, temporary code
-        public string runStrength(string species)
-        {
-            if((species.ToUpper() == "GOD") || (species.ToUpper() == "DEMON"))
-            {
-                return "BOSS";
-        }else if ((species.ToUpper() == "DRAGON") || (species.ToUpper() == "PHOENIX"))
-            {
-                return "STRONG";
-            } else if ((species.ToUpper() == "WYRM") || (species.ToUpper() == "TIGER"))
-            {
-                return "MEDIUM";
-            } else ((species.ToUpper() == "COW") || (species.ToUpper() == "PIG")) {
-                return "WEAK";
-            }
-        }
+        
     }
 }

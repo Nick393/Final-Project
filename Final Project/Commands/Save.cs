@@ -7,7 +7,7 @@ namespace Final_Project.Commands
     class Save
     {
         //remember to put path
-        StreamWriter writer = new StreamWriter("");
+        StreamWriter writer = new StreamWriter("save.txt");
         SaveData saveData;
 
 

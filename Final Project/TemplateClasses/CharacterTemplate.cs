@@ -20,6 +20,15 @@
             this.HealthPoints = healthPoints;
             this.Strength = strength;
         }
+        public CharacterTemplate(string Name, string Alignment, string Species)//non-default constructor
+        {
+            this.Name = Name;
+            _Alignment = Alignment;
+            _Species = Species;
+            this.HealthPoints = getHealth();
+            this.Strength = getStrength();
+            
+        }
 
         public string Species
         {
@@ -34,7 +43,7 @@
 
         public override string ToString()
         {
-            return "Character*" + this.Name + "*" + _Alignment + "*" +;
+            return "Character*" + this.Name + "*" + _Alignment + "*" ;
         }
     }
 }
