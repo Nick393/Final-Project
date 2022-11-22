@@ -45,7 +45,7 @@
         }
         public override string ToString()
         {
-            return "Monster*" + this.Name + "*" + _Species;
+            return "Monster*" + this.Name + "*" + _Species + "/";
         }
 
         

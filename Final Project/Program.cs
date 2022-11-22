@@ -2,6 +2,8 @@
 using Final_Project.Databases;
 using Final_Project.TemplateClasses;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Final_Project
 {
@@ -11,8 +13,8 @@ namespace Final_Project
         {
 
             CharacterTemplate Tom = new CharacterTemplate("Kevin", "Good", "Human");
-            PetTemplate Kevin = new PetTemplate();
             NameList nameList = new NameList();
+            PetTemplate Kevin = new PetTemplate(nameList.getValue(nameList.getList(2)), "Pig", 0, Tom);
             Keywords keyword = new Keywords();
             SaveData saveData = new SaveData();
             Save save = new Save();
@@ -24,7 +26,10 @@ namespace Final_Project
             Kevin.Name = Kevin.getValue(Kevin.getList(2));
             Console.WriteLine(Kevin.Name);
             saveData.addObject(Kevin);
-            //save.getObjects = saveData.getSaveData();
+            List<object> save1 = new List<object>();
+           save1= saveData.getSaveData();
+            Save.SaveObjects(save1);
+            
             foreach (string place in nameList.getList(4))
             {
                 Console.WriteLine(place);
@@ -39,7 +44,19 @@ namespace Final_Project
             }
             Console.WriteLine(nameList.getFullName());
             Console.WriteLine(nameList.getLocation());
-
+            //make this a method
+            /*List<object> characters = new List<object>();
+            foreach( string i in objects)
+            {
+                if (i.Contains("Monster"))
+                {
+                    MonsterTemplate objectexample = new MonsterTemplate();
+                    objectexample.Name = "kevin";
+                    characters.Append(objectexample);
+                }
+                
+                
+            }*/
         }
     }
 }

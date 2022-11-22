@@ -7,22 +7,28 @@ namespace Final_Project.Commands
     class Save
     {
         //remember to put path
-        StreamWriter writer = new StreamWriter("save.txt");
+        //StreamWriter writer = new StreamWriter("save.txt");
+        
         SaveData saveData;
 
 
-        public static void getObjects(List<object> objects)
+        public static void SaveObjects(List<object> objects)
         {
 
             foreach (object obj in objects)
             {
-
+                StreamWriter stream = new StreamWriter("save.txt");
+                stream.Write(obj.ToString() + "*");
+                stream.Close();
             }
         }
 
 
-        private static string Format(string st)//this method formats the strings for output
+        private static string GetObjects()//this method formats the strings for output
         {
+            StreamReader r = new StreamReader("save.txt");
+           string data= r.ReadToEnd();
+           string st = data;
             try
             {
                 string lastLetterOfInput = st.Substring(st.Length - 1);
@@ -112,7 +118,11 @@ namespace Final_Project.Commands
                         finalWord = "";//ensures that the finalWord variable is empty
                         foreach (string item in wordsList)//assembles the final output
                         {
-                            finalWord = finalWord + item + "*";
+                            if(item.Contains("Monster"))
+                            {
+                                //object obj= 
+                            }
+                            //finalWord = finalWord + item + "*";
                         }
                     }
                     return finalWord;//returns the two words formatted
