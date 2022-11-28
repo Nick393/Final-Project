@@ -8,7 +8,7 @@ namespace Final_Project.TemplateClasses
         private List<string> fNameList = new List<string>() { "Tom", "Kevin", "Jerry" };
         private List<string> lNameList = new List<string>() { "Johnson", "Tomson", "Jerryson" };
         private List<string> monsterNameList = new List<string>() { "Drakthar", "Boo", "Steve" };
-        private List<string> playerSpecies = new List<string>() { "Human", "Elves", "Dwarves" };
+        private List<string> playerSpecies = new List<string>() { "Human", "Elf", "Dwarf" };
         private List<string> monsterSpecies = new List<string>() { "Eagle", "Fish", "Dragon" };
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
         private List<string> placeNames = new List<string>() { "Deertrack", "Sevii", "Kevin", "Typhoon" };

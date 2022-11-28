@@ -6,8 +6,8 @@ using Final_Project.TemplateClasses;
 
 namespace Final_Project.Commands
 {
-    class KeywordCommands
+    class KeywordCommands : Keywords
     {
-        private Keywords keywords;
+
     }
 }
