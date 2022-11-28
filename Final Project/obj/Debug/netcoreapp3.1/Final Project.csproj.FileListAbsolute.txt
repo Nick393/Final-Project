@@ -26,3 +26,17 @@ C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcore
 C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.dll
 C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.pdb
 C:\Users\nguyette\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.genruntimeconfig.cache
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.exe
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.deps.json
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.runtimeconfig.json
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.runtimeconfig.dev.json
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.dll
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.pdb
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.csproj.AssemblyReference.cache
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.AssemblyInfoInputs.cache
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.AssemblyInfo.cs
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.csproj.CoreCompileInputs.cache
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.dll
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.pdb
+C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.genruntimeconfig.cache

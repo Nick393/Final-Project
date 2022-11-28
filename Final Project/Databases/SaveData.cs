@@ -19,7 +19,21 @@ namespace Final_Project.Databases
 
             objects.Add(Monster);
         }
+        public void addObject(PetTemplate Pet)
+        {
 
+            objects.Add(Pet);
+        }
+        public void addObject(LifeformTemplate LifeForm)
+        {
+
+            objects.Add(LifeForm);
+        }
+        public void addObject(LocationTemplate Location)
+        {
+
+            objects.Add(Location);
+        }
         public List<object> getSaveData()
         {
             return objects;

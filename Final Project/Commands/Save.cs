@@ -9,7 +9,7 @@ namespace Final_Project.Commands
         //remember to put path
         //StreamWriter writer = new StreamWriter("save.txt");
         
-        SaveData saveData;
+        //SaveData saveData;
 
 
         public static void SaveObjects(List<object> objects)
@@ -18,7 +18,7 @@ namespace Final_Project.Commands
             foreach (object obj in objects)
             {
                 StreamWriter stream = new StreamWriter("save.txt");
-                stream.Write(obj.ToString() + "*");
+                stream.Write(obj.ToString() + "/");
                 stream.Close();
             }
         }
