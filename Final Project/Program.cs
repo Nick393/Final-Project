@@ -12,7 +12,7 @@ namespace Final_Project
         static void Main(string[] args)
         {
 
-            CharacterTemplate Tom = new CharacterTemplate("Kevin", "Good", "Human");
+            CharacterTemplate Tom = new CharacterTemplate("Tom", "Good", "Human");
             NameList nameList = new NameList();
             LocationTemplate location= new LocationTemplate();
             PetTemplate Kevin = new PetTemplate(nameList.getValue(nameList.getList(2)), "Pig", 0, Tom);
@@ -28,7 +28,7 @@ namespace Final_Project
             Kevin.Name = Kevin.getValue(Kevin.getList(2));
             Console.WriteLine(Kevin.Name);
             saveData.addObject(Kevin);
-            //saveData.addObject(Tom);
+            saveData.addObject(Tom);
             List<object> save1 = new List<object>();
            save1= saveData.getSaveData();
             Save.SaveObjects(save1);

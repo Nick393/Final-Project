@@ -14,13 +14,14 @@ namespace Final_Project.Commands
 
         public static void SaveObjects(List<object> objects)
         {
-
+            StreamWriter stream = new StreamWriter("save.txt");
             foreach (object obj in objects)
             {
-                StreamWriter stream = new StreamWriter("save.txt");
+                
                 stream.Write(obj.ToString() + "/");
-                stream.Close();
+                
             }
+            stream.Close();
         }
 
 
