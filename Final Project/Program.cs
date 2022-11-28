@@ -11,7 +11,13 @@ namespace Final_Project
     {
         static void Main(string[] args)
         {
-
+            Save save = new Save();
+            List<object> Objects = new List<object>();
+            Objects = Save.GetObjects();
+            foreach(object obj in Objects)
+            {
+                Console.WriteLine(obj.ToString());
+            }
             CharacterTemplate Tom = new CharacterTemplate("Tom", "Good", "Human");
             NameList nameList = new NameList();
             LocationTemplate location= new LocationTemplate();
@@ -19,7 +25,7 @@ namespace Final_Project
             
             Keywords keyword = new Keywords();
             SaveData saveData = new SaveData();
-            Save save = new Save();
+            
             string testKeyword = "n";
             Console.WriteLine(Tom.Name);
             Console.WriteLine(Tom.Alignment);

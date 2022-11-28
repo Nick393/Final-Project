@@ -3,6 +3,13 @@
     class PetTemplate : MonsterTemplate
     {
         private CharacterTemplate _Owner;
+        public PetTemplate()
+        {
+            Name = "";
+            Species = "";
+            HealthPoints = 0;
+            Strength = 0;
+        }
         public PetTemplate(string name, string species, int strengthValue, CharacterTemplate owner)
         {
             this.Name = name;
