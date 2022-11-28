@@ -20,7 +20,9 @@ namespace Final_Project
             Keywords keyword = new Keywords();
             SaveData saveData = new SaveData();
             Save save = new Save();
-            string testKeyword = "n";
+            Story story = new Story();
+            story.createMainCharacter();
+            /*string testKeyword = "n";
             Console.WriteLine(Tom.Name);
             Console.WriteLine(Tom.Alignment);
             Console.WriteLine(Tom.getList(-2).Count);
@@ -46,7 +48,7 @@ namespace Final_Project
                 }
             }
             Console.WriteLine(nameList.getFullName());
-            Console.WriteLine(nameList.getLocation());
+            Console.WriteLine(nameList.getLocation());*/
             //make this a method
             /*List<object> characters = new List<object>();
             foreach( string i in objects)

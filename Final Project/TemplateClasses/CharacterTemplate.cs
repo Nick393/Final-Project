@@ -27,7 +27,6 @@
             _Species = Species;
             this.HealthPoints = getHealth();
             this.Strength = getStrength();
-            
         }
 
         public string Species
