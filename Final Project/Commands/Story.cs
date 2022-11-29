@@ -22,7 +22,7 @@ namespace Final_Project.Commands
         }
         public void startStory()
         {
-            Console.WriteLine("K");
+            Console.WriteLine("We shall now begin!");
         }
         
         public string RequestInformation(string infoName)
@@ -59,6 +59,7 @@ namespace Final_Project.Commands
                     }
                     
                 }
+                //if
                 return RequestErrorInformation(infoName);
             }
             if ((infoName == "Name") &&((tempReturn.Contains("/")) || (tempReturn.Contains("*"))))
@@ -71,7 +72,13 @@ namespace Final_Project.Commands
 
         public string RequestErrorInformation(string infoName)
         {
-            Console.WriteLine("Please a valid " + infoName);
+            Console.WriteLine("Please enter a valid " + infoName);
+           // Console.WriteLine("Would you likje to list out the ")
+            /*Console.WriteLine("the list of available " + infoName + " is ");
+            switch (infoName)
+            {
+
+            }*/
             string tempReturn = Console.ReadLine();
             if (commands.isKeyword(tempReturn))
             {
