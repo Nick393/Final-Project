@@ -31,8 +31,9 @@ namespace Final_Project.Commands
             string tempReturn = Console.ReadLine();
             if (commands.isKeyword(tempReturn))
             {
+                commands.Commands(tempReturn);
                 //put command method when done
-                return null;
+                return RequestInformation(infoName);
             } if (infoName.ToUpper() == "SPECIES")
             {
                 List<string> species = new List<string>();
@@ -45,6 +46,19 @@ namespace Final_Project.Commands
                     }
                     
                 }
+                string acceptableRaces = "";
+                for (int i = 0; i < species.Count; i++)
+                {
+                    if (i != species.Count - 1)
+                    {
+                        acceptableRaces = acceptableRaces + species[i] + ", ";
+                    }
+                    else
+                    {
+                        acceptableRaces = acceptableRaces + species[i];
+                    }
+                }
+                Console.WriteLine(acceptableRaces);
                return RequestErrorInformation(infoName);
             }
             else if (infoName.ToUpper() == "FACTION")
@@ -59,6 +73,19 @@ namespace Final_Project.Commands
                     }
                     
                 }
+                string acceptableRaces = "";
+                for (int i = 0; i < factions.Count; i++)
+                {
+                    if (i != factions.Count - 1)
+                    {
+                        acceptableRaces = acceptableRaces + factions[i] + ", ";
+                    }
+                    else
+                    {
+                        acceptableRaces = acceptableRaces + factions[i];
+                    }
+                }
+                Console.WriteLine(acceptableRaces);
                 return RequestErrorInformation(infoName);
             }
             if ((infoName == "Name") &&((tempReturn.Contains("/")) || (tempReturn.Contains("*"))))
@@ -75,8 +102,9 @@ namespace Final_Project.Commands
             string tempReturn = Console.ReadLine();
             if (commands.isKeyword(tempReturn))
             {
+                commands.Commands(tempReturn);
                 //put command method when done
-                return null;
+                return RequestErrorInformation(infoName);
             }
             if (infoName.ToUpper() == "SPECIES")
             {
@@ -89,7 +117,20 @@ namespace Final_Project.Commands
                         return tempReturn;
                     }
                 }
-               return RequestErrorInformation(infoName);
+                string acceptableRaces = "";
+                for (int i = 0; i < species.Count; i++)
+                {
+                    if (i != species.Count - 1)
+                    {
+                        acceptableRaces = acceptableRaces + species[i] + ", ";
+                    }
+                    else
+                    {
+                        acceptableRaces = acceptableRaces + species[i];
+                    }
+                }
+                Console.WriteLine(acceptableRaces);
+                return RequestErrorInformation(infoName);
             }
             else if (infoName.ToUpper() == "ALIGNMENT")
             {
@@ -102,6 +143,19 @@ namespace Final_Project.Commands
                         return faction;
                     }
                 }
+                string acceptableRaces = "";
+                for (int i = 0; i < factions.Count; i++)
+                {
+                    if (i != factions.Count - 1)
+                    {
+                        acceptableRaces = acceptableRaces + factions[i] + ", ";
+                    }
+                    else
+                    {
+                        acceptableRaces = acceptableRaces + factions[i];
+                    }
+                }
+                Console.WriteLine(acceptableRaces);
                 return RequestErrorInformation(infoName);
             }
             if ((infoName == "Name") && ((tempReturn.Contains("/")) || (tempReturn.Contains("*"))))

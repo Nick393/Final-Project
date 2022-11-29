@@ -21,30 +21,42 @@ namespace Final_Project
 
             //starts the story make this recursive
             StartScreen();
-            string userCommand = Console.ReadLine().ToUpper();
-            if ((userCommand == keyword.ListOfKeywords[13].ToUpper()) || (userCommand == keyword.ListOfKeywords[14].ToUpper()))
+            bool isNotWorking = true;
+            while (isNotWorking)
             {
-                CharacterTemplate mainCharacter = story.createMainCharacter();
-                saveData.addObject(mainCharacter);
-                story.startStory();
-                bool gameNotEnded = true;
-                while (gameNotEnded)
+
+                string userCommand = Console.ReadLine().ToUpper();
+                if ((userCommand == keyword.ListOfKeywords[13].ToUpper()) || (userCommand == keyword.ListOfKeywords[14].ToUpper()))
                 {
-                    string newUserCommand = Console.ReadLine();
-                    string commandUsed = keyword.detectKeyword(newUserCommand);
-                    if (commandUsed != null)
+                    isNotWorking = false;
+                    CharacterTemplate mainCharacter = story.createMainCharacter();
+                    saveData.addObject(mainCharacter);
+                    story.startStory();
+                    bool gameNotEnded = true;
+                    while (gameNotEnded)
                     {
-                        commands.Commands(commandUsed, ref saveData, ref save);
-                    } else
-                    {
-                        Console.WriteLine("Please Enter a Valid Command");
+                        string newUserCommand = Console.ReadLine();
+                        string commandUsed = keyword.detectKeyword(newUserCommand);
+                        if (commandUsed != null)
+                        {
+                            commands.Commands(commandUsed, ref saveData, ref save);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please Enter a Valid Command");
+                        }
                     }
+
                 }
-                
-            }
-            else if ((userCommand == keyword.ListOfKeywords[15].ToUpper()))
-            {
-                //Leave this to the loaded
+                else if ((userCommand == keyword.ListOfKeywords[15].ToUpper()))
+                {
+                    isNotWorking = false;
+                    //Leave this to the loaded
+                } else
+                {
+                    Console.WriteLine("Please enter a valid Command");
+                    StartScreen();
+                }
             }
             //creates the main character
         }
