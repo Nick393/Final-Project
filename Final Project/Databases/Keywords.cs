@@ -2,7 +2,7 @@
 {
     public class Keywords
     {
-        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Recover", "Heal", "Keywords", "Settings", "Exit", "Save", "Reset", "Yes", "Y", "No", "N" };
+        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Save", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load"};
 
 
         //detects if the word is a keyword, should be used before detectKeyword
@@ -33,7 +33,10 @@
             return null;
         }
 
-
+        public string[] ListOfKeywords
+        {
+            get { return keywords;  }
+        }
     }
 }
 

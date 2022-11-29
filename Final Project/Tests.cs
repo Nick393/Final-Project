@@ -7,33 +7,40 @@ using System.Linq;
 
 namespace Final_Project
 {
-    class Program
+    class Tests
     {
-        static void Main(string[] args)
+        static void Test(string[] args)
         {
+            //declares all of the classes for easy method use
             Save save = new Save();
-            List<object> Objects = new List<object>();
+            Story story = new Story();
+            NameList nameList = new NameList();
+            Keywords keyword = new Keywords();
+            SaveData saveData = new SaveData();
+            KeywordCommands commands = new KeywordCommands();
+
+            
+
+           /*List<object> Objects = new List<object>();
             Objects = Save.GetObjects();
             foreach(object obj in Objects)
             {
                 Console.WriteLine(obj.ToString());
-            }
+            }*/
             CharacterTemplate Tom = new CharacterTemplate("Tom", "Good", "Human");
-            NameList nameList = new NameList();
+            
             LocationTemplate location= new LocationTemplate();
             PetTemplate Kevin = new PetTemplate(nameList.getValue(nameList.getList(2)), "Pig", 0, Tom);
             
-            Keywords keyword = new Keywords();
-            SaveData saveData = new SaveData();
-<<<<<<< HEAD
+            
+
             
             string testKeyword = "n";
-=======
-            Save save = new Save();
-            Story story = new Story();
+
+
+ 
             story.createMainCharacter();
-            /*string testKeyword = "n";
->>>>>>> 6275e066e8e60b91e9601dfb3a21e88948022fba
+
             Console.WriteLine(Tom.Name);
             Console.WriteLine(Tom.Alignment);
             Console.WriteLine(Tom.getList(-2).Count);
@@ -59,7 +66,7 @@ namespace Final_Project
                 }
             }
             Console.WriteLine(nameList.getFullName());
-            Console.WriteLine(nameList.getLocation());*/
+            Console.WriteLine(nameList.getLocation());
             //make this a method
             /*List<object> characters = new List<object>();
             foreach( string i in objects)
@@ -74,5 +81,6 @@ namespace Final_Project
                 
             }*/
         }
+
     }
 }

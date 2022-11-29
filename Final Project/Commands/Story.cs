@@ -10,17 +10,19 @@ namespace Final_Project.Commands
         private List<object> avatars = new List<object>(1);
         private KeywordCommands commands = new KeywordCommands();
         private NameList names = new NameList();
-        public void createMainCharacter()
+        public CharacterTemplate createMainCharacter()
         {
             string name = RequestInformation("Name");
             string alignment = RequestInformation("Species");
             string species =  RequestInformation("Faction");
-            //figure out how to do this later
-            //avatars[0] = new CharacterTemplate(name, alignment, species);
+            int index = 0;
+            CharacterTemplate mc = new CharacterTemplate(name, alignment, species);
+            mc.Index = index;
+            return mc;
         }
         public void startStory()
         {
-            
+            Console.WriteLine("K");
         }
         
         public string RequestInformation(string infoName)

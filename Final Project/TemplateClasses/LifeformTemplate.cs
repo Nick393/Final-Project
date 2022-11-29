@@ -5,6 +5,7 @@
         private string _Name;
         private double _hp;
         private double _strength;
+        private int _index;
         public string Name//gets and sets
         {
             get { return _Name; }
@@ -21,6 +22,13 @@
         {
             get { return _strength; }
             set { _strength = value; }
+        }
+
+        public int Index
+        {
+            get { return _index; }
+            //never use this except for saving purposes
+            set { _index = value; }
         }
     }
 }

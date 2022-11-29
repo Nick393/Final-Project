@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Final_Project</RootNamespace>
+    <StartupObject />
   </PropertyGroup>
 
 </Project>

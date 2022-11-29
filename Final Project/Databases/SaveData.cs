@@ -38,5 +38,10 @@ namespace Final_Project.Databases
         {
             return objects;
         }
+
+        public List<object> ListOfObjects
+        {
+            get { return objects; }
+        }
     }
 }
