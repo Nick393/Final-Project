@@ -19,7 +19,7 @@ namespace Final_Project
             SaveData saveData = new SaveData();
             KeywordCommands commands = new KeywordCommands();
 
-            //starts the story
+            //starts the story make this recursive
             StartScreen();
             string userCommand = Console.ReadLine().ToUpper();
             if ((userCommand == keyword.ListOfKeywords[13].ToUpper()) || (userCommand == keyword.ListOfKeywords[14].ToUpper()))
@@ -27,17 +27,31 @@ namespace Final_Project
                 CharacterTemplate mainCharacter = story.createMainCharacter();
                 saveData.addObject(mainCharacter);
                 story.startStory();
+                bool gameNotEnded = true;
+                while (gameNotEnded)
+                {
+                    string newUserCommand = Console.ReadLine();
+                    string commandUsed = keyword.detectKeyword(newUserCommand);
+                    if (commandUsed != null)
+                    {
+                        commands.Commands(commandUsed, ref saveData, ref save);
+                    } else
+                    {
+                        Console.WriteLine("Please Enter a Valid Command");
+                    }
+                }
+                
             }
-            else if ((userCommand == keyword.ListOfKeywords[16].ToUpper()))
+            else if ((userCommand == keyword.ListOfKeywords[15].ToUpper()))
             {
-
+                //Leave this to the loaded
             }
             //creates the main character
         }
 
         public static void StartScreen()
         {
-            Console.WriteLine("If you are ready to begin your adventure, type Begin. If you would like to learn more about the game, type Settings. If you would like to load a previous save, please type Load");
+            Console.WriteLine("If you are ready to begin your adventure, type Begin. If you would like to load a previous save, please type Load");
         }
 
     }

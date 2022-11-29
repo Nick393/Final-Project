@@ -2,7 +2,7 @@
 {
     public class Keywords
     {
-        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Save", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load"};
+        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load", "Save" };
 
 
         //detects if the word is a keyword, should be used before detectKeyword
