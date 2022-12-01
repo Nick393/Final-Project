@@ -5,7 +5,7 @@ namespace Final_Project.Databases
 {
     class SaveData
     {
-        private List<object> objects = new List<object>();
+        public List<object> objects = new List<object>();
 
 
 

@@ -39,6 +39,7 @@ namespace Final_Project.Commands
                 {
                     while (lastLetterOfInput == "/")
                     {
+                        
                         int len = st.Length - 1;
                         st = st.Substring(0, len);
                         lastLetterOfInput = st.Substring(st.Length - 1);
