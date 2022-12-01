@@ -20,20 +20,6 @@
             return false;
         }
 
-        public bool isSystemKeyword(string input)
-        {
-            string upperInput = input.ToUpper();
-            for (int i = startSystem; i < keywords.Length; i++)
-            {
-                string upperKeyword = keywords[i].ToUpper();
-                if (upperInput == upperKeyword)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         //detects what keyword was used
         public string detectKeyword(string input)
         {

@@ -34,7 +34,7 @@ namespace Final_Project.Commands
         {
             Console.WriteLine("Please enter your " + infoName);
             string tempReturn = Console.ReadLine();
-            if (commands.isSystemKeyword(tempReturn))
+            if (commands.isKeyword(tempReturn))
             {
                 commands.Commands(tempReturn, ref saveData, ref save);
                 //put command method when done
