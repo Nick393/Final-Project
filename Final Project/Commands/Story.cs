@@ -61,7 +61,7 @@ namespace Final_Project.Commands
                 Console.WriteLine(acceptableRaces);
                return RequestErrorInformation(infoName);
             }
-            else if (infoName.ToUpper() == "FACTION")
+             if (infoName.ToUpper() == "FACTION")
             {
                 List<string> factions = new List<string>();
                 factions = names.getList(8);

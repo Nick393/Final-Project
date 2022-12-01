@@ -17,7 +17,14 @@ namespace Final_Project.Commands
             }
             else if ((commandUsed == keyword.ListOfKeywords[6]) || (commandUsed == keyword.ListOfKeywords[7]))
             {
-                //Exit or Close
+                //Exit or CloseC
+                Console.WriteLine("Would you like to save? (y/n)");
+                string determine = Console.ReadLine();
+                if(determine=="Y")
+                {
+
+                    Save.SaveObjects(SaveData.objects);
+                }
             }
 
             else if (commandUsed == keyword.ListOfKeywords[8])
