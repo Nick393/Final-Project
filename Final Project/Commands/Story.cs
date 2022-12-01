@@ -69,7 +69,7 @@ namespace Final_Project.Commands
                 }
                return RequestInformation(infoName);
             }
-            else if (infoName.ToUpper() == "FACTION")
+             if (infoName.ToUpper() == "FACTION")
             {
                 List<string> factions = new List<string>();
                 factions = names.getList(8);
