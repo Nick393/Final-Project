@@ -24,7 +24,7 @@ namespace Final_Project.Commands
                 if(determine=="Y")
                 {
 
-                    Save.SaveObjects(SaveData.objects);
+                    //Save.SaveObjects(SaveData.objects);
                 }
             }
 
