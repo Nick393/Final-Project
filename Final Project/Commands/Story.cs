@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Final_Project.Databases;
+﻿using Final_Project.Databases;
 using Final_Project.TemplateClasses;
+using System;
+using System.Collections.Generic;
 
 
 namespace Final_Project.Commands
@@ -18,7 +17,7 @@ namespace Final_Project.Commands
         {
             string name = RequestInformation("Name");
             string alignment = RequestInformation("Species");
-            string species =  RequestInformation("Faction");
+            string species = RequestInformation("Faction");
             int index = 0;
             const int START_STAGE = 0;
             CharacterTemplate mc = new CharacterTemplate(name, alignment, species, START_STAGE);
@@ -29,17 +28,25 @@ namespace Final_Project.Commands
         {
             Console.WriteLine("We shall now begin!");
         }
-        
+
         public string RequestInformation(string infoName)
         {
             Console.WriteLine("Please enter your " + infoName);
             string tempReturn = Console.ReadLine();
             if (commands.isKeyword(tempReturn))
             {
-                commands.Commands(tempReturn, ref saveData, ref save);
+                if (commands.isSystemKeyword(tempReturn))
+                {
+                    commands.Commands(tempReturn, ref saveData, ref save);
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a " + infoName + " that is not a keyword");
+                }
                 //put command method when done
                 return RequestInformation(infoName);
-            }  else if (infoName.ToUpper() == "SPECIES")
+            }
+            else if (infoName.ToUpper() == "SPECIES")
             {
                 List<string> species = new List<string>();
                 species = names.getList(3);
@@ -49,7 +56,7 @@ namespace Final_Project.Commands
                     {
                         return race;
                     }
-                    
+
                 }
                 string acceptableRaces = "";
                 if (listInputsPrompt(infoName))
@@ -67,9 +74,9 @@ namespace Final_Project.Commands
                     }
                     Console.WriteLine(acceptableRaces);
                 }
-               return RequestInformation(infoName);
+                return RequestInformation(infoName);
             }
-             if (infoName.ToUpper() == "FACTION")
+            if (infoName.ToUpper() == "FACTION")
             {
                 List<string> factions = new List<string>();
                 factions = names.getList(8);
@@ -79,7 +86,7 @@ namespace Final_Project.Commands
                     {
                         return faction;
                     }
-                    
+
                 }
                 string acceptableRaces = "";
                 if (listInputsPrompt(infoName))
@@ -100,12 +107,12 @@ namespace Final_Project.Commands
 
                 return RequestInformation(infoName);
             }
-            if ((infoName == "Name") &&((tempReturn.Contains("/")) || (tempReturn.Contains("*"))))
+            if ((infoName == "Name") && ((tempReturn.Contains("/")) || (tempReturn.Contains("*"))))
             {
                 return RequestInformation(infoName);
             }
             return tempReturn;
-          
+
         }
 
         public object RandomEncounter(int randNum, string mcAlignment, int gameStage)
@@ -126,7 +133,8 @@ namespace Final_Project.Commands
                 }
                 return RandomEncounter(multiplier, mcAlignment, gameStage);
 
-            } else if (randNum < 0)
+            }
+            else if (randNum < 0)
             {
                 if (Math.Abs(randNum) == 1)
                 {
@@ -134,14 +142,16 @@ namespace Final_Project.Commands
                     const int BUFF_POWER = 3;
                     MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage);
                     return encounter;
-                } else
+                }
+                else
                 {
                     const int BUFF_POWER = 0;
                     MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage);
                     return encounter;
                 }
 
-            } else
+            }
+            else
             {
                 if (Math.Abs(randNum) == 1)
                 {
@@ -149,12 +159,14 @@ namespace Final_Project.Commands
                     const int BUFF_POWER = 3;
                     CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
                     return encounter;
-                } else if (Math.Abs(randNum) < 100)
+                }
+                else if (Math.Abs(randNum) < 100)
                 {
                     const int BUFF_POWER = 2;
                     CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
                     return encounter;
-                } else if (Math.Abs(randNum) < 10000)
+                }
+                else if (Math.Abs(randNum) < 10000)
                 {
                     const int BUFF_POWER = 1;
                     CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
@@ -167,7 +179,7 @@ namespace Final_Project.Commands
                     return encounter;
                 }
 
-            } 
+            }
         }
 
         public MonsterTemplate makeEncounter(int BUFF_POWER, int gameStage)
@@ -186,7 +198,7 @@ namespace Final_Project.Commands
             CharacterTemplate returnCharacter = new CharacterTemplate(name, alignment, species, BUFF_POWER, gameStage);
             return returnCharacter;
         }
-      
+
         //Use this to put to start the game from the save data
         public void loadSave()
         {
@@ -197,8 +209,15 @@ namespace Final_Project.Commands
         {
             Console.WriteLine("Would you like to see a list of Valid " + infoName + "? Y/N");
             string test = Console.ReadLine();
-                if ((test.ToUpper() == "Y") || (test.ToUpper() == "YES")) { return true; } else if ((test.ToUpper() == "N") || (test.ToUpper() == "NO")) { return false; } else { return listInputsPrompt(infoName); }
-            
+            if (commands.isKeyword(test))
+            {
+                commands.Commands(test, ref saveData, ref save);
+
+            }
+            if ((test.ToUpper() == "Y") || (test.ToUpper() == "YES")) { return true; } 
+            else if ((test.ToUpper() == "N") || (test.ToUpper() == "NO")) { return false; } 
+            else { return listInputsPrompt(infoName); }
+
         }
     }
 }

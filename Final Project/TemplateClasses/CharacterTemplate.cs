@@ -68,7 +68,7 @@
 
         public override string ToString()
         {
-            return "Character*" + this.Name + "*" + _Alignment + "*" ;
+            return "Character*" + this.Name + "*" + _Alignment + "*";
         }
     }
 }

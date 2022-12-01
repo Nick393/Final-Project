@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Final_Project.Commands;
+﻿using Final_Project.Commands;
 using Final_Project.Databases;
 using Final_Project.TemplateClasses;
+using System;
 
 namespace Final_Project
 {
@@ -38,10 +36,13 @@ namespace Final_Project
                     {
                         if (rand.Next(1, 2) == 1)
                         {
-                            story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
-                        } else
+                            CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
+                            Console.WriteLine(newVillian.Alignment);
+                        }
+                        else
                         {
-                            story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
+                            MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
+                            Console.WriteLine(newMonster);
                         }
                         string newUserCommand = Console.ReadLine();
                         string commandUsed = keyword.detectKeyword(newUserCommand);
@@ -60,7 +61,8 @@ namespace Final_Project
                 {
                     isNotWorking = false;
                     //Leave this to the loaded
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Please enter a valid Command");
                     StartScreen();

@@ -3,7 +3,6 @@ using Final_Project.Databases;
 using Final_Project.TemplateClasses;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Final_Project
 {
@@ -19,14 +18,14 @@ namespace Final_Project
             SaveData saveData = new SaveData();
             KeywordCommands commands = new KeywordCommands();
 
-            
 
-           /*List<object> Objects = new List<object>();
-            Objects = Save.GetObjects();
-            foreach(object obj in Objects)
-            {
-                Console.WriteLine(obj.ToString());
-            }*/
+
+            /*List<object> Objects = new List<object>();
+             Objects = Save.GetObjects();
+             foreach(object obj in Objects)
+             {
+                 Console.WriteLine(obj.ToString());
+             }*/
             /*CharacterTemplate Tom = new CharacterTemplate("Tom", "Good", "Human");
             
             LocationTemplate location= new LocationTemplate();
@@ -50,9 +49,9 @@ namespace Final_Project
             saveData.addObject(Kevin);
             saveData.addObject(Tom);*/
             List<object> save1 = new List<object>();
-           save1= saveData.getSaveData();
+            save1 = saveData.getSaveData();
             Save.SaveObjects(save1);
-            
+
             foreach (string place in nameList.getList(4))
             {
                 Console.WriteLine(place);

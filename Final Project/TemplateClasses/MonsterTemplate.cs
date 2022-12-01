@@ -51,6 +51,6 @@
             return "Monster*" + this.Name + "*" + _Species;
         }
 
-        
+
     }
 }

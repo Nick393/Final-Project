@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Final_Project.Databases;
+﻿using Final_Project.Databases;
 using Final_Project.TemplateClasses;
+using System;
 
 namespace Final_Project.Commands
 {
@@ -32,7 +30,7 @@ namespace Final_Project.Commands
             {
                 //Heal
             }
-            else if (commandUsed == keyword.ListOfKeywords[5].ToUpper())
+            else if ((commandUsed == keyword.ListOfKeywords[5].ToUpper()) || commandUsed == keyword.ListOfKeywords[16].ToUpper())
             {
                 //Keywords
                 string listOfWords = null;
@@ -52,7 +50,6 @@ namespace Final_Project.Commands
                     }
                 }
                 Console.WriteLine(listOfWords);
-                Console.ReadLine();
             }
             else if ((commandUsed == keyword.ListOfKeywords[6].ToUpper()) || (commandUsed == keyword.ListOfKeywords[7].ToUpper()))
             {
@@ -80,7 +77,7 @@ namespace Final_Project.Commands
             {
 
             }
-            else if (commandUsed == keyword.ListOfKeywords[16].ToUpper())
+            else if (commandUsed == keyword.ListOfKeywords[17].ToUpper())
             {
 
             }
