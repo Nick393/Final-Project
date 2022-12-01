@@ -11,6 +11,7 @@ namespace Final_Project.Commands
         public void Commands(string commandUsed)
         {
             Keywords keyword = new Keywords();
+
             if (commandUsed == keyword.ListOfKeywords[5])
             {
                 //Keywords
