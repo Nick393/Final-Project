@@ -17,6 +17,7 @@ namespace Final_Project
             NameList nameList = new NameList();
             Keywords keyword = new Keywords();
             SaveData saveData = new SaveData();
+            Random rand = new Random();
             KeywordCommands commands = new KeywordCommands();
             int gameStage = 0;
             //starts the story make this recursive
@@ -35,6 +36,13 @@ namespace Final_Project
                     bool gameNotEnded = true;
                     while (gameNotEnded)
                     {
+                        if (rand.Next(1, 2) == 1)
+                        {
+                            story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
+                        } else
+                        {
+                            story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
+                        }
                         string newUserCommand = Console.ReadLine();
                         string commandUsed = keyword.detectKeyword(newUserCommand);
                         if (commandUsed != null)
