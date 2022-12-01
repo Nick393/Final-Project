@@ -27,7 +27,7 @@ namespace Final_Project
             {
                 Console.WriteLine(obj.ToString());
             }*/
-            CharacterTemplate Tom = new CharacterTemplate("Tom", "Good", "Human");
+            /*CharacterTemplate Tom = new CharacterTemplate("Tom", "Good", "Human");
             
             LocationTemplate location= new LocationTemplate();
             PetTemplate Kevin = new PetTemplate(nameList.getValue(nameList.getList(2)), "Pig", 0, Tom);
@@ -48,7 +48,7 @@ namespace Final_Project
             Kevin.Name = Kevin.getValue(Kevin.getList(2));
             Console.WriteLine(Kevin.Name);
             saveData.addObject(Kevin);
-            saveData.addObject(Tom);
+            saveData.addObject(Tom);*/
             List<object> save1 = new List<object>();
            save1= saveData.getSaveData();
             Save.SaveObjects(save1);
@@ -57,15 +57,15 @@ namespace Final_Project
             {
                 Console.WriteLine(place);
             }
-            if (keyword.isKeyword(testKeyword))
+            /*if (keyword.isKeyword(testKeyword))
             {
                 if (keyword.detectKeyword(testKeyword) == "Save")
                 {
                     object data = saveData.getSaveData();
 
                 }
-            }
-            Console.WriteLine(nameList.getFullName());
+            }*/
+            Console.WriteLine(nameList.getHumanName());
             Console.WriteLine(nameList.getLocation());
             //make this a method
             /*List<object> characters = new List<object>();

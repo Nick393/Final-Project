@@ -9,24 +9,50 @@
             this.Name = "";
             _Alignment = "";
             _Species = "";
-            this.HealthPoints = getHealth();
+            this.HealthPoints = 0;
+            this.Strength = 0;
         }
 
-        public CharacterTemplate(string Name, string Alignment, string Species, double healthPoints, double strength)//non-default constructor
+        public CharacterTemplate(string Name, string Alignment, string Species, int strengthValue, int gameStage)//non-default constructor, makes enemy NPC characters
         {
             this.Name = Name;
             _Alignment = Alignment;
             _Species = Species;
-            this.HealthPoints = healthPoints;
-            this.Strength = strength;
+            double multiplier;
+            switch (strengthValue)
+            {
+                case 3:
+                    multiplier = 4;
+                    break;
+                case 2:
+                    multiplier = 2;
+                    break;
+                case 1:
+                    multiplier = 1;
+                    break;
+                case 0:
+                    multiplier = 0.5;
+                    break;
+                default:
+                    multiplier = 1;
+                    break;
+            }
+            double health = 0;
+            double strength = 0;
+            determineDefault(gameStage, ref health, ref strength);
+            this.HealthPoints = health * multiplier;
+            this.Strength = strength * multiplier;
         }
-        public CharacterTemplate(string Name, string Alignment, string Species)//non-default constructor
+        public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters
         {
             this.Name = Name;
             _Alignment = Alignment;
             _Species = Species;
-            this.HealthPoints = getHealth();
-            this.Strength = getStrength();
+            double health = 0;
+            double strength = 0;
+            determineDefault(gameStage, ref health, ref strength);
+            this.HealthPoints = health;
+            this.Strength = strength;
         }
 
         public string Species

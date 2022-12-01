@@ -18,7 +18,7 @@ namespace Final_Project
             Keywords keyword = new Keywords();
             SaveData saveData = new SaveData();
             KeywordCommands commands = new KeywordCommands();
-
+            int gameStage = 0;
             //starts the story make this recursive
             StartScreen();
             bool isNotWorking = true;

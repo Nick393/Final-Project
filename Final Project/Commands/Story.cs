@@ -20,7 +20,8 @@ namespace Final_Project.Commands
             string alignment = RequestInformation("Species");
             string species =  RequestInformation("Faction");
             int index = 0;
-            CharacterTemplate mc = new CharacterTemplate(name, alignment, species);
+            const int START_STAGE = 0;
+            CharacterTemplate mc = new CharacterTemplate(name, alignment, species, START_STAGE);
             mc.Index = index;
             return mc;
         }
@@ -107,7 +108,84 @@ namespace Final_Project.Commands
           
         }
 
+        public object RandomEncounter(int randNum, string mcAlignment, int gameStage)
+        {
+            if (randNum == 0)
+            {
 
+                Random rand = new Random();
+                int sign = rand.Next(1, 2);
+                int multiplier = 0;
+                if (sign == 1)
+                {
+                    multiplier = -1;
+                }
+                else if (sign == 2)
+                {
+                    multiplier = 1;
+                }
+                return RandomEncounter(multiplier, mcAlignment, gameStage);
+
+            } else if (randNum < 0)
+            {
+                if (Math.Abs(randNum) == 1)
+                {
+                    //put boss method here
+                    const int BUFF_POWER = 3;
+                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage);
+                    return encounter;
+                } else
+                {
+                    const int BUFF_POWER = 0;
+                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage);
+                    return encounter;
+                }
+
+            } else
+            {
+                if (Math.Abs(randNum) == 1)
+                {
+                    //put boss method here
+                    const int BUFF_POWER = 3;
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    return encounter;
+                } else if (Math.Abs(randNum) < 100)
+                {
+                    const int BUFF_POWER = 2;
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    return encounter;
+                } else if (Math.Abs(randNum) < 10000)
+                {
+                    const int BUFF_POWER = 1;
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    return encounter;
+                }
+                else
+                {
+                    const int BUFF_POWER = 0;
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    return encounter;
+                }
+
+            } 
+        }
+
+        public MonsterTemplate makeEncounter(int BUFF_POWER, int gameStage)
+        {
+            string name = names.getMonsterName();
+            string species = names.getMonsterSpecies();
+            MonsterTemplate returnMonster = new MonsterTemplate(name, species, BUFF_POWER, gameStage);
+            return returnMonster;
+        }
+
+        public CharacterTemplate makeEncounter(int BUFF_POWER, int gameStage, string mcAlignment)
+        {
+            string name = names.getHumanName();
+            string species = names.getHumanSpecies();
+            string alignment = names.getOpposingFaction(mcAlignment);
+            CharacterTemplate returnCharacter = new CharacterTemplate(name, alignment, species, BUFF_POWER, gameStage);
+            return returnCharacter;
+        }
       
         //Use this to put to start the game from the save data
         public void loadSave()
