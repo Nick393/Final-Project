@@ -14,17 +14,52 @@ namespace Final_Project.TemplateClasses
         private List<string> placeNames = new List<string>() { "Deertrack", "Sevii", "Kevin", "Typhoon" };
         private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
         private List<string> factions = new List<string>() { "Good", "Neutral", "Evil" };
-        private double defaultHealth = 15;
-        private double defaultStrength = 15;
 
 
         //Returns a name for NPC characters
-        public string getFullName()
+        public string getHumanName()
         {
             Random rand = new Random();
             string randFName = fNameList[rand.Next(fNameList.Count)];
             string randLName = lNameList[rand.Next(lNameList.Count)];
             return randFName + " " + randLName;
+        }
+
+        public string getHumanSpecies()
+        {
+            Random rand = new Random();
+            string speciesName = playerSpecies[rand.Next(playerSpecies.Count)];
+            return speciesName;
+        }
+
+        public string getOpposingFaction(string mcFaction)
+        {
+            Random rand = new Random();
+            int numNotPicked = 0;
+            foreach (string faction in factions)
+            {
+                if (mcFaction.ToUpper() == faction.ToUpper())
+                {
+                    numNotPicked = factions.IndexOf(faction);
+                }
+            }
+            List<string> useableFactions = getList(8);
+            useableFactions.RemoveAt(numNotPicked);
+            return useableFactions[rand.Next(useableFactions.Count)];
+        }
+
+        public string getMonsterName()
+        {
+            Random rand = new Random();
+            string monstName = monsterNameList[rand.Next(monsterNameList.Count)];
+            return monstName;
+        }
+
+        public string getMonsterSpecies()
+        {
+            Random rand = new Random();
+            string speciesName = monsterSpecies[rand.Next(monsterSpecies.Count)];
+            return speciesName;
         }
 
         //returns a random value from a list provided
@@ -42,15 +77,6 @@ namespace Final_Project.TemplateClasses
             string randPlaceName = placeNames[rand.Next(placeNames.Count)];
             string randSuffixName = placeSuffixes[rand.Next(placeSuffixes.Count)];
             return randPlaceName + " " + randSuffixName;
-        }
-
-        public double getHealth()
-        {
-            return defaultHealth;
-        }
-        public double getStrength()
-        {
-            return defaultStrength;
         }
 
         //returns a list based on its arbitrary index value
@@ -104,41 +130,41 @@ namespace Final_Project.TemplateClasses
 
 
         //sets default values based on the stage of the game
-        public void determineDefault(int stage)
+        public void determineDefault(int stage, ref double health, ref double strength)
         {
             int newStage = stage - 1;
             switch (newStage)
             {
                 case 0:
-                    defaultHealth = 15;
-                    defaultStrength = 20;
+                    health = 15;
+                    strength = 20;
                     break;
                 case 1:
-                    defaultHealth = 22.5;
-                    defaultStrength = 30;
+                    health = 22.5;
+                    strength = 30;
                     break;
                 case 2:
-                    defaultHealth = 30;
-                    defaultStrength = 40;
+                    health = 30;
+                    strength = 40;
                     break;
                 case 3:
-                    defaultHealth = 37.5; 
-                    defaultStrength = 50;
+                    health = 37.5; 
+                    strength = 50;
                     break;
                 case 4:
-                    defaultHealth = 45; 
-                    defaultStrength = 60;
+                    health = 45; 
+                    strength = 60;
                     break;
                 case 5:
-                    defaultHealth = 52.5; 
-                    defaultStrength = 70;
+                    health = 52.5; 
+                    strength = 70;
                     break;
                 case 6:
-                    defaultHealth = 60; 
-                    defaultStrength = 80;
+                    health = 60; 
+                    strength = 80;
                     break;
                 default:
-                    determineDefault(1);
+                    determineDefault(1, ref health, ref strength);
                     break;
             }
         }
