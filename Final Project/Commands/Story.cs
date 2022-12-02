@@ -16,8 +16,8 @@ namespace Final_Project.Commands
         public CharacterTemplate createMainCharacter()
         {
             string name = RequestInformation("Name");
-            string alignment = RequestInformation("Species");
-            string species = RequestInformation("Faction");
+            string species = RequestInformation("Species");
+            string alignment = RequestInformation("Faction");
             int index = 0;
             const int START_STAGE = 0;
             CharacterTemplate mc = new CharacterTemplate(name, alignment, species, START_STAGE);
@@ -223,18 +223,16 @@ namespace Final_Project.Commands
             if (mcAlignment.ToUpper() == "NEUTRAL")
             {
                 int newRandomizer = rand.Next(0, 201);
-                Console.WriteLine(newRandomizer);
                 if (newRandomizer > 100)
                 {
                     neutralCalc = 1;
-                    Console.WriteLine(neutralCalc);
                 }
             }
             if ((mcAlignment.ToUpper() == "GOOD") || (neutralCalc >= 1))
             {   
                 if (isBoss)
                 {
-
+                    message = beginEncounter + enemy.Name + ", the Destroyer of Worlds, the Demon of" + names.getCity() + ", and the Devourer of Souls" + "." ;
                 }
                 else
                 {
@@ -273,7 +271,7 @@ namespace Final_Project.Commands
             {
                 if (isBoss)
                 {
-
+                    message = beginEncounter + enemy.Name + ", the Saint King, the Protector of" + names.getCity() + ", and the Sword of Justice" + ".";
                 }
                 else
                 {
@@ -310,6 +308,55 @@ namespace Final_Project.Commands
                 }
             }
             Console.WriteLine(message);
+            Console.WriteLine("What would you like to do next?");
+        }
+
+        public void runEncounter(MonsterTemplate enemy, string mcAlignment, bool isBoss)
+        {
+            string message = "ERROR MESSAGE, SHOULD NOT BE SHOWN";
+            const string beginEncounter = "You have encountered ";
+            Random rand = new Random();
+            int randomizer = rand.Next(0, 8);
+                if (isBoss)
+                {
+                    message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Destroyer of Worlds, the Demon of " + names.getCity() + ", and the Devourer of Souls" + ".";
+                }
+                else
+                {
+                    switch (randomizer)
+                    {
+                        case 0:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Destroyer of Worlds.";
+                            break;
+                        case 1:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Eater of Dreams.";
+                            break;
+                        case 2:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Soul Eater.";
+                            break;
+                        case 3:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Barbarian.";
+                            break;
+                        case 4:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Calamity.";
+                            break;
+                        case 5:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Demon King.";
+                            break;
+                        case 6:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Butcher of " + names.getCity() + ".";
+                            break;
+                        case 7:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Asura.";
+                            break;
+                        default:
+                            message = beginEncounter + enemy.Name + ", the " + enemy.Species + ".";
+                            break;
+                    }
+                }
+
+            Console.WriteLine(message);
+            Console.WriteLine("What would you like to do next?");
         }
         //Use this to put to start the game from the save data
         public void loadSave()

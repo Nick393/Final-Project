@@ -1,9 +1,13 @@
-﻿namespace Final_Project.TemplateClasses
+﻿using System;
+using System.Collections.Generic;
+
+namespace Final_Project.TemplateClasses
 {
     public class CharacterTemplate : LifeformTemplate
     {
         private string _Alignment;
         private string _Species;
+        private List<PetTemplate> _Pets;
         public CharacterTemplate()//default constructor
         {
             this.Name = "";
@@ -16,7 +20,7 @@
         public CharacterTemplate(string Name, string Alignment, string Species, int strengthValue, int gameStage)//non-default constructor, makes enemy NPC characters
         {
             this.Name = Name;
-            _Alignment = Alignment.ToUpper();
+            _Alignment = Alignment;
             _Species = Species;
             double multiplier;
             switch (strengthValue)
@@ -46,7 +50,7 @@
         public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters
         {
             this.Name = Name;
-            _Alignment = Alignment.ToUpper(); ;
+            _Alignment = Alignment ;
             _Species = Species;
             double health = 0;
             double strength = 0;
@@ -65,6 +69,16 @@
             get { return _Alignment; }
             set { _Alignment = value; }
         }
+
+        public List<PetTemplate> Pets
+        {
+            get { return Pets; }
+        }
+
+        /*public void addPets(MonsterTemplate newPet)
+        {
+
+        }*/
 
         public override string ToString()
         {

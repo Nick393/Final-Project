@@ -43,7 +43,7 @@ namespace Final_Project
                         else
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
-                            
+                            story.runEncounter(newMonster, mainCharacter.Alignment, false);
                         }
                         string newUserCommand = Console.ReadLine();
                         string commandUsed = keyword.detectKeyword(newUserCommand);

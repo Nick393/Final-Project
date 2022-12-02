@@ -1,6 +1,6 @@
 ﻿namespace Final_Project.TemplateClasses
 {
-    class PetTemplate : MonsterTemplate
+    public class PetTemplate : MonsterTemplate
     {
         private CharacterTemplate _Owner;
         public PetTemplate()
@@ -9,6 +9,16 @@
             Species = "";
             HealthPoints = 0;
             Strength = 0;
+            _Owner = new CharacterTemplate();
+        }
+
+        public PetTemplate(MonsterTemplate oldForm, CharacterTemplate Owner)
+        {
+            this.Name = oldForm.Name;
+            this.Species = oldForm.Species;
+            this.HealthPoints = oldForm.HealthPoints;
+            this.Strength = oldForm.Strength;
+            _Owner = Owner;
         }
         public PetTemplate(string name, string species, int strengthValue, int gameStage, CharacterTemplate owner)
         {
