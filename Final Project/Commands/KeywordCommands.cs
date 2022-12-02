@@ -82,6 +82,13 @@ namespace Final_Project.Commands
             commandUsed = commandUsed.ToUpper();
             if (commandUsed == keyword.ListOfKeywords[0].ToUpper())
             {
+                double probability = (mainCharacter.HealthPoints / monster.HealthPoints)*100;
+                Random rand = new Random();
+                double random=rand.Next(0, 101);
+                if(random>probability)
+                {
+                    Console.WriteLine("You Lose!");
+                }
                 //Fight
             }
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
@@ -95,6 +102,19 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
             {
                 //kill
+                double probability = ((getStrengthValue(mainCharacter)) / (monster.HealthPoints+monster.Strength)) * 100;
+                Random rand = new Random();
+                double random = rand.Next(0, 101);
+                if (random > probability)
+                {
+                    Console.WriteLine("You Lose! Press any key to admit defeat!");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine
+                }
             }
             else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
             {
@@ -104,6 +124,18 @@ namespace Final_Project.Commands
             {
                 Commands(commandUsed, ref saveData, ref save);
             }
+        }
+        public double getStrengthValue( CharacterTemplate mainCharacter)
+        {
+            double petStrength = mainCharacter.Strength;
+            if (mainCharacter.Pets.Count != 0)
+            {
+                for (int i = 0; i < mainCharacter.Pets.Count; i++)
+                {
+                    petStrength = petStrength + mainCharacter.Pets[i].Strength;
+                }
+            }
+            return petStrength;
         }
     }
 }

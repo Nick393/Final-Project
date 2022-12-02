@@ -1,6 +1,6 @@
 ﻿namespace Final_Project.TemplateClasses
 {
-    class MonsterTemplate : LifeformTemplate
+    public class MonsterTemplate : LifeformTemplate
     {
         private string _Species;
 

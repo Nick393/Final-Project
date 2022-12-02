@@ -1,9 +1,13 @@
-﻿namespace Final_Project.TemplateClasses
+﻿using System;
+using System.Collections.Generic;
+
+namespace Final_Project.TemplateClasses
 {
     public class CharacterTemplate : LifeformTemplate
     {
         private string _Alignment;
         private string _Species;
+        private List<PetTemplate> _Pets;
         public CharacterTemplate()//default constructor
         {
             this.Name = "";
@@ -65,6 +69,16 @@
             get { return _Alignment; }
             set { _Alignment = value; }
         }
+
+        public List<PetTemplate> Pets
+        {
+            get { return Pets; }
+        }
+
+        /*public void addPets(MonsterTemplate newPet)
+        {
+
+        }*/
 
         public override string ToString()
         {
