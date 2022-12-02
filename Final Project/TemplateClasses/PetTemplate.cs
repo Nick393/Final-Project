@@ -9,7 +9,7 @@
             Species = "";
             HealthPoints = 0;
             Strength = 0;
-            _Owner = new CharacterTemplate;
+            _Owner = new CharacterTemplate();
         }
 
         public PetTemplate(MonsterTemplate oldForm, CharacterTemplate Owner)

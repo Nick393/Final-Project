@@ -113,7 +113,7 @@ namespace Final_Project.Commands
                 }
                 else
                 {
-                    Console.WriteLine
+                    Console.WriteLine("You won the fight!");
                 }
             }
             else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
