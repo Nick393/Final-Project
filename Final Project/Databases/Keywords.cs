@@ -2,7 +2,7 @@
 {
     public class Keywords
     {
-        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load", "Help", "Save" };
+        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load", "Help", "Save", "Stats" };
         private const int startSystem = 5;
 
         //detects if the word is a keyword, should be used before detectKeyword

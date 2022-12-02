@@ -38,12 +38,12 @@ namespace Final_Project
                         if (randNum >= 251)
                         {
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
-                            story.runEncounter(newVillian, mainCharacter.Alignment, true);
+                            story.runEncounter(newVillian, mainCharacter.Alignment, false);
                         }
                         else
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
-                            story.runEncounter(newMonster, mainCharacter.Alignment, true);
+                            story.runEncounter(newMonster, mainCharacter.Alignment, false);
                         }
                         string newUserCommand = Console.ReadLine();
                         string commandUsed = keyword.detectKeyword(newUserCommand);

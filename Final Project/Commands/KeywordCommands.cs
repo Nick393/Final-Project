@@ -10,27 +10,7 @@ namespace Final_Project.Commands
         {
             Keywords keyword = new Keywords();
             commandUsed = commandUsed.ToUpper();
-            if (commandUsed == keyword.ListOfKeywords[0].ToUpper())
-            {
-                //Fight
-            }
-            else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
-            {
-                //Flee
-            }
-            else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
-            {
-                //Tame
-            }
-            else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
-            {
-                //kill
-            }
-            else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
-            {
-                //Heal
-            }
-            else if ((commandUsed == keyword.ListOfKeywords[5].ToUpper()) || commandUsed == keyword.ListOfKeywords[16].ToUpper())
+            if ((commandUsed == keyword.ListOfKeywords[5].ToUpper()) || commandUsed == keyword.ListOfKeywords[16].ToUpper())
             {
                 //Keywords
                 string listOfWords = null;
@@ -54,6 +34,15 @@ namespace Final_Project.Commands
             else if ((commandUsed == keyword.ListOfKeywords[6].ToUpper()) || (commandUsed == keyword.ListOfKeywords[7].ToUpper()))
             {
                 //Exit or Close
+                Console.WriteLine("Would you like to Save? Y/N");
+                string response = Console.ReadLine().ToUpper();
+                if (response == "Y" || response == "YES")
+                {
+                    Commands("Save", ref saveData, ref save);
+                } else if (response == "N" || response == "NO")
+                {
+                    Environment.Exit(0);
+                }
             }
 
             else if (commandUsed == keyword.ListOfKeywords[8].ToUpper())
@@ -75,11 +64,45 @@ namespace Final_Project.Commands
             }
             else if (commandUsed == keyword.ListOfKeywords[15].ToUpper())
             {
-
+                //Load
             }
             else if (commandUsed == keyword.ListOfKeywords[17].ToUpper())
             {
+                //Save
+                Environment.Exit(0);
+            } else if (commandUsed == keyword.ListOfKeywords[18].ToUpper())
+            {
+                //Stats
+            }
+        }
 
+        public void Commands(string commandUsed, MonsterTemplate monster, CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
+        {
+            Keywords keyword = new Keywords();
+            commandUsed = commandUsed.ToUpper();
+            if (commandUsed == keyword.ListOfKeywords[0].ToUpper())
+            {
+                //Fight
+            }
+            else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
+            {
+                //Flee
+            }
+            else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
+            {
+                //Tame
+            }
+            else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
+            {
+                //kill
+            }
+            else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
+            {
+                //Heal
+            }
+            else
+            {
+                Commands(commandUsed, ref saveData, ref save);
             }
         }
     }
