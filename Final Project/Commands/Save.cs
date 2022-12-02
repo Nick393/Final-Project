@@ -1,15 +1,14 @@
-﻿using Final_Project.Databases;
+﻿using Final_Project.TemplateClasses;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Final_Project.TemplateClasses;
 namespace Final_Project.Commands
 {
     class Save
     {
         //remember to put path
         //StreamWriter writer = new StreamWriter("save.txt");
-        
+
         //SaveData saveData;
 
 
@@ -18,9 +17,9 @@ namespace Final_Project.Commands
             StreamWriter stream = new StreamWriter("save.txt");
             foreach (object obj in objects)
             {
-                
+
                 stream.Write(obj.ToString() + "/");
-                
+
             }
             stream.Close();
         }
@@ -29,8 +28,8 @@ namespace Final_Project.Commands
         public static List<object> GetObjects()//this method formats the strings for output
         {
             StreamReader r = new StreamReader("save.txt");
-           string data= r.ReadToEnd();
-           string st = data;
+            string data = r.ReadToEnd();
+            string st = data;
             try
             {
                 string lastLetterOfInput = st.Substring(st.Length - 1);
@@ -39,7 +38,7 @@ namespace Final_Project.Commands
                 {
                     while (lastLetterOfInput == "/")
                     {
-                        
+
                         int len = st.Length - 1;
                         st = st.Substring(0, len);
                         lastLetterOfInput = st.Substring(st.Length - 1);
@@ -197,7 +196,7 @@ namespace Final_Project.Commands
                 }
                 else
                 {
-                    List<Object> error = new List<object>();;
+                    List<Object> error = new List<object>(); ;
                     return error;//this returns the new string.
                 }
             }
@@ -206,8 +205,8 @@ namespace Final_Project.Commands
                 List<Object> error = new List<object>();
                 return error;
             }
-            
-            }
+
+        }
     }
 }
 

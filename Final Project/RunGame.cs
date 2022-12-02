@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Final_Project.Commands;
+﻿using Final_Project.Commands;
 using Final_Project.Databases;
 using Final_Project.TemplateClasses;
+using System;
 
 namespace Final_Project
 {
@@ -17,6 +15,7 @@ namespace Final_Project
             NameList nameList = new NameList();
             Keywords keyword = new Keywords();
             SaveData saveData = new SaveData();
+            Random rand = new Random();
             KeywordCommands commands = new KeywordCommands();
             int gameStage = 0;
             //starts the story make this recursive
@@ -35,6 +34,17 @@ namespace Final_Project
                     bool gameNotEnded = true;
                     while (gameNotEnded)
                     {
+                        int randNum = rand.Next(0, 501);
+                        if (randNum >= 251)
+                        {
+                            CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
+                            story.runEncounter(newVillian, mainCharacter.Alignment, false);
+                        }
+                        else
+                        {
+                            MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
+                            
+                        }
                         string newUserCommand = Console.ReadLine();
                         string commandUsed = keyword.detectKeyword(newUserCommand);
                         if (commandUsed != null)
@@ -52,7 +62,8 @@ namespace Final_Project
                 {
                     isNotWorking = false;
                     //Leave this to the loaded
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Please enter a valid Command");
                     StartScreen();

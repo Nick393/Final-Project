@@ -13,7 +13,7 @@ namespace Final_Project.TemplateClasses
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
         private List<string> placeNames = new List<string>() { "Deertrack", "Sevii", "Kevin", "Typhoon" };
         private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
-        private List<string> factions = new List<string>() { "Good", "Neutral", "Evil" };
+        private  List<string> factions = new List<string>() { "Good", "Neutral", "Evil"};
 
 
         //Returns a name for NPC characters
@@ -36,16 +36,29 @@ namespace Final_Project.TemplateClasses
         {
             Random rand = new Random();
             int numNotPicked = 0;
-            foreach (string faction in factions)
+            for (int i = 0; i < factions.Count; i++)
             {
-                if (mcFaction.ToUpper() == faction.ToUpper())
+                if (mcFaction.ToUpper() == factions[i].ToUpper())
                 {
-                    numNotPicked = factions.IndexOf(faction);
+                    numNotPicked = i;
                 }
             }
-            List<string> useableFactions = getList(8);
-            useableFactions.RemoveAt(numNotPicked);
-            return useableFactions[rand.Next(useableFactions.Count)];
+            int randNum = notEqualValue(numNotPicked, factions.Count - 1);
+            return factions[randNum];
+        }
+
+        public int notEqualValue(int secondValue, int size)
+        {
+            Random rand = new Random();
+            int randomValue = rand.Next(size);
+            if (randomValue == secondValue)
+            {
+                return notEqualValue(secondValue, size);
+            }
+            else
+            {
+                return randomValue;
+            }
         }
 
         public string getMonsterName()
@@ -77,6 +90,13 @@ namespace Final_Project.TemplateClasses
             string randPlaceName = placeNames[rand.Next(placeNames.Count)];
             string randSuffixName = placeSuffixes[rand.Next(placeSuffixes.Count)];
             return randPlaceName + " " + randSuffixName;
+        }
+
+        public string getCity()
+        {
+            Random rand = new Random();
+            string cityName = cityNames[rand.Next(cityNames.Count)];
+            return cityName;
         }
 
         //returns a list based on its arbitrary index value
@@ -148,19 +168,19 @@ namespace Final_Project.TemplateClasses
                     strength = 40;
                     break;
                 case 3:
-                    health = 37.5; 
+                    health = 37.5;
                     strength = 50;
                     break;
                 case 4:
-                    health = 45; 
+                    health = 45;
                     strength = 60;
                     break;
                 case 5:
-                    health = 52.5; 
+                    health = 52.5;
                     strength = 70;
                     break;
                 case 6:
-                    health = 60; 
+                    health = 60;
                     strength = 80;
                     break;
                 default:
