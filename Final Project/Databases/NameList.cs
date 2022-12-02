@@ -13,7 +13,7 @@ namespace Final_Project.TemplateClasses
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
         private List<string> placeNames = new List<string>() { "Deertrack", "Sevii", "Kevin", "Typhoon" };
         private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
-        private  List<string> factions = new List<string>() { "Good", "Neutral", "Evil", "a", "a" };
+        private  List<string> factions = new List<string>() { "Good", "Neutral", "Evil"};
 
 
         //Returns a name for NPC characters
@@ -42,10 +42,8 @@ namespace Final_Project.TemplateClasses
                 {
                     numNotPicked = i;
                 }
-                Console.WriteLine(factions[i]);
             }
             int randNum = notEqualValue(numNotPicked, factions.Count - 1);
-            Console.WriteLine(factions[randNum]);
             return factions[randNum];
         }
 
@@ -92,6 +90,13 @@ namespace Final_Project.TemplateClasses
             string randPlaceName = placeNames[rand.Next(placeNames.Count)];
             string randSuffixName = placeSuffixes[rand.Next(placeSuffixes.Count)];
             return randPlaceName + " " + randSuffixName;
+        }
+
+        public string getCity()
+        {
+            Random rand = new Random();
+            string cityName = cityNames[rand.Next(cityNames.Count)];
+            return cityName;
         }
 
         //returns a list based on its arbitrary index value

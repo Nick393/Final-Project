@@ -109,10 +109,24 @@ namespace Final_Project.Commands
             }
             if ((infoName == "Name") && ((tempReturn.Contains("/")) || (tempReturn.Contains("*"))))
             {
+                Console.WriteLine("Please enter a " + infoName + " that is does not contain / or *");
                 return RequestInformation(infoName);
             }
             return tempReturn;
+        }
 
+        public bool listInputsPrompt(string infoName)
+        {
+            Console.WriteLine("Would you like to see a list of Valid " + infoName + "? Y/N");
+            string test = Console.ReadLine();
+            if (commands.isKeyword(test))
+            {
+                commands.Commands(test, ref saveData, ref save);
+
+            }
+            if ((test.ToUpper() == "Y") || (test.ToUpper() == "YES")) { return true; }
+            else if ((test.ToUpper() == "N") || (test.ToUpper() == "NO")) { return false; }
+            else { return listInputsPrompt(infoName); }
         }
 
         public object RandomEncounter(int randNum, string mcAlignment, int gameStage)
@@ -199,25 +213,110 @@ namespace Final_Project.Commands
             return returnCharacter;
         }
 
+        public void runEncounter(CharacterTemplate enemy, string mcAlignment, bool isBoss)
+        {
+            string message = "ERROR MESSAGE, SHOULD NOT BE SHOWN";
+            const string beginEncounter = "You have encountered ";
+            Random rand = new Random();
+            int randomizer = rand.Next(0, 8);
+            int neutralCalc = 0;
+            if (mcAlignment.ToUpper() == "NEUTRAL")
+            {
+                int newRandomizer = rand.Next(0, 201);
+                Console.WriteLine(newRandomizer);
+                if (newRandomizer > 100)
+                {
+                    neutralCalc = 1;
+                    Console.WriteLine(neutralCalc);
+                }
+            }
+            if ((mcAlignment.ToUpper() == "GOOD") || (neutralCalc >= 1))
+            {   
+                if (isBoss)
+                {
+
+                }
+                else
+                {
+                    switch (randomizer)
+                    {
+                        case 0:
+                            message = beginEncounter + enemy.Name + ", the Destroyer of Worlds.";
+                            break;
+                        case 1:
+                            message = beginEncounter + enemy.Name + ", the Eater of Dreams.";
+                            break;
+                        case 2:
+                            message = beginEncounter + enemy.Name + ", the Soul Eater.";
+                            break;
+                        case 3:
+                            message = beginEncounter + enemy.Name + ", the Barbarian.";
+                            break;
+                        case 4:
+                            message = beginEncounter + enemy.Name + ", the Calamity.";
+                            break;
+                        case 5:
+                            message = beginEncounter + enemy.Name + ", the Demon King.";
+                            break;
+                        case 6:
+                            message = beginEncounter + enemy.Name + ", the Butcher of " + names.getCity() + ".";
+                            break;
+                        case 7:
+                            message = beginEncounter + enemy.Name + ", the Asura.";
+                            break;
+                        default:
+                            message = beginEncounter + enemy.Name + ".";
+                            break;
+                    }
+                }
+            } else
+            {
+                if (isBoss)
+                {
+
+                }
+                else
+                {
+                    switch (randomizer)
+                    {
+                        case 0:
+                            message = beginEncounter + enemy.Name + ", the Conquerer.";
+                            break;
+                        case 1:
+                            message = beginEncounter + enemy.Name + ", the Builder.";
+                            break;
+                        case 2:
+                            message = beginEncounter + enemy.Name + ", the Sword of Justice.";
+                            break;
+                        case 3:
+                            message = beginEncounter + enemy.Name + ", the Demon Slayer.";
+                            break;
+                        case 4:
+                            message = beginEncounter + enemy.Name + ", the Good.";
+                            break;
+                        case 5:
+                            message = beginEncounter + enemy.Name + ", the Saint King.";
+                            break;
+                        case 6:
+                            message = beginEncounter + enemy.Name + ", the Just.";
+                            break;
+                        case 7:
+                            message = beginEncounter + enemy.Name + ", the Defender of the World.";
+                            break;
+                        default:
+                            message = beginEncounter + enemy.Name + ".";
+                            break;
+                    }
+                }
+            }
+            Console.WriteLine(message);
+        }
         //Use this to put to start the game from the save data
         public void loadSave()
         {
 
         }
 
-        public bool listInputsPrompt(string infoName)
-        {
-            Console.WriteLine("Would you like to see a list of Valid " + infoName + "? Y/N");
-            string test = Console.ReadLine();
-            if (commands.isKeyword(test))
-            {
-                commands.Commands(test, ref saveData, ref save);
-
-            }
-            if ((test.ToUpper() == "Y") || (test.ToUpper() == "YES")) { return true; } 
-            else if ((test.ToUpper() == "N") || (test.ToUpper() == "NO")) { return false; } 
-            else { return listInputsPrompt(infoName); }
-
-        }
+       
     }
 }

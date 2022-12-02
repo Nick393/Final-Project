@@ -34,15 +34,16 @@ namespace Final_Project
                     bool gameNotEnded = true;
                     while (gameNotEnded)
                     {
-                        if (rand.Next(1, 2) == 1)
+                        int randNum = rand.Next(0, 501);
+                        if (randNum >= 251)
                         {
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
-                            Console.WriteLine(newVillian.Alignment);
+                            story.runEncounter(newVillian, mainCharacter.Alignment, false);
                         }
                         else
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
-                            Console.WriteLine(newMonster);
+                            
                         }
                         string newUserCommand = Console.ReadLine();
                         string commandUsed = keyword.detectKeyword(newUserCommand);

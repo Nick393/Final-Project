@@ -16,7 +16,7 @@
         public CharacterTemplate(string Name, string Alignment, string Species, int strengthValue, int gameStage)//non-default constructor, makes enemy NPC characters
         {
             this.Name = Name;
-            _Alignment = Alignment;
+            _Alignment = Alignment.ToUpper();
             _Species = Species;
             double multiplier;
             switch (strengthValue)
@@ -46,7 +46,7 @@
         public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters
         {
             this.Name = Name;
-            _Alignment = Alignment;
+            _Alignment = Alignment.ToUpper(); ;
             _Species = Species;
             double health = 0;
             double strength = 0;
