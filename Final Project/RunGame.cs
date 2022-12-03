@@ -91,6 +91,11 @@ namespace Final_Project
             mode = mode.Substring(13);
             int num = 0;
             Console.WriteLine(mode);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.BackgroundColor= ConsoleColor.Black;
+            Console.WriteLine("The game is now playable!");
+            
             switch (mode)
             {
                     case "Safe":
@@ -98,7 +103,7 @@ namespace Final_Project
                         Console.ForegroundColor = ConsoleColor.Green;
                         
                         
-                        Console.WriteLine("The game is in Safe mode");
+                        Console.WriteLine("The game is in Safe mode,this is for a new feature not implemented yet");
                         Console.WriteLine("endgame functionality may be limited");
                         break;
 
@@ -123,8 +128,12 @@ namespace Final_Project
                         break;
                     }
                     
-
+                    //these modes are not implemented.  they are for a planned "Master Hacker" super boss.
+                    //Loss to this boss will shut down the computer.  Hence the warning.  
             }
+            Console.ForegroundColor= ConsoleColor.Red;
+            Console.WriteLine("to change the mode, enable the alternate modes and set it in the config.json file. ");
+            Console.WriteLine("WARNING! Alternate modes may cause accidental data loss");
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine("If you are ready to begin your adventure, type Begin. If you would like to load a previous save, please type Load");
         }
