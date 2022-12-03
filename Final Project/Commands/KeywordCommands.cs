@@ -18,8 +18,8 @@ namespace Final_Project.Commands
             {
                 //Exit or CloseC
                 Console.WriteLine("Would you like to save? (y/n)");
-                if(determine=="Y")
-                string determine = Console.ReadLine();
+                //if(determine=="Y")
+                //string determine = Console.ReadLine();
                 {
 
                     //Save.SaveObjects(SaveData.objects);
@@ -27,14 +27,15 @@ namespace Final_Project.Commands
 
             }
             else if (commandUsed == keyword.ListOfKeywords[8])
-                //Reset
+            //Reset
             {
-            else if ((commandUsed == keyword.ListOfKeywords[9]) || (commandUsed == keyword.ListOfKeywords[10]))
             }
-            {
+            else if ((commandUsed == keyword.ListOfKeywords[9]) || (commandUsed == keyword.ListOfKeywords[10]))
+            { 
+            
                 //Yes
             }
-                Console.WriteLine("Yes");
+                //Console.WriteLine("Yes");
             else if (commandUsed == keyword.ListOfKeywords[12] || commandUsed == keyword.ListOfKeywords[11])
             {
                 //No
@@ -43,17 +44,17 @@ namespace Final_Project.Commands
             {
 
             }
-            {
+            
             else if (commandUsed == keyword.ListOfKeywords[14])
-
+            { 
             }
-            {
+            
             else if (commandUsed == keyword.ListOfKeywords[15])
-
+            { 
             }
-            {
+            
             else if (commandUsed == keyword.ListOfKeywords[16])
-
+            { 
             }
         }
         public void Commands(string commandUsed, ref SaveData saveData, ref Save save)
@@ -148,6 +149,19 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
             {
                 //Tame
+                if((monster.HealthPoints>mainCharacter.HealthPoints/3)||monster.Strength>mainCharacter.Strength/2)
+                {
+                    Console.WriteLine("You cannot tame this monster");
+                }
+                else
+                {
+                    Console.WriteLine("You have tamed " + monster.Name);
+                    double healthLost =  monster.Strength/2;
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
+                    Console.WriteLine("Unfortunately, you have lost " + healthLost);
+                    PetTemplate pet = new PetTemplate(monster.Name,monster.Species,monster.Strength,monster.HealthPoints)
+                    mainCharacter.Pets.Add();
+                }
             }
             else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
             {

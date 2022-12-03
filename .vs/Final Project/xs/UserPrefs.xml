@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{E45FD283-3051-483C-98A8-5B955A0D3518}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Final_220Project PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Final Project/TemplateClasses/PetTemplate.cs">
+    <Files>
+      <File FileName="Final Project/Commands/KeywordCommands.cs" Line="164" Column="18" />
+      <File FileName="Final Project/TemplateClasses/PetTemplate.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Final Project" expanded="True">
+            <Node name="Final Project" expanded="True">
+              <Node name="Commands" expanded="True" />
+              <Node name="TemplateClasses" expanded="True">
+                <Node name="PetTemplate.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
