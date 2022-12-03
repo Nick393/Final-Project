@@ -7,7 +7,7 @@ namespace Final_Project.TemplateClasses
     {
         private string _Alignment;
         private string _Species;
-        private List<PetTemplate> _Pets;
+        private List<PetTemplate> _Pets=new List<PetTemplate>();
         public CharacterTemplate()//default constructor
         {
             this.Name = "";
@@ -72,7 +72,8 @@ namespace Final_Project.TemplateClasses
 
         public List<PetTemplate> Pets
         {
-            get { return Pets; }
+            get { return _Pets; }
+            set { _Pets = value; }
         }
 
         /*public void addPets(MonsterTemplate newPet)

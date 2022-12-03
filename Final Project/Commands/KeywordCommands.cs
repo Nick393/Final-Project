@@ -67,7 +67,7 @@ namespace Final_Project.Commands
             {
                 //Keywords
                 string listOfWords = null;
-                foreach (string word in keyword.ListOfKeywords)
+                foreach (string word in keyword.operateKeywords)
                 {
                     if ((word == "Y") || (word == "N"))
                     {
@@ -137,11 +137,19 @@ namespace Final_Project.Commands
             {
                 double probability = (mainCharacter.HealthPoints / monster.HealthPoints)*100;
                 Random rand = new Random();
+                int intprob=(int)(mainCharacter.HealthPoints)/(int)monster.HealthPoints;
+                int loseRand= rand.Next(0,intprob);
+                mainCharacter.HealthPoints = mainCharacter.HealthPoints-loseRand;
                 double random=rand.Next(0, 101);
                 if(random>probability)
                 {
                     Console.WriteLine("You Lose!");
                 }
+                else
+                {
+                    Console.WriteLine("You wonthe fight!");
+                }
+                Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
                 //Fight
             }
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
@@ -160,7 +168,7 @@ namespace Final_Project.Commands
                     Console.WriteLine("You have tamed " + monster.Name);
                     double healthLost =  monster.Strength/2;
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
-                    Console.WriteLine("Unfortunately, you have lost " + healthLost);
+                    Console.WriteLine("Unfortunately, you have lost " + healthLost+" hitpoints.");
                     PetTemplate pet = new PetTemplate(monster,mainCharacter);
                     pet.HealthPoints = pet.HealthPoints * 0.75;
                     mainCharacter.Pets.Add(pet);
@@ -174,6 +182,9 @@ namespace Final_Project.Commands
                     double probability = ((getStrengthValue(mainCharacter) + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength)) * 100;
                     Random rand = new Random();
                     double random = rand.Next(0, 101);
+                    int intprob = (int)(mainCharacter.HealthPoints) / (int)monster.HealthPoints;
+                    int loseRand = rand.Next(0, intprob);
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
                     if (random > probability)
                     {
                         Console.WriteLine("You Lose! Press any key to admit defeat!");
@@ -183,13 +194,14 @@ namespace Final_Project.Commands
                     else
                     {
                         Console.WriteLine("You won the fight!");
-                        Console.ReadKey();
+                        Console.WriteLine("You have lost " + loseRand + " hitpoints");
+                        
                     }
                 }
                 catch(Exception ex)
                 {
                     Console.WriteLine(ex);
-                    Console.ReadKey();
+                    
                 }
             }
             else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())

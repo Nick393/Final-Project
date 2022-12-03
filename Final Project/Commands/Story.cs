@@ -27,9 +27,9 @@ namespace Final_Project.Commands
             mc.Strength = 1000;
             return mc;
         }
-        public void startStory()
+        public void startStory(CharacterTemplate mainCharacter)
         {
-            Console.WriteLine("We shall now begin!");
+            Console.WriteLine("Welcome "+mainCharacter.Name+" of the "+mainCharacter.Species+" species.  You are now a member of the "+mainCharacter.Alignment+" side.  We shall now begin!");
         }
 
         public string RequestInformation(string infoName)
@@ -322,10 +322,16 @@ namespace Final_Project.Commands
                 string command = Console.ReadLine();
 
                 keywords.Commands(command, monster1, mainCharacter, ref saveData, ref save);
-                if(mainCharacter.HealthPoints<=0)
+                if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
                 }
+                else if (command == "kill"||command=="tame"||command=="fight")
+                {
+                    encounterDone=true;
+                }
+                Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
+
             }
 
         }
@@ -387,6 +393,11 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
+                else if (command == "kill" || command == "tame")
+                {
+                    encounterDone = true;
+                }
+                Console.WriteLine("Your health is now "+mainCharacter.HealthPoints.ToString());
             }
         }
         //Use this to put to start the game from the save data

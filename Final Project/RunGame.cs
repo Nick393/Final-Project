@@ -30,51 +30,55 @@ namespace Final_Project
                 string userCommand = Console.ReadLine().ToUpper();
                 if ((userCommand == keyword.ListOfKeywords[13].ToUpper()) || (userCommand == keyword.ListOfKeywords[14].ToUpper()))
                 {
+                    bool startgame = true;
                     isNotWorking = false;
                     CharacterTemplate mainCharacter = story.createMainCharacter();
                     saveData.addObject(mainCharacter);
-                    story.startStory();
+                    story.startStory(mainCharacter);
                     bool gameNotEnded = true;
                     while (gameNotEnded)
                     {
                         int randNum = rand.Next(0, 501);
                         if (randNum >= 251)
                         {
+                            startgame = false;
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
                             newVillian.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newVillian, mainCharacter.Alignment, false,mainCharacter);
+                            story.runEncounter(newVillian, mainCharacter.Alignment, false, mainCharacter);
                         }
                         else
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
                             newMonster.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newMonster, mainCharacter.Alignment, false,mainCharacter);
+                            story.runEncounter(newMonster, mainCharacter.Alignment, false, mainCharacter);
                         }
-                        
-                        string newUserCommand = Console.ReadLine();
-                        string commandUsed = keyword.detectKeyword(newUserCommand);
-                        
-                        if (commandUsed != null)
+                        if (startgame == true)
                         {
-                            commands.Commands(commandUsed, ref saveData, ref save);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Please Enter a Valid Command");
+                            string newUserCommand = Console.ReadLine();
+                            string commandUsed = keyword.detectKeyword(newUserCommand);
+
+                            if (commandUsed != null)
+                            {
+                                commands.Commands(commandUsed, ref saveData, ref save);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please Enter a Valid Command");
+                            }
                         }
                     }
 
-                }
+                    }
                 else if ((userCommand == keyword.ListOfKeywords[15].ToUpper()))
-                {
-                    isNotWorking = false;
-                    //Leave this to the loaded
-                }
-                else
-                {
-                    Console.WriteLine("Please enter a valid Command");
-                    StartScreen();
-                }
+                    {
+                        isNotWorking = false;
+                        //Leave this to the loaded
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a valid Command");
+                        StartScreen();
+                    } 
             }
             //creates the main character
         }
