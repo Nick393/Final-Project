@@ -1,20 +1,30 @@
 ﻿<Properties StartupConfiguration="{E45FD283-3051-483C-98A8-5B955A0D3518}|Default">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Final_220Project PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Final Project/TemplateClasses/PetTemplate.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Final Project/Commands/KeywordCommands.cs">
     <Files>
-      <File FileName="Final Project/Commands/KeywordCommands.cs" Line="164" Column="18" />
-      <File FileName="Final Project/TemplateClasses/PetTemplate.cs" Line="1" Column="1" />
+      <File FileName="Final Project/Commands/KeywordCommands.cs" Line="177" Column="46" />
+      <File FileName="Final Project/TemplateClasses/PetTemplate.cs" Line="56" Column="13" />
+      <File FileName="Final Project/RunGame.cs" Line="44" Column="33" />
+      <File FileName="Final Project/Commands/Story.cs" Line="27" Column="32" />
+      <File FileName="Final Project/TemplateClasses/MonsterTemplate.cs" Line="82" Column="29" />
+      <File FileName="Final Project/Databases/Keywords.cs" Line="61" Column="37" />
+      <File FileName="Final Project/TemplateClasses/CharacterTemplate.cs" Line="89" Column="97" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Final Project" expanded="True">
             <Node name="Final Project" expanded="True">
-              <Node name="Commands" expanded="True" />
-              <Node name="TemplateClasses" expanded="True">
-                <Node name="PetTemplate.cs" selected="True" />
+              <Node name="Commands" expanded="True">
+                <Node name="KeywordCommands.cs" selected="True" />
               </Node>
+              <Node name="Databases" expanded="True" />
+              <Node name="TemplateClasses" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -24,9 +34,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

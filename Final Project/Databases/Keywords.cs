@@ -1,9 +1,13 @@
-﻿namespace Final_Project.TemplateClasses
+﻿using Final_Project.Commands;
+using System;
+
+namespace Final_Project.TemplateClasses
 {
     public class Keywords
     {
-        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load", "Help", "Save", "Stats" };
+        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load", "Help", "Save", "Stats","cheat" };
         private const int startSystem = 5;
+        private string[] returnkeys = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "Yes", "Y", "No", "N", "Begin", "Start", "Load", "Help", "Save", "Stats"};
 
         //detects if the word is a keyword, should be used before detectKeyword
         public bool isKeyword(string input)
@@ -49,7 +53,12 @@
 
         public string[] ListOfKeywords
         {
+            
             get { return keywords; }
+        }
+        public string [] operateKeywords
+        {
+            get { return returnkeys; }
         }
     }
 }

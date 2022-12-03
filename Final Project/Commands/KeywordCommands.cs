@@ -29,13 +29,14 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[8])
             //Reset
             {
+
             }
             else if ((commandUsed == keyword.ListOfKeywords[9]) || (commandUsed == keyword.ListOfKeywords[10]))
-            { 
-            
+            {
+
                 //Yes
             }
-                //Console.WriteLine("Yes");
+            //Console.WriteLine("Yes");
             else if (commandUsed == keyword.ListOfKeywords[12] || commandUsed == keyword.ListOfKeywords[11])
             {
                 //No
@@ -44,18 +45,19 @@ namespace Final_Project.Commands
             {
 
             }
-            
+
             else if (commandUsed == keyword.ListOfKeywords[14])
-            { 
+            {
             }
-            
+
             else if (commandUsed == keyword.ListOfKeywords[15])
-            { 
+            {
+            }
+
+            else if (commandUsed == keyword.ListOfKeywords[16])
+            {
             }
             
-            else if (commandUsed == keyword.ListOfKeywords[16])
-            { 
-            }
         }
         public void Commands(string commandUsed, ref SaveData saveData, ref Save save)
         {
@@ -159,30 +161,46 @@ namespace Final_Project.Commands
                     double healthLost =  monster.Strength/2;
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
                     Console.WriteLine("Unfortunately, you have lost " + healthLost);
-                    PetTemplate pet = new PetTemplate(monster.Name,monster.Species,monster.Strength,monster.HealthPoints)
-                    mainCharacter.Pets.Add();
+                    PetTemplate pet = new PetTemplate(monster,mainCharacter);
+                    pet.HealthPoints = pet.HealthPoints * 0.75;
+                    mainCharacter.Pets.Add(pet);
                 }
             }
             else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
             {
                 //kill
-                double probability = ((getStrengthValue(mainCharacter)) / (monster.HealthPoints+monster.Strength)) * 100;
-                Random rand = new Random();
-                double random = rand.Next(0, 101);
-                if (random > probability)
+                try
                 {
-                    Console.WriteLine("You Lose! Press any key to admit defeat!");
-                    Console.ReadKey();
-                    Environment.Exit(0);
+                    double probability = ((getStrengthValue(mainCharacter) + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength)) * 100;
+                    Random rand = new Random();
+                    double random = rand.Next(0, 101);
+                    if (random > probability)
+                    {
+                        Console.WriteLine("You Lose! Press any key to admit defeat!");
+                        Console.ReadKey();
+                        Environment.Exit(5);
+                    }
+                    else
+                    {
+                        Console.WriteLine("You won the fight!");
+                        Console.ReadKey();
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    Console.WriteLine("You won the fight!");
+                    Console.WriteLine(ex);
+                    Console.ReadKey();
                 }
             }
             else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
             {
                 //Heal
+            }
+            else if (commandUsed == ListOfKeywords[19])
+            {
+                //cheat
+                Console.WriteLine(monster.cheat());
+                Console.WriteLine(mainCharacter.cheat());
             }
             else
             {
@@ -198,7 +216,9 @@ namespace Final_Project.Commands
                 {
                     petStrength = petStrength + mainCharacter.Pets[i].Strength;
                 }
+
             }
+            else return 0;
             return petStrength;
         }
     }

@@ -82,7 +82,11 @@ namespace Final_Project.TemplateClasses
 
         public override string ToString()
         {
-            return "Character*" + this.Name + "*" + _Alignment + "*";
+            return "Character*" + this.Name + "*" + _Alignment + "*"+HealthPoints;
+        }
+        public string cheat()
+        {
+            return "Character " + this.Name + " " + _Alignment + " " + HealthPoints+" "+Strength;
         }
     }
 }

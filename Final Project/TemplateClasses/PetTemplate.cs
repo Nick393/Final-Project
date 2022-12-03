@@ -50,5 +50,9 @@
             this.Strength = strength * multiplier;
             _Owner = owner;
         }
+       /* public PetTemplate(string name,string species,int strengthValue,CharacterTemplate owner, int healthPoints)
+        {
+
+        }/*/
     }
 }
