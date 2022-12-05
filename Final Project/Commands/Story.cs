@@ -23,8 +23,8 @@ namespace Final_Project.Commands
             const int START_STAGE = 0;
             CharacterTemplate mc = new CharacterTemplate(name, alignment, species, START_STAGE);
             mc.Index = index;
-            mc.HealthPoints = 1000;
-            mc.Strength = 1000;
+            mc.HealthPoints = 500;
+            mc.Strength = 500;
             return mc;
         }
         public void startStory(CharacterTemplate mainCharacter)
@@ -333,7 +333,7 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill"||(command=="tame"&&(!(((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))) ||command=="fight"||(command=="flee"&& !((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command=="tame"&&(!(((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))) ||(command=="flee"&& !((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone=true;
                 }

@@ -132,8 +132,15 @@ namespace Final_Project.Commands
 
         public void Commands(string commandUsed, MonsterTemplate monster, CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
         {
+            if (mainCharacter.HealthPoints<=0)
+            {
+                Console.WriteLine("You lost.  Press any key to admit defeat");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
             Keywords keyword = new Keywords();
             commandUsed = commandUsed.ToUpper();
+            int probabilityfix = 0;
             if (commandUsed == keyword.ListOfKeywords[0].ToUpper())
             {
                 List<PetTemplate> newPets = new List<PetTemplate>();
@@ -142,7 +149,8 @@ namespace Final_Project.Commands
                 mainCharacter.Pets = newPets;
                 double probability = (mainCharacter.HealthPoints / monster.HealthPoints)*100;
                 Random rand = new Random();
-                int intprob=(int)(mainCharacter.HealthPoints)/(int)monster.HealthPoints;
+                int intprob = (int)probability;
+                //int intprob=(int)((mainCharacter.HealthPoints)/(int)monster.HealthPoints)*100;
                 int loseRand= rand.Next(0,intprob);
                 mainCharacter.HealthPoints = mainCharacter.HealthPoints-loseRand;
                 double random=rand.Next(0, 101);
@@ -155,7 +163,7 @@ namespace Final_Project.Commands
                 {
                     Console.WriteLine("You won the fight!");
                 }
-                Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
+               // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
                 //Fight
 
             }
@@ -192,6 +200,8 @@ namespace Final_Project.Commands
             }
             else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
             {
+                int repair = 0;
+                int proabilityfix = 0;
                 //kill
                 try
                 {
@@ -201,15 +211,17 @@ namespace Final_Project.Commands
                     mainCharacter.Pets = newPets;
                     double probability = ((getStrengthValue(mainCharacter) + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength)) * 100;
                     Random rand = new Random();
-                    int randstart=rand.Next(0,50);
+                    int randstart=rand.Next(0,49);
                     int randEnd = rand.Next(51, 101);
                     double random = rand.Next((int)randstart, randEnd);
                     int intprob = (int)(mainCharacter.HealthPoints) / (int)monster.HealthPoints;
+                    probabilityfix = intprob;
                     int loseRand = rand.Next((int)randstart, intprob*100);//bug here
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
                     if (random > probability)
                     {
                         Console.WriteLine("You Lose! Press any key to admit defeat!");
+                        Console.ReadKey();
                         Console.ReadKey();
                         Environment.Exit(5);
                     }
@@ -217,13 +229,34 @@ namespace Final_Project.Commands
                     {
                         Console.WriteLine("You won the fight!");
                         Console.WriteLine("You have lost " + loseRand + " hitpoints");
+                        if (mainCharacter.HealthPoints<=0)
+                        {
+                            Console.WriteLine("You lost");
+                            Console.WriteLine("press any key to admit defeat");
+                            Console.ReadKey();
+                            Environment.Exit(0);
+                        }
                         
                     }
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine(ex);
-                    
+                    Random rand = new Random();
+
+                    int probabilityfixer = probabilityfix + 1;
+                    int random = rand.Next(0, probabilityfixer);
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints = random;
+                    Console.WriteLine("You have lost " + random + "Hitpoints");
+                    //Console.WriteLine(ex);
+                    if (mainCharacter.HealthPoints <= 0)
+                    {
+                        Console.WriteLine("You lost");
+                        Console.WriteLine("press any key to admit defeat");
+                        Console.ReadKey();
+                        Environment.Exit(0);
+                    }
+
+
                 }
             }
             else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
