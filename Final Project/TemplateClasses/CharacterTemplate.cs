@@ -7,6 +7,7 @@ namespace Final_Project.TemplateClasses
     {
         private string _Alignment;
         private string _Species;
+        private int _numMedkits;
         private List<PetTemplate> _Pets=new List<PetTemplate>();
         public CharacterTemplate()//default constructor
         {
@@ -15,6 +16,8 @@ namespace Final_Project.TemplateClasses
             _Species = "";
             this.HealthPoints = 0;
             this.Strength = 0;
+            this.numMedkits = 0;
+
         }
 
         public CharacterTemplate(string Name, string Alignment, string Species, int strengthValue, int gameStage)//non-default constructor, makes enemy NPC characters
@@ -46,6 +49,7 @@ namespace Final_Project.TemplateClasses
             determineDefault(gameStage, ref health, ref strength);
             this.HealthPoints = health * multiplier;
             this.Strength = strength * multiplier;
+            this.numMedkits = 0;
         }
         public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters
         {
@@ -57,6 +61,7 @@ namespace Final_Project.TemplateClasses
             determineDefault(gameStage, ref health, ref strength);
             this.HealthPoints = health;
             this.Strength = strength;
+            this.numMedkits = 0;
         }
 
         public string Species
@@ -74,6 +79,11 @@ namespace Final_Project.TemplateClasses
         {
             get { return _Pets; }
             set { _Pets = value; }
+        }
+        public int numMedkits
+        {
+            get { return _numMedkits; }
+            set { _numMedkits = value; }
         }
 
         /*public void addPets(MonsterTemplate newPet)

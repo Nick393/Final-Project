@@ -216,8 +216,15 @@ namespace Final_Project.Commands
             return returnCharacter;
         }
 
-        public void runEncounter(CharacterTemplate enemy, string mcAlignment, bool isBoss,CharacterTemplate mainCharacter)
+        public void runEncounter(CharacterTemplate enemy, string mcAlignment, bool isBoss,CharacterTemplate mainCharacter,double sMuliplier)
         {
+            Random rando = new Random();
+            int add=rando.Next(0, 12);
+            if(add==5)
+            {
+                mainCharacter.numMedkits = mainCharacter.numMedkits + 1;
+                Console.WriteLine("You have found a medkit!");
+            }
             string message = "ERROR MESSAGE, SHOULD NOT BE SHOWN";
             const string beginEncounter = "You have encountered ";
             Random rand = new Random();
@@ -315,7 +322,7 @@ namespace Final_Project.Commands
             
             bool encounterDone = false;
             KeywordCommands keywords = new KeywordCommands();
-            MonsterTemplate monster1 = new MonsterTemplate(enemy.Name, enemy.Species, enemy.Strength, enemy.HealthPoints);
+            MonsterTemplate monster1 = new MonsterTemplate(enemy.Name, enemy.Species, enemy.Strength*sMuliplier, enemy.HealthPoints*sMuliplier);
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?");
@@ -326,18 +333,35 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill"||command=="tame"||command=="fight")
+                else if (command == "kill"||(command=="tame"&&(!(((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))) ||command=="fight"||(command=="flee"&& !((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone=true;
                 }
                 Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
+                Console.WriteLine("Your strength is " + mainCharacter.Strength);
+                if(mainCharacter.Pets.Count!=0)
+                {
+                    Console.WriteLine("You have " + mainCharacter.Pets.Count + " pets.  They are:");
+                    foreach (object pet in mainCharacter.Pets)
+                    {
+                        Console.WriteLine(pet.ToString());
+                    }
+
+                }
 
             }
 
         }
 
-        public void runEncounter(MonsterTemplate enemy, string mcAlignment, bool isBoss, CharacterTemplate mainCharacter)
+        public void runEncounter(MonsterTemplate enemy, string mcAlignment, bool isBoss, CharacterTemplate mainCharacter,double SMultiplier)
         {
+            Random rando = new Random();
+            int add = rando.Next(0, 12);
+            if (add == 5)
+            {
+                mainCharacter.numMedkits = mainCharacter.numMedkits + 1;
+                Console.WriteLine("You have found a medkit!");
+            }
             string message = "ERROR MESSAGE, SHOULD NOT BE SHOWN";
             const string beginEncounter = "You have encountered ";
             Random rand = new Random();
@@ -384,6 +408,8 @@ namespace Final_Project.Commands
             //Console.WriteLine("What would you like to do next?");
             bool encounterDone = false;
             KeywordCommands keywords = new KeywordCommands();
+            enemy.HealthPoints = enemy.HealthPoints * SMultiplier;
+            enemy.Strength = enemy.Strength * SMultiplier;
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?");
@@ -393,7 +419,7 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "tame")
+                else if (command == "kill" || command == "tame" || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
                 }

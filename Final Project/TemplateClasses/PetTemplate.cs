@@ -50,9 +50,13 @@
             this.Strength = strength * multiplier;
             _Owner = owner;
         }
-       /* public PetTemplate(string name,string species,int strengthValue,CharacterTemplate owner, int healthPoints)
+        public override string ToString()
         {
+            return "This pet's name is " + this.Name + ", it is of the  " + this.Species + " species, and its health is " + this.HealthPoints + ".  The strength of this pet is " + this.Strength+"\n";
+        }
+        /* public PetTemplate(string name,string species,int strengthValue,CharacterTemplate owner, int healthPoints)
+         {
 
-        }/*/
+         }/*/
     }
 }

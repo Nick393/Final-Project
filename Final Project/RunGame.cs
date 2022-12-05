@@ -36,21 +36,23 @@ namespace Final_Project
                     saveData.addObject(mainCharacter);
                     story.startStory(mainCharacter);
                     bool gameNotEnded = true;
+                    double SMult = 1;
                     while (gameNotEnded)
                     {
                         int randNum = rand.Next(0, 501);
                         if (randNum >= 251)
                         {
+                            
                             startgame = false;
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
                             newVillian.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newVillian, mainCharacter.Alignment, false, mainCharacter);
+                            story.runEncounter(newVillian, mainCharacter.Alignment, false, mainCharacter,SMult);
                         }
                         else
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
                             newMonster.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newMonster, mainCharacter.Alignment, false, mainCharacter);
+                            story.runEncounter(newMonster, mainCharacter.Alignment, false, mainCharacter,SMult);
                         }
                         if (startgame == true)
                         {
@@ -66,6 +68,7 @@ namespace Final_Project
                                 Console.WriteLine("Please Enter a Valid Command");
                             }
                         }
+                        SMult = SMult + 1;
                     }
 
                     }

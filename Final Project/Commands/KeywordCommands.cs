@@ -1,6 +1,7 @@
 ﻿using Final_Project.Databases;
 using Final_Project.TemplateClasses;
 using System;
+using System.Collections.Generic;
 
 namespace Final_Project.Commands
 {
@@ -135,26 +136,41 @@ namespace Final_Project.Commands
             commandUsed = commandUsed.ToUpper();
             if (commandUsed == keyword.ListOfKeywords[0].ToUpper())
             {
+                List<PetTemplate> newPets = new List<PetTemplate>();
+                newPets = modifyPetHealth(monster.HealthPoints, monster.Strength, mainCharacter);
+                mainCharacter.Pets.Clear();
+                mainCharacter.Pets = newPets;
                 double probability = (mainCharacter.HealthPoints / monster.HealthPoints)*100;
                 Random rand = new Random();
                 int intprob=(int)(mainCharacter.HealthPoints)/(int)monster.HealthPoints;
                 int loseRand= rand.Next(0,intprob);
                 mainCharacter.HealthPoints = mainCharacter.HealthPoints-loseRand;
                 double random=rand.Next(0, 101);
+
                 if(random>probability)
                 {
                     Console.WriteLine("You Lose!");
                 }
                 else
                 {
-                    Console.WriteLine("You wonthe fight!");
+                    Console.WriteLine("You won the fight!");
                 }
                 Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
                 //Fight
+
             }
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
             {
                 //Flee
+                if (((monster.HealthPoints > mainCharacter.HealthPoints / 3) || monster.Strength > mainCharacter.Strength / 2))
+                {
+                    Console.WriteLine("This monster is too strong.  You cannot flee!");
+                }
+                else
+                {
+                    Console.WriteLine("You have fled " + monster.Name+"!");
+                }
+
             }
             else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
             {
@@ -179,11 +195,17 @@ namespace Final_Project.Commands
                 //kill
                 try
                 {
+                    List<PetTemplate> newPets = new List<PetTemplate>();
+                    newPets = modifyPetHealth(monster.HealthPoints, monster.Strength, mainCharacter);
+                    mainCharacter.Pets.Clear();
+                    mainCharacter.Pets = newPets;
                     double probability = ((getStrengthValue(mainCharacter) + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength)) * 100;
                     Random rand = new Random();
-                    double random = rand.Next(0, 101);
+                    int randstart=rand.Next(0,50);
+                    int randEnd = rand.Next(51, 101);
+                    double random = rand.Next((int)randstart, randEnd);
                     int intprob = (int)(mainCharacter.HealthPoints) / (int)monster.HealthPoints;
-                    int loseRand = rand.Next(0, intprob);
+                    int loseRand = rand.Next((int)randstart, intprob*100);//bug here
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
                     if (random > probability)
                     {
@@ -207,6 +229,17 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
             {
                 //Heal
+                int medkitRestoreValue = 50;
+                if(mainCharacter.numMedkits!=0)
+                {
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints + medkitRestoreValue;
+                    mainCharacter.numMedkits = mainCharacter.numMedkits - 1;
+                    Console.WriteLine("You have been healed! Your new health is " + mainCharacter.HealthPoints + ".  You have " + mainCharacter.numMedkits + " medkits remaining.");
+                }
+                else
+                {
+                    Console.WriteLine("Unable to heal! You have no medkits");
+                }
             }
             else if (commandUsed == ListOfKeywords[19])
             {
@@ -232,6 +265,29 @@ namespace Final_Project.Commands
             }
             else return 0;
             return petStrength;
+        }
+        public List<PetTemplate> modifyPetHealth(double enemyHp, double enemyStrength, CharacterTemplate character)
+        {
+            List<PetTemplate> petlist = new List<PetTemplate>();
+            if(character.Pets.Count!=0)
+            {
+
+                foreach (PetTemplate pet in character.Pets)
+                {
+                    Random rand = new Random();
+                    int hurt = rand.Next(0, (int)(enemyHp + enemyStrength / 2));
+                    pet.HealthPoints = pet.HealthPoints - hurt;
+                    if (pet.HealthPoints <= 0)
+                    {
+                        Console.WriteLine("You have lost your pet " + pet.Name);
+                    }
+                    else
+                    {
+                        petlist.Add(pet);
+                    }
+                }
+            }
+            return petlist;
         }
     }
 }
