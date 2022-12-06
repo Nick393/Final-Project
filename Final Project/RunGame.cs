@@ -29,31 +29,38 @@ namespace Final_Project
                 string userCommand = Console.ReadLine().ToUpper();
                 if ((userCommand == keyword.ListOfKeywords[13].ToUpper()) || (userCommand == keyword.ListOfKeywords[14].ToUpper()))
                 {
+                    double sMult = 1;
                     bool startgame = true;
                     isNotWorking = false;
-                    CharacterTemplate mainCharacter = story.createMainCharacter();
+                    CharacterTemplate mainCharacter = story.createMainCharacter(sMult);
                     saveData.addObject(mainCharacter);
                     story.startStory(mainCharacter);
                     bool gameNotEnded = true;
-                    double SMult = 1;
+                    int PositiveEnd = 100000;
+                    int NegativeEnd = -100000;
                     while (gameNotEnded)
                     {
                         int randNum = rand.Next(0, 501);
-                        if (randNum >= 251)
+                        if (mainCharacter.HealthPoints <= 0)
+                        {
+                            gameNotEnded = false;
+                        }
+
+                        else if (randNum >= 251)
                         {
 
                             startgame = false;
-                            CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
+                            CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, PositiveEnd), mainCharacter.Alignment, gameStage, sMult);
                             newVillian.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(ref newVillian, mainCharacter.Alignment, false, ref mainCharacter, SMult, ref saveData, ref save);
+                            story.runEncounter(ref newVillian, mainCharacter.Alignment, false, ref mainCharacter, ref saveData, ref save);
                         }
-                        else
+                        else if (randNum < 251)
                         {
-                            MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
+                            MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(NegativeEnd, -2), mainCharacter.Alignment, gameStage, sMult);
                             newMonster.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(ref newMonster, mainCharacter.Alignment, false, ref mainCharacter, SMult, ref save, ref saveData);
+                            story.runEncounter(ref newMonster, mainCharacter.Alignment, false, ref mainCharacter, ref save, ref saveData);
                         }
-                        if (startgame == true)
+                        /*else if (startgame == true)
                         {
                             string newUserCommand = Console.ReadLine();
                             string commandUsed = keyword.detectKeyword(newUserCommand);
@@ -62,12 +69,14 @@ namespace Final_Project
                             {
                                 commands.Commands(commandUsed, ref saveData, ref save);
                             }
-                            else
-                            {
-                                Console.WriteLine("Please Enter a Valid Command");
-                            }
+                        }*/
+                        else
+                        {
+                            Console.WriteLine("Please Enter a Valid Command");
                         }
-                        SMult = SMult + 1;
+                        
+                        PositiveEnd++;
+                        NegativeEnd--;
                     }
 
                 }

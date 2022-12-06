@@ -39,7 +39,7 @@
             this.Strength = strengthValue * multiplier;
         }
 
-        public MonsterTemplate(string name, string species, double strengthValue, int gameStage)
+        public MonsterTemplate(string name, string species, double strengthValue, int gameStage, double nicksMultiplier)
         {
             this.Name = name;
             this.Species = species;
@@ -65,8 +65,8 @@
             double health = 0;
             double strength = 0;
             determineDefault(gameStage, ref health, ref strength);
-            this.HealthPoints = health * multiplier;
-            this.Strength = strength * multiplier;
+            this.HealthPoints = health * multiplier * nicksMultiplier;
+            this.Strength = strength * multiplier * nicksMultiplier;
         }
         public string Species
         {

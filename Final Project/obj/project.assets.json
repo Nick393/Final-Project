@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\mvsierra\\.nuget\\packages\\": {},
+    "C:\\Users\\nguyette\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
@@ -16,11 +16,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\Final Project.csproj",
+      "projectUniqueName": "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\Final Project.csproj",
       "projectName": "Final Project",
-      "projectPath": "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\Final Project.csproj",
-      "packagesPath": "C:\\Users\\mvsierra\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mvsierra\\source\\repos\\Final-Project\\Final Project\\obj\\",
+      "projectPath": "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\Final Project.csproj",
+      "packagesPath": "C:\\Users\\nguyette\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nguyette\\Documents\\GitHub\\Final-Project\\Final Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -28,7 +28,7 @@
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mvsierra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nguyette\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"

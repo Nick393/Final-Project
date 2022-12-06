@@ -13,17 +13,13 @@ namespace Final_Project.Commands
         private NameList names = new NameList();
         private SaveData saveData = new SaveData();
         private Save save = new Save();
-        public CharacterTemplate createMainCharacter()
+        public CharacterTemplate createMainCharacter(double sMult)
         {
             string name = RequestInformation("Name");
             string species = RequestInformation("Species");
             string alignment = RequestInformation("Faction");
-            int index = 0;
             const int START_STAGE = 0;
-            CharacterTemplate mc = new CharacterTemplate(name, alignment, species, START_STAGE);
-            mc.Index = index;
-            mc.HealthPoints = 500;
-            mc.Strength = 500;
+            CharacterTemplate mc = new CharacterTemplate(name, alignment, species, 3, START_STAGE, sMult);
             StreamReader r = new StreamReader("highScore.json");
             int score = int.Parse(r.ReadLine());
             r.Close();
@@ -135,7 +131,7 @@ namespace Final_Project.Commands
             else { return listInputsPrompt(infoName); }
         }
 
-        public object RandomEncounter(int randNum, string mcAlignment, int gameStage)
+        public object RandomEncounter(int randNum, string mcAlignment, int gameStage, double sMult)
         {
             if (randNum == 0)
             {
@@ -151,7 +147,7 @@ namespace Final_Project.Commands
                 {
                     multiplier = 1;
                 }
-                return RandomEncounter(multiplier, mcAlignment, gameStage);
+                return RandomEncounter(multiplier, mcAlignment, gameStage, sMult);
 
             }
             else if (randNum < 0)
@@ -160,13 +156,13 @@ namespace Final_Project.Commands
                 {
                     //put boss method here
                     const int BUFF_POWER = 3;
-                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage);
+                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, sMult);
                     return encounter;
                 }
                 else
                 {
                     const int BUFF_POWER = 0;
-                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage);
+                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, sMult);
                     return encounter;
                 }
 
@@ -177,49 +173,49 @@ namespace Final_Project.Commands
                 {
                     //put boss method here
                     const int BUFF_POWER = 3;
-                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment, sMult);
                     return encounter;
                 }
                 else if (Math.Abs(randNum) < 100)
                 {
                     const int BUFF_POWER = 2;
-                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment, sMult);
                     return encounter;
                 }
                 else if (Math.Abs(randNum) < 10000)
                 {
                     const int BUFF_POWER = 1;
-                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment, sMult);
                     return encounter;
                 }
                 else
                 {
                     const int BUFF_POWER = 0;
-                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment);
+                    CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment, sMult);
                     return encounter;
                 }
 
             }
         }
 
-        public MonsterTemplate makeEncounter(int BUFF_POWER, int gameStage)
+        public MonsterTemplate makeEncounter(int BUFF_POWER, int gameStage,double sMult)
         {
             string name = names.getMonsterName();
             string species = names.getMonsterSpecies();
-            MonsterTemplate returnMonster = new MonsterTemplate(name, species, BUFF_POWER, gameStage);
+            MonsterTemplate returnMonster = new MonsterTemplate(name, species, BUFF_POWER, gameStage, sMult);
             return returnMonster;
         }
 
-        public CharacterTemplate makeEncounter(int BUFF_POWER, int gameStage, string mcAlignment)
+        public CharacterTemplate makeEncounter(int BUFF_POWER, int gameStage, string mcAlignment, double sMult)
         {
             string name = names.getHumanName();
             string species = names.getHumanSpecies();
             string alignment = names.getOpposingFaction(mcAlignment);
-            CharacterTemplate returnCharacter = new CharacterTemplate(name, alignment, species, BUFF_POWER, gameStage);
+            CharacterTemplate returnCharacter = new CharacterTemplate(name, alignment, species, BUFF_POWER, gameStage,  sMult);
             return returnCharacter;
         }
 
-        public void runEncounter(ref CharacterTemplate enemy, string mcAlignment, bool isBoss, ref CharacterTemplate mainCharacter, double sMuliplier, ref SaveData saveData, ref Save save)
+        public void runEncounter(ref CharacterTemplate enemy, string mcAlignment, bool isBoss, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
         {
             Random rando = new Random();
             int add = rando.Next(0, 12);
@@ -322,21 +318,18 @@ namespace Final_Project.Commands
                 }
             }
             Console.WriteLine(message);
-
-
             bool encounterDone = false;
             KeywordCommands keywords = new KeywordCommands();
-            MonsterTemplate monster1 = new MonsterTemplate(enemy.Name, enemy.Species, enemy.Strength * sMuliplier, enemy.HealthPoints * sMuliplier);
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine().ToLower();
-                keywords.Commands(command, ref monster1, ref mainCharacter, ref saveData, ref save);
+                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || (command == "tame" && (!(((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))) || (command == "flee" && !((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command == "tame" && (!(((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))) || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
                 }
@@ -366,7 +359,7 @@ namespace Final_Project.Commands
 
         }
 
-        public void runEncounter(ref MonsterTemplate enemy, string mcAlignment, bool isBoss,ref CharacterTemplate mainCharacter, double SMultiplier, ref Save save, ref SaveData saveData)
+        public void runEncounter(ref MonsterTemplate enemy, string mcAlignment, bool isBoss,ref CharacterTemplate mainCharacter, ref Save save, ref SaveData saveData)
         {
             Random rando = new Random();
             int add = rando.Next(0, 12);
@@ -421,8 +414,8 @@ namespace Final_Project.Commands
             //Console.WriteLine("What would you like to do next?");
             bool encounterDone = false;
             KeywordCommands keywords = new KeywordCommands();
-            enemy.HealthPoints = enemy.HealthPoints * SMultiplier;
-            enemy.Strength = enemy.Strength * SMultiplier;
+            enemy.HealthPoints = enemy.HealthPoints;
+            enemy.Strength = enemy.Strength;
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?");

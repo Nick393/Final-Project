@@ -28,7 +28,7 @@ namespace Final_Project.TemplateClasses
 
         }
 
-        public CharacterTemplate(string Name, string Alignment, string Species, int strengthValue, int gameStage)//non-default constructor, makes enemy NPC characters
+        public CharacterTemplate(string Name, string Alignment, string Species, int strengthValue, int gameStage, double nicksMultiplier)//non-default constructor, makes enemy NPC characters
         {
             this.Name = Name;
             _Alignment = Alignment;
@@ -57,8 +57,8 @@ namespace Final_Project.TemplateClasses
             double health = 0;
             double strength = 0;
             determineDefault(gameStage, ref health, ref strength);
-            this.HealthPoints = health * multiplier;
-            this.Strength = strength * multiplier;
+            this.HealthPoints = health * multiplier * nicksMultiplier;
+            this.Strength = strength * multiplier * nicksMultiplier;
             this.numMedkits = 0;
         }
         public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters
