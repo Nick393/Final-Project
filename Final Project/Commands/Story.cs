@@ -2,7 +2,6 @@
 using Final_Project.TemplateClasses;
 using System;
 using System.Collections.Generic;
-using Final_Project.Commands;
 using System.IO;
 
 namespace Final_Project.Commands
@@ -33,7 +32,7 @@ namespace Final_Project.Commands
         }
         public void startStory(CharacterTemplate mainCharacter)
         {
-            Console.WriteLine("Welcome "+mainCharacter.Name+" of the "+mainCharacter.Species+" species.  You are now a member of the "+mainCharacter.Alignment+" side.  We shall now begin!");
+            Console.WriteLine("Welcome " + mainCharacter.Name + " of the " + mainCharacter.Species + " species.  You are now a member of the " + mainCharacter.Alignment + " side.  We shall now begin!");
         }
 
         public string RequestInformation(string infoName)
@@ -220,11 +219,11 @@ namespace Final_Project.Commands
             return returnCharacter;
         }
 
-        public void runEncounter(CharacterTemplate enemy, string mcAlignment, bool isBoss,CharacterTemplate mainCharacter,double sMuliplier)
+        public void runEncounter(CharacterTemplate enemy, string mcAlignment, bool isBoss, CharacterTemplate mainCharacter, double sMuliplier)
         {
             Random rando = new Random();
-            int add=rando.Next(0, 12);
-            if(add==5)
+            int add = rando.Next(0, 12);
+            if (add == 5)
             {
                 mainCharacter.numMedkits = mainCharacter.numMedkits + 1;
                 Console.WriteLine("You have found a medkit!");
@@ -243,10 +242,10 @@ namespace Final_Project.Commands
                 }
             }
             if ((mcAlignment.ToUpper() == "GOOD") || (neutralCalc >= 1))
-            {   
+            {
                 if (isBoss)
                 {
-                    message = beginEncounter + enemy.Name + ", the Destroyer of Worlds, the Demon of" + names.getCity() + ", and the Devourer of Souls" + "." ;
+                    message = beginEncounter + enemy.Name + ", the Destroyer of Worlds, the Demon of" + names.getCity() + ", and the Devourer of Souls" + ".";
                 }
                 else
                 {
@@ -281,7 +280,8 @@ namespace Final_Project.Commands
                             break;
                     }
                 }
-            } else
+            }
+            else
             {
                 if (isBoss)
                 {
@@ -323,10 +323,10 @@ namespace Final_Project.Commands
             }
             Console.WriteLine(message);
 
-            
+
             bool encounterDone = false;
             KeywordCommands keywords = new KeywordCommands();
-            MonsterTemplate monster1 = new MonsterTemplate(enemy.Name, enemy.Species, enemy.Strength*sMuliplier, enemy.HealthPoints*sMuliplier);
+            MonsterTemplate monster1 = new MonsterTemplate(enemy.Name, enemy.Species, enemy.Strength * sMuliplier, enemy.HealthPoints * sMuliplier);
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?");
@@ -337,13 +337,13 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || (command=="tame"&&(!(((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))) ||(command=="flee"&& !((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command == "tame" && (!(((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))) || (command == "flee" && !((monster1.HealthPoints > mainCharacter.HealthPoints / 3) || monster1.Strength > mainCharacter.Strength / 2)))
                 {
-                    encounterDone=true;
+                    encounterDone = true;
                 }
                 Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
                 Console.WriteLine("Your strength is " + mainCharacter.Strength);
-                if(mainCharacter.Pets.Count!=0)
+                if (mainCharacter.Pets.Count != 0)
                 {
                     Console.WriteLine("You have " + mainCharacter.Pets.Count + " pets.  They are:");
                     foreach (object pet in mainCharacter.Pets)
@@ -359,15 +359,15 @@ namespace Final_Project.Commands
             int score = int.Parse(r.ReadLine());
             r.Close();
             score++;
-            StreamWriter W = new StreamWriter("highScore.json");
-            W.Write(score);
-            W.Close();
+            //StreamWriter W = new StreamWriter("highScore.json");
+            //W.Write(score);
+            //W.Close();
 
 
 
         }
 
-        public void runEncounter(MonsterTemplate enemy, string mcAlignment, bool isBoss, CharacterTemplate mainCharacter,double SMultiplier)
+        public void runEncounter(MonsterTemplate enemy, string mcAlignment, bool isBoss, CharacterTemplate mainCharacter, double SMultiplier)
         {
             Random rando = new Random();
             int add = rando.Next(0, 12);
@@ -428,7 +428,7 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine();
-                keywords.Commands(command,enemy,mainCharacter,ref saveData,ref save);
+                keywords.Commands(command, enemy, mainCharacter, ref saveData, ref save);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
@@ -437,13 +437,13 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                Console.WriteLine("Your health is now "+mainCharacter.HealthPoints.ToString());
+                Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
             }
             mainCharacter.score = mainCharacter.score + 1;
-            
-            StreamWriter W = new StreamWriter("highScore.json");
-            W.Write(mainCharacter.score);
-            W.Close();
+
+            //treamWriter W = new StreamWriter("highScore.json");
+            //W.Write(mainCharacter.score);
+            //W.Close();
         }
         //Use this to put to start the game from the save data
         public void loadSave()
@@ -451,6 +451,6 @@ namespace Final_Project.Commands
 
         }
 
-       
+
     }
 }

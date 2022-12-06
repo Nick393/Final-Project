@@ -15,7 +15,7 @@ namespace Final_Project.Commands
             {
                 //Keywords
             }
-           
+
             else if (commandUsed == keyword.ListOfKeywords[8])
             //Reset
             {
@@ -47,7 +47,7 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[16])
             {
             }
-            
+
         }
         public void Commands(string commandUsed, ref SaveData saveData, ref Save save)
         {
@@ -82,7 +82,8 @@ namespace Final_Project.Commands
                 if (response == "Y" || response == "YES")
                 {
                     Commands("Save", ref saveData, ref save);
-                } else if (response == "N" || response == "NO")
+                }
+                else if (response == "N" || response == "NO")
                 {
                     Environment.Exit(0);
                 }
@@ -108,12 +109,11 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[15].ToUpper())
             {
                 //Load
+                Console.WriteLine("Please enter the file name exactly.");
+                Save.loadState();
+
             }
-            else if (commandUsed == keyword.ListOfKeywords[17].ToUpper())
-            {
-                //Save
-                Environment.Exit(0);
-            } else if (commandUsed == keyword.ListOfKeywords[18].ToUpper())
+            else if (commandUsed == keyword.ListOfKeywords[18].ToUpper())
             {
                 //Stats
             }
@@ -121,7 +121,7 @@ namespace Final_Project.Commands
 
         public void Commands(string commandUsed, MonsterTemplate monster, CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
         {
-            if (mainCharacter.HealthPoints<=0)
+            if (mainCharacter.HealthPoints <= 0)
             {
                 Console.WriteLine("You lost.  Press any key to admit defeat");
                 Console.ReadKey();
@@ -136,15 +136,15 @@ namespace Final_Project.Commands
                 newPets = modifyPetHealth(monster.HealthPoints, monster.Strength, mainCharacter);
                 mainCharacter.Pets.Clear();
                 mainCharacter.Pets = newPets;
-                double probability = (mainCharacter.HealthPoints / monster.HealthPoints)*100;
+                double probability = (mainCharacter.HealthPoints / monster.HealthPoints) * 100;
                 Random rand = new Random();
                 int intprob = (int)probability;
                 //int intprob=(int)((mainCharacter.HealthPoints)/(int)monster.HealthPoints)*100;
-                int loseRand= rand.Next(0,intprob);
-                mainCharacter.HealthPoints = mainCharacter.HealthPoints-loseRand;
-                double random=rand.Next(0, 101);
+                int loseRand = rand.Next(0, intprob);
+                mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
+                double random = rand.Next(0, 101);
 
-                if(random>probability)
+                if (random > probability)
                 {
                     Console.WriteLine("You Lose!");
                 }
@@ -152,9 +152,18 @@ namespace Final_Project.Commands
                 {
                     Console.WriteLine("You won the fight!");
                 }
-               // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
+                // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
                 //Fight
 
+            }
+            else if (commandUsed == keyword.ListOfKeywords[17].ToUpper())
+            {
+                Console.WriteLine("What would you like to call this save?");
+                string name = Console.ReadLine();
+                //Save
+                Save.saveState(mainCharacter, monster, name);
+                Console.WriteLine("Game saved.  Press any key to exit.");
+                Environment.Exit(0);
             }
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
             {
@@ -165,7 +174,7 @@ namespace Final_Project.Commands
                 }
                 else
                 {
-                    Console.WriteLine("You have fled " + monster.Name+"!");
+                    Console.WriteLine("You have fled " + monster.Name + "!");
                 }
 
             }
@@ -181,8 +190,10 @@ namespace Final_Project.Commands
                 if (determine == "Y")
                 //string determine = Console.ReadLine();
                 {
-
-                    Save.saveState(mainCharacter, monster);
+                    Console.WriteLine("What would you like to call this save?");
+                    string name = Console.ReadLine();
+                    //Save
+                    Save.saveState(mainCharacter, monster, name);
                     Console.WriteLine("Game saved.  Press any key to exit");
                     Console.ReadKey();
                     Environment.Exit(0);
@@ -192,17 +203,17 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
             {
                 //Tame
-                if((monster.HealthPoints>mainCharacter.HealthPoints/3)||monster.Strength>mainCharacter.Strength/2)
+                if ((monster.HealthPoints > mainCharacter.HealthPoints / 3) || monster.Strength > mainCharacter.Strength / 2)
                 {
                     Console.WriteLine("You cannot tame this monster");
                 }
                 else
                 {
                     Console.WriteLine("You have tamed " + monster.Name);
-                    double healthLost =  monster.Strength/2;
+                    double healthLost = monster.Strength / 2;
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
-                    Console.WriteLine("Unfortunately, you have lost " + healthLost+" hitpoints.");
-                    PetTemplate pet = new PetTemplate(monster,mainCharacter);
+                    Console.WriteLine("Unfortunately, you have lost " + healthLost + " hitpoints.");
+                    PetTemplate pet = new PetTemplate(monster, mainCharacter);
                     pet.HealthPoints = pet.HealthPoints * 0.75;
                     mainCharacter.Pets.Add(pet);
                 }
@@ -220,12 +231,12 @@ namespace Final_Project.Commands
                     mainCharacter.Pets = newPets;
                     double probability = ((getStrengthValue(mainCharacter) + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength)) * 100;
                     Random rand = new Random();
-                    int randstart=rand.Next(0,49);
+                    int randstart = rand.Next(0, 49);
                     int randEnd = rand.Next(51, 101);
                     double random = rand.Next((int)randstart, randEnd);
                     int intprob = (int)(mainCharacter.HealthPoints) / (int)monster.HealthPoints;
                     probabilityfix = intprob;
-                    int loseRand = rand.Next((int)randstart, intprob*100);//bug here
+                    int loseRand = rand.Next((int)randstart, intprob * 100);//bug here
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
                     if (random > probability)
                     {
@@ -238,17 +249,17 @@ namespace Final_Project.Commands
                     {
                         Console.WriteLine("You won the fight!");
                         Console.WriteLine("You have lost " + loseRand + " hitpoints");
-                        if (mainCharacter.HealthPoints<=0)
+                        if (mainCharacter.HealthPoints <= 0)
                         {
                             Console.WriteLine("You lost");
                             Console.WriteLine("press any key to admit defeat");
                             Console.ReadKey();
                             Environment.Exit(0);
                         }
-                        
+
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Random rand = new Random();
 
@@ -272,7 +283,7 @@ namespace Final_Project.Commands
             {
                 //Heal
                 int medkitRestoreValue = 50;
-                if(mainCharacter.numMedkits!=0)
+                if (mainCharacter.numMedkits != 0)
                 {
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints + medkitRestoreValue;
                     mainCharacter.numMedkits = mainCharacter.numMedkits - 1;
@@ -294,7 +305,7 @@ namespace Final_Project.Commands
                 Commands(commandUsed, ref saveData, ref save);
             }
         }
-        public double getStrengthValue( CharacterTemplate mainCharacter)
+        public double getStrengthValue(CharacterTemplate mainCharacter)
         {
             double petStrength = mainCharacter.Strength;
             if (mainCharacter.Pets.Count != 0)
@@ -311,7 +322,7 @@ namespace Final_Project.Commands
         public List<PetTemplate> modifyPetHealth(double enemyHp, double enemyStrength, CharacterTemplate character)
         {
             List<PetTemplate> petlist = new List<PetTemplate>();
-            if(character.Pets.Count!=0)
+            if (character.Pets.Count != 0)
             {
 
                 foreach (PetTemplate pet in character.Pets)

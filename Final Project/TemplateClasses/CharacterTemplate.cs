@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace Final_Project.TemplateClasses
@@ -11,7 +10,7 @@ namespace Final_Project.TemplateClasses
         private int _numMedkits;
         private int _Score;
         private int _highScore;
-        private List<PetTemplate> _Pets=new List<PetTemplate>();
+        private List<PetTemplate> _Pets = new List<PetTemplate>();
         public CharacterTemplate()//default constructor
         {
             this.Name = "";
@@ -25,7 +24,7 @@ namespace Final_Project.TemplateClasses
             int score = int.Parse(r.ReadLine());
             this._highScore = score;
             r.Close();
-            
+
 
         }
 
@@ -65,7 +64,7 @@ namespace Final_Project.TemplateClasses
         public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters
         {
             this.Name = Name;
-            _Alignment = Alignment ;
+            _Alignment = Alignment;
             _Species = Species;
             double health = 0;
             double strength = 0;
@@ -108,11 +107,11 @@ namespace Final_Project.TemplateClasses
 
         public override string ToString()
         {
-            return "Character*" + this.Name + "*" + _Alignment + "*"+HealthPoints;
+            return "Character*" + this.Name + " " + _Alignment + " " + HealthPoints;
         }
         public string cheat()
         {
-            return "Character " + this.Name + " " + _Alignment + " " + HealthPoints+" "+Strength;
+            return "Character " + this.Name + " " + _Alignment + " " + HealthPoints + " " + Strength;
         }
     }
 }

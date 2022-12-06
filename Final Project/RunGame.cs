@@ -4,7 +4,6 @@ using Final_Project.TemplateClasses;
 
 using System;
 using System.IO;
-using System.Collections.Generic;
 
 namespace Final_Project
 {
@@ -42,17 +41,17 @@ namespace Final_Project
                         int randNum = rand.Next(0, 501);
                         if (randNum >= 251)
                         {
-                            
+
                             startgame = false;
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
                             newVillian.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newVillian, mainCharacter.Alignment, false, mainCharacter,SMult);
+                            story.runEncounter(newVillian, mainCharacter.Alignment, false, mainCharacter, SMult);
                         }
                         else
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
                             newMonster.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newMonster, mainCharacter.Alignment, false, mainCharacter,SMult);
+                            story.runEncounter(newMonster, mainCharacter.Alignment, false, mainCharacter, SMult);
                         }
                         if (startgame == true)
                         {
@@ -71,17 +70,17 @@ namespace Final_Project
                         SMult = SMult + 1;
                     }
 
-                    }
+                }
                 else if ((userCommand == keyword.ListOfKeywords[15].ToUpper()))
-                    {
-                        isNotWorking = false;
-                        //Leave this to the loaded
-                    }
-                    else
-                    {
-                        Console.WriteLine("Please enter a valid Command");
-                        StartScreen();
-                    } 
+                {
+                    isNotWorking = false;
+                    //Leave this to the loaded
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid Command");
+                    StartScreen();
+                }
             }
             //creates the main character
         }
@@ -89,7 +88,7 @@ namespace Final_Project
         public static void StartScreen()
         {
             Console.WriteLine("to change the settings, type \"config\"");
-           string[] config =File.ReadAllLines("config.json");
+            string[] config = File.ReadAllLines("config.json");
             string mode = config[0];
             mode = mode.Substring(13);
             int num = 0;
@@ -105,51 +104,51 @@ namespace Final_Project
                 StreamWriter a = new StreamWriter("highScore.json");
                 a.Write(0);
                 a.Close();
-                
+
             }
             Console.WriteLine("Your high score is " + hscore);
             Console.WriteLine(mode);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
-            Console.BackgroundColor= ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine("The game is now playable!");
-            
+
             switch (mode)
             {
-                    case "Safe":
+                case "Safe":
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        
-                        
+
+
                         Console.WriteLine("The game is in Safe mode,this is for a new feature not implemented yet");
                         Console.WriteLine("endgame functionality may be limited");
                         break;
 
                     }
-                    case "Semi-Full":
+                case "Semi-Full":
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("The game is in Semi-Full Mode");
                         break;
                     }
-                    case "Full":
+                case "Full":
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("The game is in Full mode");
                         break;
                     }
-                    case"Danger":
+                case "Danger":
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("The game is in Danger mode");
                         Console.WriteLine("Warning! This mode can cause loss of data");
                         break;
                     }
-                    
+
                     //these modes are not implemented.  they are for a planned "Master Hacker" super boss.
                     //Loss to this boss will shut down the computer.  Hence the warning. ?purprle text? 
             }
-            Console.ForegroundColor= ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("to change the mode, enable the alternate modes and set it in the config.json file. ");
             Console.WriteLine("WARNING! Alternate modes may cause accidental data loss");
             Console.ForegroundColor = ConsoleColor.DarkBlue;

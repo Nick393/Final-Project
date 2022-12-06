@@ -11,7 +11,7 @@
             this.HealthPoints = 0;
             this.Strength = 0;
         }
-        public MonsterTemplate(string name,string species, double strengthValue,double health)
+        public MonsterTemplate(string name, string species, double strengthValue, double health)
         {
             this.Name = name;
             this.Species = species;
