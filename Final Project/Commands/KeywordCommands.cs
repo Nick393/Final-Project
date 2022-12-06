@@ -306,7 +306,7 @@ namespace Final_Project.Commands
 
                 if (random > probability)
                 {
-                    Console.WriteLine("You Lose!");
+                    Console.WriteLine("You lost the fight!");
                 }
                 else
                 {
