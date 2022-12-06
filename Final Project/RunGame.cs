@@ -116,7 +116,7 @@ namespace Final_Project
 
             }
             Console.WriteLine("Your high score is " + hscore);
-            Console.WriteLine(mode);
+           // Console.WriteLine(mode);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Black;
