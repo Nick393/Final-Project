@@ -15,18 +15,7 @@ namespace Final_Project.Commands
             {
                 //Keywords
             }
-            else if ((commandUsed == keyword.ListOfKeywords[6]) || (commandUsed == keyword.ListOfKeywords[7]))
-            {
-                //Exit or CloseC
-                Console.WriteLine("Would you like to save? (y/n)");
-                //if(determine=="Y")
-                //string determine = Console.ReadLine();
-                {
-
-                    //Save.SaveObjects(SaveData.objects);
-                }
-
-            }
+           
             else if (commandUsed == keyword.ListOfKeywords[8])
             //Reset
             {
@@ -177,6 +166,26 @@ namespace Final_Project.Commands
                 else
                 {
                     Console.WriteLine("You have fled " + monster.Name+"!");
+                }
+
+            }
+            else if ((commandUsed == keyword.ListOfKeywords[6]) || (commandUsed == keyword.ListOfKeywords[7]))
+            {
+                string determine = "";
+                //Exit or CloseC
+                while (determine != "Y" || determine != "N")
+                {
+                    Console.WriteLine("Would you like to save? (y/n)");
+                    determine = Console.ReadLine().ToUpper();
+                }
+                if (determine == "Y")
+                //string determine = Console.ReadLine();
+                {
+
+                    Save.saveState(mainCharacter, monster);
+                    Console.WriteLine("Game saved.  Press any key to exit");
+                    Console.ReadKey();
+                    Environment.Exit(0);
                 }
 
             }

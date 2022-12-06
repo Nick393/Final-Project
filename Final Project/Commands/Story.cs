@@ -3,7 +3,7 @@ using Final_Project.TemplateClasses;
 using System;
 using System.Collections.Generic;
 using Final_Project.Commands;
-
+using System.IO;
 
 namespace Final_Project.Commands
 {
@@ -25,6 +25,10 @@ namespace Final_Project.Commands
             mc.Index = index;
             mc.HealthPoints = 500;
             mc.Strength = 500;
+            StreamReader r = new StreamReader("highScore.json");
+            int score = int.Parse(r.ReadLine());
+            r.Close();
+            mc.score = score;
             return mc;
         }
         public void startStory(CharacterTemplate mainCharacter)
@@ -350,6 +354,16 @@ namespace Final_Project.Commands
                 }
 
             }
+            mainCharacter.score = mainCharacter.score + 1;
+            StreamReader r = new StreamReader("highScore.json");
+            int score = int.Parse(r.ReadLine());
+            r.Close();
+            score++;
+            StreamWriter W = new StreamWriter("highScore.json");
+            W.Write(score);
+            W.Close();
+
+
 
         }
 
@@ -425,6 +439,11 @@ namespace Final_Project.Commands
                 }
                 Console.WriteLine("Your health is now "+mainCharacter.HealthPoints.ToString());
             }
+            mainCharacter.score = mainCharacter.score + 1;
+            
+            StreamWriter W = new StreamWriter("highScore.json");
+            W.Write(mainCharacter.score);
+            W.Close();
         }
         //Use this to put to start the game from the save data
         public void loadSave()

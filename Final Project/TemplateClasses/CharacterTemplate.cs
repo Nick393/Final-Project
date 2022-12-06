@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Final_Project.TemplateClasses
 {
@@ -8,15 +9,23 @@ namespace Final_Project.TemplateClasses
         private string _Alignment;
         private string _Species;
         private int _numMedkits;
+        private int _Score;
+        private int _highScore;
         private List<PetTemplate> _Pets=new List<PetTemplate>();
         public CharacterTemplate()//default constructor
         {
             this.Name = "";
+            _Score = 0;
             _Alignment = "";
             _Species = "";
             this.HealthPoints = 0;
             this.Strength = 0;
             this.numMedkits = 0;
+            StreamReader r = new StreamReader("highScore.json");
+            int score = int.Parse(r.ReadLine());
+            this._highScore = score;
+            r.Close();
+            
 
         }
 
@@ -25,6 +34,8 @@ namespace Final_Project.TemplateClasses
             this.Name = Name;
             _Alignment = Alignment;
             _Species = Species;
+            //_Score = 0;
+
             double multiplier;
             switch (strengthValue)
             {
@@ -74,7 +85,11 @@ namespace Final_Project.TemplateClasses
             get { return _Alignment; }
             set { _Alignment = value; }
         }
-
+        public int score
+        {
+            get { return _Score; }
+            set { _Score = value; }
+        }
         public List<PetTemplate> Pets
         {
             get { return _Pets; }

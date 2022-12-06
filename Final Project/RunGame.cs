@@ -93,6 +93,21 @@ namespace Final_Project
             string mode = config[0];
             mode = mode.Substring(13);
             int num = 0;
+            StreamReader w = new StreamReader("highScore.json");
+            int hscore = 0;
+            try
+            {
+                hscore = int.Parse(w.ReadLine());
+            }
+            catch
+            {
+                w.Close();
+                StreamWriter a = new StreamWriter("highScore.json");
+                a.Write(0);
+                a.Close();
+                
+            }
+            Console.WriteLine("Your high score is " + hscore);
             Console.WriteLine(mode);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
@@ -132,7 +147,7 @@ namespace Final_Project
                     }
                     
                     //these modes are not implemented.  they are for a planned "Master Hacker" super boss.
-                    //Loss to this boss will shut down the computer.  Hence the warning.  
+                    //Loss to this boss will shut down the computer.  Hence the warning. ?purprle text? 
             }
             Console.ForegroundColor= ConsoleColor.Red;
             Console.WriteLine("to change the mode, enable the alternate modes and set it in the config.json file. ");

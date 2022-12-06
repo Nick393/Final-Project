@@ -6,6 +6,39 @@ namespace Final_Project.Commands
 {
     class Save
     {
+       public static void  saveState(CharacterTemplate character, MonsterTemplate monster)
+        {
+            Console.WriteLine("What would you like to call this save?");
+            string name = Console.ReadLine();
+            if (!File.Exists(name + " character.json"))
+            {
+                StreamWriter w = new StreamWriter(name + " character.csv");
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                if( character.Pets.Count != 0)
+                {
+                    w.Write("/");
+                    foreach (PetTemplate pet in character.Pets)
+                    {
+                        w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                    }
+                }
+
+            }
+            else
+            {
+                StreamWriter w = new StreamWriter(DateTime.Now.ToString()  +" "+name+" Character.csv");
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                if (character.Pets.Count != 0)
+                {
+                    w.Write("/");
+                    foreach (PetTemplate pet in character.Pets)
+                    {
+                        w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                    }
+                }
+
+            }
+        }
         //remember to put path
         //StreamWriter writer = new StreamWriter("save.txt");
 
