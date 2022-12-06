@@ -45,13 +45,13 @@ namespace Final_Project
                             startgame = false;
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, 100000), mainCharacter.Alignment, gameStage);
                             newVillian.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newVillian, mainCharacter.Alignment, false, mainCharacter, SMult);
+                            story.runEncounter(ref newVillian, mainCharacter.Alignment, false, ref mainCharacter, SMult, ref saveData, ref save);
                         }
                         else
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(-100000, -2), mainCharacter.Alignment, gameStage);
                             newMonster.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(newMonster, mainCharacter.Alignment, false, mainCharacter, SMult);
+                            story.runEncounter(ref newMonster, mainCharacter.Alignment, false, ref mainCharacter, SMult, ref save, ref saveData);
                         }
                         if (startgame == true)
                         {

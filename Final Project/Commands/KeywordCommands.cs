@@ -7,48 +7,6 @@ namespace Final_Project.Commands
 {
     class KeywordCommands : Keywords
     {
-        public void Commands(string commandUsed)
-        {
-            Keywords keyword = new Keywords();
-
-            if (commandUsed == keyword.ListOfKeywords[5])
-            {
-                //Keywords
-            }
-
-            else if (commandUsed == keyword.ListOfKeywords[8])
-            //Reset
-            {
-
-            }
-            else if ((commandUsed == keyword.ListOfKeywords[9]) || (commandUsed == keyword.ListOfKeywords[10]))
-            {
-
-                //Yes
-            }
-            //Console.WriteLine("Yes");
-            else if (commandUsed == keyword.ListOfKeywords[12] || commandUsed == keyword.ListOfKeywords[11])
-            {
-                //No
-            }
-            else if (commandUsed == keyword.ListOfKeywords[13])
-            {
-
-            }
-
-            else if (commandUsed == keyword.ListOfKeywords[14])
-            {
-            }
-
-            else if (commandUsed == keyword.ListOfKeywords[15])
-            {
-            }
-
-            else if (commandUsed == keyword.ListOfKeywords[16])
-            {
-            }
-
-        }
         public void Commands(string commandUsed, ref SaveData saveData, ref Save save)
         {
             Keywords keyword = new Keywords();
@@ -96,7 +54,7 @@ namespace Final_Project.Commands
             else if ((commandUsed == keyword.ListOfKeywords[9].ToUpper()) || (commandUsed == keyword.ListOfKeywords[10].ToUpper()))
             {
                 //Yes
-                Console.WriteLine("Yes");
+
             }
             else if ((commandUsed == keyword.ListOfKeywords[11].ToUpper()) || (commandUsed == keyword.ListOfKeywords[12].ToUpper()))
             {
@@ -119,7 +77,7 @@ namespace Final_Project.Commands
             }
         }
 
-        public void Commands(string commandUsed, MonsterTemplate monster, CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
+        public void Commands(string commandUsed,ref MonsterTemplate monster, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
         {
             if (mainCharacter.HealthPoints <= 0)
             {
@@ -170,7 +128,7 @@ namespace Final_Project.Commands
                 //Flee
                 if (((monster.HealthPoints > mainCharacter.HealthPoints / 3) || monster.Strength > mainCharacter.Strength / 2))
                 {
-                    Console.WriteLine("This monster is too strong.  You cannot flee!");
+                    Console.WriteLine("This monster is too strong. You cannot flee!");
                 }
                 else
                 {
@@ -304,7 +262,7 @@ namespace Final_Project.Commands
             {
                 Commands(commandUsed, ref saveData, ref save);
             }
-        }
+        } 
         public double getStrengthValue(CharacterTemplate mainCharacter)
         {
             double petStrength = mainCharacter.Strength;
@@ -319,6 +277,181 @@ namespace Final_Project.Commands
             else return 0;
             return petStrength;
         }
+
+        public void Commands(string commandUsed, ref CharacterTemplate enemy,ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
+        {
+            
+            if (mainCharacter.HealthPoints <= 0)
+            {
+                Console.WriteLine("You lost.  Press any key to admit defeat");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+            Keywords keyword = new Keywords();
+            commandUsed = commandUsed.ToUpper();
+            int probabilityfix = 0;
+            if (commandUsed == keyword.ListOfKeywords[0].ToUpper())
+            {
+                List<PetTemplate> newPets = new List<PetTemplate>();
+                newPets = modifyPetHealth(enemy.HealthPoints, enemy.Strength, mainCharacter);
+                mainCharacter.Pets.Clear();
+                mainCharacter.Pets = newPets;
+                double probability = (mainCharacter.HealthPoints / enemy.HealthPoints) * 100;
+                Random rand = new Random();
+                int intprob = (int)probability;
+                //int intprob=(int)((mainCharacter.HealthPoints)/(int)monster.HealthPoints)*100;
+                int loseRand = rand.Next(0, intprob);
+                mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
+                double random = rand.Next(0, 101);
+
+                if (random > probability)
+                {
+                    Console.WriteLine("You Lose!");
+                }
+                else
+                {
+                    Console.WriteLine("You won the fight!");
+                }
+                // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
+                //Fight
+
+            }
+            else if (commandUsed == keyword.ListOfKeywords[17].ToUpper())
+            {
+                Console.WriteLine("What would you like to call this save?");
+                string name = Console.ReadLine();
+                //Save
+                Save.saveState(mainCharacter, enemy, name);
+                Console.WriteLine("Game saved.  Press any key to exit.");
+                Environment.Exit(0);
+            }
+            else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
+            {
+                //Flee
+                if (((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2))
+                {
+                    Console.WriteLine("This monster is too strong. You cannot flee!");
+                }
+                else
+                {
+                    Console.WriteLine("You have fled " + enemy.Name + "!");
+                }
+
+            }
+            else if ((commandUsed == keyword.ListOfKeywords[6]) || (commandUsed == keyword.ListOfKeywords[7]))
+            {
+                string determine = "";
+                //Exit or CloseC
+                while (determine != "Y" || determine != "N")
+                {
+                    Console.WriteLine("Would you like to save? (y/n)");
+                    determine = Console.ReadLine().ToUpper();
+                }
+                if (determine == "Y")
+                //string determine = Console.ReadLine();
+                {
+                    Console.WriteLine("What would you like to call this save?");
+                    string name = Console.ReadLine();
+                    //Save
+                    Save.saveState(mainCharacter, enemy, name);
+                    Console.WriteLine("Game saved.  Press any key to exit");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+
+            }
+            else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
+            {
+                Console.WriteLine("You cannot tame a person!");
+            }
+            else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
+            {
+                int repair = 0;
+                int proabilityfix = 0;
+                //kill
+                try
+                {
+                    List<PetTemplate> newPets = new List<PetTemplate>();
+                    newPets = modifyPetHealth(enemy.HealthPoints, enemy.Strength, mainCharacter);
+                    mainCharacter.Pets.Clear();
+                    mainCharacter.Pets = newPets;
+                    double probability = ((getStrengthValue(mainCharacter) + mainCharacter.Strength) / (enemy.HealthPoints + enemy.Strength)) * 100;
+                    Random rand = new Random();
+                    int randstart = rand.Next(0, 49);
+                    int randEnd = rand.Next(51, 101);
+                    double random = rand.Next((int)randstart, randEnd);
+                    int intprob = (int)(mainCharacter.HealthPoints) / (int)enemy.HealthPoints;
+                    probabilityfix = intprob;
+                    int loseRand = rand.Next((int)randstart, intprob * 100);//bug here
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
+                    if (random > probability)
+                    {
+                        Console.WriteLine("You Lose! Press any key to admit defeat!");
+                        Console.ReadKey();
+                        Console.ReadKey();
+                        Environment.Exit(5);
+                    }
+                    else
+                    {
+                        Console.WriteLine("You won the fight!");
+                        Console.WriteLine("You have lost " + loseRand + " hitpoints");
+                        if (mainCharacter.HealthPoints <= 0)
+                        {
+                            Console.WriteLine("You lost");
+                            Console.WriteLine("press any key to admit defeat");
+                            Console.ReadKey();
+                            Environment.Exit(0);
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Random rand = new Random();
+
+                    int probabilityfixer = probabilityfix + 1;
+                    int random = rand.Next(0, probabilityfixer);
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints = random;
+                    Console.WriteLine("You have lost " + random + "Hitpoints");
+                    //Console.WriteLine(ex);
+                    if (mainCharacter.HealthPoints <= 0)
+                    {
+                        Console.WriteLine("You lost");
+                        Console.WriteLine("press any key to admit defeat");
+                        Console.ReadKey();
+                        Environment.Exit(0);
+                    }
+
+
+                }
+            }
+            else if (commandUsed == keyword.ListOfKeywords[4].ToUpper())
+            {
+                //Heal
+                int medkitRestoreValue = 50;
+                if (mainCharacter.numMedkits != 0)
+                {
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints + medkitRestoreValue;
+                    mainCharacter.numMedkits = mainCharacter.numMedkits - 1;
+                    Console.WriteLine("You have been healed! Your new health is " + mainCharacter.HealthPoints + ".  You have " + mainCharacter.numMedkits + " medkits remaining.");
+                }
+                else
+                {
+                    Console.WriteLine("Unable to heal! You have no medkits");
+                }
+            }
+            else if (commandUsed == ListOfKeywords[19])
+            {
+                //cheat
+                Console.WriteLine(enemy.cheat());
+                Console.WriteLine(mainCharacter.cheat());
+            }
+            else
+            {
+                Commands(commandUsed, ref saveData, ref save);
+            }
+        } 
+        
         public List<PetTemplate> modifyPetHealth(double enemyHp, double enemyStrength, CharacterTemplate character)
         {
             List<PetTemplate> petlist = new List<PetTemplate>();

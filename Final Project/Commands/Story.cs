@@ -32,7 +32,7 @@ namespace Final_Project.Commands
         }
         public void startStory(CharacterTemplate mainCharacter)
         {
-            Console.WriteLine("Welcome " + mainCharacter.Name + " of the " + mainCharacter.Species + " species.  You are now a member of the " + mainCharacter.Alignment + " side.  We shall now begin!");
+            Console.WriteLine("Welcome " + mainCharacter.Name + " of the " + mainCharacter.Species + " species. You are now a member of the " + mainCharacter.Alignment + " side. We shall now begin!");
         }
 
         public string RequestInformation(string infoName)
@@ -219,7 +219,7 @@ namespace Final_Project.Commands
             return returnCharacter;
         }
 
-        public void runEncounter(CharacterTemplate enemy, string mcAlignment, bool isBoss, CharacterTemplate mainCharacter, double sMuliplier)
+        public void runEncounter(ref CharacterTemplate enemy, string mcAlignment, bool isBoss, ref CharacterTemplate mainCharacter, double sMuliplier, ref SaveData saveData, ref Save save)
         {
             Random rando = new Random();
             int add = rando.Next(0, 12);
@@ -330,9 +330,8 @@ namespace Final_Project.Commands
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?");
-                string command = Console.ReadLine();
-
-                keywords.Commands(command, monster1, mainCharacter, ref saveData, ref save);
+                string command = Console.ReadLine().ToLower();
+                keywords.Commands(command, ref monster1, ref mainCharacter, ref saveData, ref save);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
@@ -367,7 +366,7 @@ namespace Final_Project.Commands
 
         }
 
-        public void runEncounter(MonsterTemplate enemy, string mcAlignment, bool isBoss, CharacterTemplate mainCharacter, double SMultiplier)
+        public void runEncounter(ref MonsterTemplate enemy, string mcAlignment, bool isBoss,ref CharacterTemplate mainCharacter, double SMultiplier, ref Save save, ref SaveData saveData)
         {
             Random rando = new Random();
             int add = rando.Next(0, 12);
@@ -427,13 +426,13 @@ namespace Final_Project.Commands
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?");
-                string command = Console.ReadLine();
-                keywords.Commands(command, enemy, mainCharacter, ref saveData, ref save);
+                string command = Console.ReadLine().ToLower();
+                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "tame" || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || command == "tame" || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
                 }

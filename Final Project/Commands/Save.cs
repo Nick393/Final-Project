@@ -319,15 +319,15 @@ namespace Final_Project.Commands
                 w.Close();
 
             }
-            if (!File.Exists(name + "monster.csv"))
+            if (!File.Exists(name + "enemy.csv"))
             {
-                StreamWriter m = new StreamWriter(name + " monster.csv");
+                StreamWriter m = new StreamWriter(name + " enemy.csv");
                 m.Write(monster.Name + "," + monster.Species + "," + monster.Strength + "," + monster.HealthPoints);
                 m.Close();
             }
             else
             {
-                StreamWriter m = new StreamWriter(DateTime.Now.ToString() + " " + name + " monster.csv");
+                StreamWriter m = new StreamWriter(DateTime.Now.ToString() + " " + name + " enemy.csv");
                 m.Write(monster.Name + "," + monster.Species + "," + monster.Strength + "," + monster.HealthPoints);
                 m.Close();
             }
@@ -336,7 +336,88 @@ namespace Final_Project.Commands
         //StreamWriter writer = new StreamWriter("save.txt");
 
         //SaveData saveData;
+        public static void saveState(CharacterTemplate character, CharacterTemplate enemy, string name)
+        {
+            if (name != "")
+            {
+                try
+                {
+                    //StreamWriter n = new StreamWriter("names.data");
 
+                    var a = File.AppendText("names.data");
+                    //n.Close();
+                    a.WriteLine(name);
+                    a.Close();
+                }
+                catch (Exception e)
+                {
+                    StreamReader a = new StreamReader("iterator.data");
+                    int s = a.Read();
+                    a.Close();
+                    StreamWriter n = new StreamWriter("names" + a + ".data");
+                    n.WriteLine(name);
+                    n.Close();
+                    s++;
+                    File.Delete("iterator.data");
+                    StreamWriter w = new StreamWriter("iterator.data");
+                    w.Write(s);
+                    w.Close();
+
+                }
+            }
+            //Console.WriteLine("What would you like to call this save?");
+            //string name = Console.ReadLine();
+            if (!File.Exists(name + " character.csv"))
+            {
+                StreamWriter w = new StreamWriter(name + " character.csv");
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                //w.Write("/");
+                if (character.Pets.Count != 0)
+                {
+                    int iterator = 0;
+                    //w.Write("*");
+                    foreach (PetTemplate pet in character.Pets)
+                    {
+                        var petsci = File.CreateText((name + iterator + " pet.csv"));
+                        //w.Write("*");
+                        petsci.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                        iterator++;
+                    }
+                }
+                w.Close();
+
+            }
+            else
+            {
+                StreamWriter w = new StreamWriter(DateTime.Now.ToString() + " " + name + " character.csv");
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                if (character.Pets.Count != 0)
+                {
+                    w.Write("/");
+                    int iterator = 0;
+                    foreach (PetTemplate pet in character.Pets)
+                    {
+                        File.CreateText((DateTime.Now.ToString() + " " + name + iterator + " pet.csv"));
+                        //w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                        iterator++;
+                    }
+                }
+                w.Close();
+
+            }
+            if (!File.Exists(name + "enemy.csv"))
+            {
+                StreamWriter m = new StreamWriter(name + " enemy.csv");
+                m.Write(enemy.Name + "," + enemy.Species + "," + enemy.Strength + "," + enemy.HealthPoints);
+                m.Close();
+            }
+            else
+            {
+                StreamWriter m = new StreamWriter(DateTime.Now.ToString() + " " + name + " enemy.csv");
+                m.Write(enemy.Name + "," + enemy.Species + "," + enemy.Strength + "," + enemy.HealthPoints);
+                m.Close();
+            }
+        }
 
         public static void SaveObjects(List<object> objects)
         {
