@@ -444,6 +444,8 @@ namespace Final_Project.Commands
             {
                 //cheat
                 Console.WriteLine(enemy.cheat());
+                PetTemplate test = new PetTemplate("bob", "dragon", 34, 1, mainCharacter);
+                mainCharacter.Pets.Add(test);
                 Console.WriteLine(mainCharacter.cheat());
             }
             else

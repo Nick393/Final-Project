@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Final_Project.TemplateClasses
@@ -111,6 +112,10 @@ namespace Final_Project.TemplateClasses
         }
         public string cheat()
         {
+            CharacterTemplate blan = new CharacterTemplate();
+            PetTemplate pet = new PetTemplate("test", "dragon", 100, 1, blan);
+            this.Pets.Add(pet);
+            Console.WriteLine(pet.ToString());
             return "Character " + this.Name + " " + _Alignment + " " + HealthPoints + " " + Strength;
         }
     }

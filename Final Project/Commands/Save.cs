@@ -108,7 +108,19 @@ namespace Final_Project.Commands
                     StreamReader p = new StreamReader(fileName + " character.csv");
                     string PlayerData = p.ReadToEnd();
                     int z = 0;
-                    string use = PlayerData.Substring(0, PlayerData.IndexOf("/") - 1);
+                int index = PlayerData.IndexOf("/");
+                string use;
+                bool hasPets;
+                if (index == 0 || index == -1)
+                {
+                    hasPets = false;
+                    use = PlayerData;
+                }
+                else
+                {
+                    hasPets = true;
+                    use = PlayerData.Substring(0, PlayerData.IndexOf("/"));
+                }
                     while (use.Contains(","))//this while loop formats each word in a city name beyond the first two.  
                     {
                         int nextWordLoc = use.IndexOf(",")+1;//this finds the start of the next word
@@ -116,7 +128,7 @@ namespace Final_Project.Commands
                         {
                             properties.Add(use.Substring(0, nextWordLoc));
                         }
-                        nextWordLoc++;//this sets the location to the first letter of the word
+                        //nextWordLoc++;//this sets the location to the first letter of the word
                         string tempWordTwo = use.Substring(nextWordLoc);//this stores the full end of the string so it can be fed back to the while loop
                         string process;//this variable holds the word while it is being processed
                         use = tempWordTwo;
@@ -133,13 +145,20 @@ namespace Final_Project.Commands
                         properties.Add(tempWordTwo);//this adds the word to the list
                         z++;
                     }
+                    foreach (string porperty in properties)
+                {
+                    Console.WriteLine(porperty);
+                }
                     CharacterTemplate character = new CharacterTemplate();
                     character.Name = properties[0];
                     character.Alignment = properties[1];
                     character.Species = properties[2];
                     character.Strength = int.Parse(properties[3]);
-                Console.WriteLine(properties[4]);
+                //////////////////////////////////////////////////////////
+                //Console.WriteLine(properties[4]);
                     character.HealthPoints = double.Parse(properties[3]);
+                if (hasPets == true)
+                { 
                     string petData = PlayerData.Substring(PlayerData.IndexOf("/"));
                     if (petData.Contains("*"))
 
@@ -232,6 +251,7 @@ namespace Final_Project.Commands
                             }
                             character.Pets = listPet;
                         }
+                        }
                         list.Add(character);
                         return list;
                     }
@@ -292,9 +312,10 @@ namespace Final_Project.Commands
                     //w.Write("*");
                     foreach (PetTemplate pet in character.Pets)
                     {
-                        var petsci=File.CreateText((name + iterator + " pet.csv"));
+                        var petsci=File.CreateText((name + iterator.ToString() + " pet.csv"));
                         //w.Write("*");
                         petsci.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                        petsci.Close();
                         iterator++;
                     }
                 }
