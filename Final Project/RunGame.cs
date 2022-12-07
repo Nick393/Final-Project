@@ -36,8 +36,10 @@ namespace Final_Project
                     saveData.addObject(mainCharacter);
                     story.startStory(mainCharacter);
                     bool gameNotEnded = true;
+                    bool isBoss = false;
                     int PositiveEnd = 100000;
                     int NegativeEnd = -100000;
+                    int multiplier = 1;
                     while (gameNotEnded)
                     {
                         int randNum = rand.Next(0, 501);
@@ -52,13 +54,21 @@ namespace Final_Project
                             startgame = false;
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, PositiveEnd), mainCharacter.Alignment, gameStage, sMult);
                             newVillian.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(ref newVillian, mainCharacter.Alignment, false, ref mainCharacter, ref saveData, ref save);
+                            story.runEncounter(ref newVillian, mainCharacter.Alignment, isBoss, ref mainCharacter, ref saveData, ref save);
+                            if (isBoss)
+                            {
+                                endGame(newVillian);
+                            }
                         }
                         else if (randNum < 251)
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(NegativeEnd, -2), mainCharacter.Alignment, gameStage, sMult);
                             newMonster.HealthPoints = rand.Next(20, 250);
-                            story.runEncounter(ref newMonster, mainCharacter.Alignment, false, ref mainCharacter, ref save, ref saveData);
+                            story.runEncounter(ref newMonster, mainCharacter.Alignment, isBoss, ref mainCharacter, ref save, ref saveData);
+                            if (isBoss)
+                            {
+                                endGame(newMonster);
+                            }
                         }
                         /*else if (startgame == true)
                         {
@@ -74,11 +84,21 @@ namespace Final_Project
                         {
                             Console.WriteLine("Please Enter a Valid Command");
                         }
-                        
-                        PositiveEnd++;
-                        NegativeEnd--;
+                        for (int i = multiplier * 10; i > 0; i--)
+                        {
+                            PositiveEnd++;
+                            NegativeEnd--;
+                        }
+                        if (isBoss)
+                        {
+                            gameNotEnded = false;
+                        }
+                        multiplier = multiplier * 2;
+                        if (multiplier >= 32768)
+                        {
+                            isBoss = true;
+                        }
                     }
-
                 }
                 else if ((userCommand == keyword.ListOfKeywords[15].ToUpper()))
                 {
@@ -126,7 +146,7 @@ namespace Final_Project
             {
                 case "Safe":
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Blue;
 
 
                         Console.WriteLine("The game is in Safe mode,this is for a new feature not implemented yet");
@@ -160,9 +180,17 @@ namespace Final_Project
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("to change the mode, enable the alternate modes and set it in the config.json file. ");
             Console.WriteLine("WARNING! Alternate modes may cause accidental data loss");
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("If you are ready to begin your adventure, type Begin. If you would like to load a previous save, please type Load");
         }
 
+        public static void endGame(CharacterTemplate finalBoss)
+        {
+            Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
+        }
+        public static void endGame(MonsterTemplate finalBoss)
+        {
+            Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
+        }
     }
 }

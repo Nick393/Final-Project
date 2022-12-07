@@ -21,6 +21,11 @@ namespace Final_Project.Commands
             const int START_STAGE = 0;
             CharacterTemplate mc = new CharacterTemplate(name, alignment, species, 3, START_STAGE, sMult);
             StreamReader r = new StreamReader("highScore.json");
+            if (mc.Name == "HaCKEr")
+            {
+                mc.HealthPoints = 10000;
+                mc.Strength = 10000;
+            }
             int score = int.Parse(r.ReadLine());
             r.Close();
             mc.score = score;
@@ -109,9 +114,9 @@ namespace Final_Project.Commands
 
                 return RequestInformation(infoName);
             }
-            if ((infoName == "Name") && ((tempReturn.Contains("/")) || (tempReturn.Contains("*"))))
+            if ((infoName == "Name") && ((tempReturn.Contains("/")) || (tempReturn.Contains(",") || (tempReturn.Contains("?")))))
             {
-                Console.WriteLine("Please enter a " + infoName + " that is does not contain / or *");
+                Console.WriteLine("Please enter a " + infoName + " that is does not contain comma (,), a question mark (?), or a slash (/)");
                 return RequestInformation(infoName);
             }
             return tempReturn;
@@ -124,7 +129,6 @@ namespace Final_Project.Commands
             if (commands.isKeyword(test))
             {
                 commands.Commands(test, ref saveData, ref save);
-
             }
             if ((test.ToUpper() == "Y") || (test.ToUpper() == "YES")) { return true; }
             else if ((test.ToUpper() == "N") || (test.ToUpper() == "NO")) { return false; }
@@ -241,7 +245,7 @@ namespace Final_Project.Commands
             {
                 if (isBoss)
                 {
-                    message = beginEncounter + enemy.Name + ", the Destroyer of Worlds, the Demon of" + names.getCity() + ", and the Devourer of Souls" + ".";
+                    message = "You are confronted with your own mortality by " + enemy.Name + ", the Destroyer of Worlds, the Demon of" + names.getCity() + ", and the Devourer of Souls" + ".";
                 }
                 else
                 {
@@ -281,7 +285,7 @@ namespace Final_Project.Commands
             {
                 if (isBoss)
                 {
-                    message = beginEncounter + enemy.Name + ", the Saint King, the Protector of" + names.getCity() + ", and the Sword of Justice" + ".";
+                    message = "You are confronted with your own mortality by " + enemy.Name + ", the Saint King, the Protector of" + names.getCity() + ", and the Sword of Justice" + ".";
                 }
                 else
                 {
@@ -318,6 +322,8 @@ namespace Final_Project.Commands
                 }
             }
             Console.WriteLine(message);
+            Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
+            Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
             bool encounterDone = false;
             KeywordCommands keywords = new KeywordCommands();
             while (encounterDone == false)
@@ -329,12 +335,19 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || (command == "tame" && (!(((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))) || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
+                    Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
+                    Console.WriteLine("Your strength is " + mainCharacter.Strength);
                 }
-                Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
-                Console.WriteLine("Your strength is " + mainCharacter.Strength);
+                else
+                {
+                    commands.invalidCommand();
+                    Console.WriteLine("You are facing " + enemy.Name);
+                    Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
+                    Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
+                }
                 if (mainCharacter.Pets.Count != 0)
                 {
                     Console.WriteLine("You have " + mainCharacter.Pets.Count + " pets.  They are:");
@@ -374,7 +387,7 @@ namespace Final_Project.Commands
             int randomizer = rand.Next(0, 8);
             if (isBoss)
             {
-                message = beginEncounter + enemy.Name + ", the " + enemy.Species + ", the Destroyer of Worlds, the Demon of " + names.getCity() + ", and the Devourer of Souls" + ".";
+                message = "You are confronted with your own mortality by " + enemy.Name + ", the " + enemy.Species + ", the Destroyer of Worlds, the Demon of " + names.getCity() + ", and the Devourer of Souls" + ".";
             }
             else
             {
@@ -411,6 +424,8 @@ namespace Final_Project.Commands
             }
 
             Console.WriteLine(message);
+            Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
+            Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
             //Console.WriteLine("What would you like to do next?");
             bool encounterDone = false;
             KeywordCommands keywords = new KeywordCommands();
@@ -428,8 +443,15 @@ namespace Final_Project.Commands
                 else if (command == "kill" || command == "fight" || command == "tame" || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
+                    Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
                 }
-                Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
+                else
+                {
+                    commands.invalidCommand();
+                    Console.WriteLine("You are facing " + enemy.Name);
+                    Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
+                    Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
+                }
             }
             mainCharacter.score = mainCharacter.score + 1;
 
