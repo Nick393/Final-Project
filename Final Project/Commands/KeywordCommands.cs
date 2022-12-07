@@ -459,6 +459,10 @@ namespace Final_Project.Commands
                 if (mainCharacter.numMedkits != 0)
                 {
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints + medkitRestoreValue;
+                    foreach (PetTemplate pet in mainCharacter.Pets)
+                    {
+                        pet.HealthPoints = pet.HealthPoints + medkitRestoreValue;
+                    }
                     mainCharacter.numMedkits = mainCharacter.numMedkits - 1;
                     Console.WriteLine("You have been healed! Your new health is " + mainCharacter.HealthPoints + ".  You have " + mainCharacter.numMedkits + " medkits remaining.");
                 }

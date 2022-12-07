@@ -245,7 +245,7 @@ namespace Final_Project.Commands
             {
                 if (isBoss)
                 {
-                    message = "You are confronted with your own mortality by " + enemy.Name + ", the Destroyer of Worlds, the Demon of" + names.getCity() + ", and the Devourer of Souls" + ".";
+                    message = "You are confronted with your own mortality by " + enemy.Name + ", the Destroyer of Worlds, the Demon of " + names.getCity() + ", and the Devourer of Souls" + ".";
                 }
                 else
                 {
@@ -285,7 +285,7 @@ namespace Final_Project.Commands
             {
                 if (isBoss)
                 {
-                    message = "You are confronted with your own mortality by " + enemy.Name + ", the Saint King, the Protector of" + names.getCity() + ", and the Sword of Justice" + ".";
+                    message = "You are confronted with your own mortality by " + enemy.Name + ", the Saint King, the Protector of " + names.getCity() + ", and the Sword of Justice" + ".";
                 }
                 else
                 {
