@@ -19,7 +19,7 @@ namespace Final_Project.Commands
             string species = RequestInformation("Species");
             string alignment = RequestInformation("Faction");
             const int START_STAGE = 0;
-            CharacterTemplate mc = new CharacterTemplate(name, alignment, species, 3, START_STAGE, sMult);
+            CharacterTemplate mc = new CharacterTemplate(name, alignment, species, 4, START_STAGE, sMult);
             StreamReader r = new StreamReader("highScore.json");
             if (mc.Name == "HaCKEr")
             {
@@ -330,12 +330,13 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine().ToLower();
-                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save);
+                bool ranAway = false;
+                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command == "flee" && ranAway) || ((enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
                     Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
@@ -343,7 +344,6 @@ namespace Final_Project.Commands
                 }
                 else
                 {
-                    commands.invalidCommand();
                     Console.WriteLine("You are facing " + enemy.Name);
                     Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
                     Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
@@ -435,19 +435,20 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine().ToLower();
-                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save);
+                bool ranAway = false;
+                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || command == "tame" || (command == "flee" && !((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command == "tame" && ranAway) || (enemy.Strength > mainCharacter.Strength / 2) || (command == "flee" && ranAway) || ((enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
                     Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
                 }
                 else
                 {
-                    commands.invalidCommand();
+
                     Console.WriteLine("You are facing " + enemy.Name);
                     Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
                     Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);

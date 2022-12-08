@@ -2,7 +2,7 @@
 {
     public class Keywords
     {
-        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "", "", "", "", "Begin", "Start", "Load", "Help", "Save", "Stats", "cheat" };
+        private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "", "", "", "", "Begin", "Start", "Load", "Help", "Save", "Stats", "Cheat" };
         private const int startSystem = 5;
         private string[] returnkeys = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "", "", "", "", "Begin", "Start", "Load", "Help", "Save", "Stats" };
 

@@ -43,17 +43,22 @@ namespace Final_Project
                     while (gameNotEnded)
                     {
                         int randNum = rand.Next(0, 501);
+                        if (randNum > 450)
+                        {
+                            gameStage++;
+                            mainCharacter.updateHealth(gameStage);
+                            Console.WriteLine("You have levelled up! Your stats have grown and your health has recovered.");
+                        }
                         if (mainCharacter.HealthPoints <= 0)
                         {
                             gameNotEnded = false;
                         }
-
                         else if (randNum >= 251)
                         {
 
                             startgame = false;
                             CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, PositiveEnd), mainCharacter.Alignment, gameStage, sMult);
-                            newVillian.HealthPoints = rand.Next(20, 250);
+                            
                             story.runEncounter(ref newVillian, mainCharacter.Alignment, isBoss, ref mainCharacter, ref saveData, ref save);
                             if (isBoss)
                             {
@@ -63,7 +68,7 @@ namespace Final_Project
                         else if (randNum < 251)
                         {
                             MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(NegativeEnd, -2), mainCharacter.Alignment, gameStage, sMult);
-                            newMonster.HealthPoints = rand.Next(20, 250);
+                            
                             story.runEncounter(ref newMonster, mainCharacter.Alignment, isBoss, ref mainCharacter, ref save, ref saveData);
                             if (isBoss)
                             {
@@ -82,7 +87,7 @@ namespace Final_Project
                         }*/
                         else
                         {
-                            Console.WriteLine("Please Enter a Valid Command");
+                            //Console.WriteLine("Please Enter a Valid Command"); //don't know what this was for, but its currently useless
                         }
                         for (int i = multiplier * 10; i > 0; i--)
                         {
