@@ -64,13 +64,7 @@ namespace Final_Project.Commands
             {
                 //Begin/Start
             }
-            else if (commandUsed == keyword.ListOfKeywords[15].ToUpper())
-            {
-                //Load
-                Console.WriteLine("Please enter the file name exactly.");
-                Save.loadState();
-
-            }
+            
             else if (commandUsed == keyword.ListOfKeywords[18].ToUpper())
             {
                 //Stats
@@ -112,6 +106,17 @@ namespace Final_Project.Commands
                 }
                 // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
                 //Fight
+
+            }
+            else if (commandUsed == keyword.ListOfKeywords[15].ToUpper())
+            {
+                //Load
+                Console.WriteLine("Please enter the file name exactly.");
+                List<object> characters = new List<object>();
+                characters = Save.loadState();
+                monster = (MonsterTemplate)characters[0];
+                mainCharacter = (CharacterTemplate)characters[1];
+
 
             }
             else if (commandUsed == keyword.ListOfKeywords[17].ToUpper())
