@@ -51,15 +51,6 @@ namespace Final_Project.Commands
             {
                 //Reset
             }
-            else if ((commandUsed == keyword.ListOfKeywords[9].ToUpper()) || (commandUsed == keyword.ListOfKeywords[10].ToUpper()))
-            {
-                //Yes
-
-            }
-            else if ((commandUsed == keyword.ListOfKeywords[11].ToUpper()) || (commandUsed == keyword.ListOfKeywords[12].ToUpper()))
-            {
-                //No
-            }
             else if ((commandUsed == keyword.ListOfKeywords[13].ToUpper()) || (commandUsed == keyword.ListOfKeywords[14].ToUpper()))
             {
                 //Begin/Start
@@ -71,13 +62,10 @@ namespace Final_Project.Commands
                 Save.loadState();
 
             }
-            else if (commandUsed == keyword.ListOfKeywords[18].ToUpper())
-            {
-                //Stats
-            }
+
         }
 
-        public void Commands(string commandUsed,ref MonsterTemplate monster, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
+        public void Commands(string commandUsed,ref MonsterTemplate monster, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save, ref bool ranAway)
         {
             if (mainCharacter.HealthPoints <= 0)
             {
@@ -126,13 +114,39 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
             {
                 //Flee
-                if (((monster.HealthPoints > mainCharacter.HealthPoints / 3) || monster.Strength > mainCharacter.Strength / 2))
+                /*if (((monster.HealthPoints / 3 > mainCharacter.HealthPoints ) || monster.Strength / 2 > mainCharacter.Strength ))
                 {
                     Console.WriteLine(monster.Name + " is too strong. You cannot flee!");
                 }
                 else
                 {
                     Console.WriteLine("You have fled " + monster.Name + "!");
+                }*/
+                double strengthComparison = (mainCharacter.HealthPoints + mainCharacter.Strength)/(monster.HealthPoints + monster.Strength);
+                if(strengthComparison >= 1)
+                {
+                    Console.WriteLine("You have successfully fled from " + monster.Name + "!");
+                    ranAway = true;
+                } else
+                {
+                    Random rand = new Random();
+                    int duuble = rand.Next(1, 100);
+                    double duublePercentage = duuble / 100;
+                    if (duublePercentage >= strengthComparison)
+                    {
+                        Console.WriteLine("You have successfully fled from " + monster.Name + "!");
+                        ranAway = true;
+                    } else
+                    {
+                        int amountLost = 0;
+                        int duuuble = rand.Next(1, 100);
+                        double duuublePercentage = duuuble / 100;
+                        double duuubleLost = duuublePercentage * monster.Strength;
+                        amountLost = (int)duuubleLost;
+                        Console.WriteLine("You have failed to flee from " + monster.Name + "!");
+                        Console.WriteLine("You have taken " + amountLost + " damage.");
+                        ranAway = false;
+                    }
                 }
 
             }
@@ -161,19 +175,21 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
             {
                 //Tame
-                if ((monster.HealthPoints > mainCharacter.HealthPoints / 3) || monster.Strength > mainCharacter.Strength / 2)
+                if ((monster.HealthPoints > mainCharacter.HealthPoints / 2) || monster.Strength > mainCharacter.Strength / 2)
                 {
                     Console.WriteLine("You cannot tame " + monster.Name + ". It is too powerful");
                 }
                 else
                 {
                     Console.WriteLine("You have tamed " + monster.Name);
-                    double healthLost = monster.Strength / 2;
+                    Random rand = new Random();
+                    double healthLost = monster.Strength * (rand.Next(1, 11) * 0.1) ;
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
                     Console.WriteLine("Unfortunately, you have lost " + healthLost + " hitpoints.");
                     PetTemplate pet = new PetTemplate(monster, mainCharacter);
                     pet.HealthPoints = pet.HealthPoints * 0.75;
                     mainCharacter.Pets.Add(pet);
+                    ranAway = true;
                 }
             }
             else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
@@ -259,6 +275,10 @@ namespace Final_Project.Commands
                 {
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints + medkitRestoreValue;
                     mainCharacter.numMedkits = mainCharacter.numMedkits - 1;
+                    foreach (PetTemplate pet in mainCharacter.Pets)
+                    {
+                        pet.HealthPoints = pet.HealthPoints + medkitRestoreValue;
+                    }
                     Console.WriteLine("You have been healed! Your new health is " + mainCharacter.HealthPoints + ".  You have " + mainCharacter.numMedkits + " medkits remaining.");
                 }
                 else
@@ -271,6 +291,15 @@ namespace Final_Project.Commands
                 //cheat
                 Console.WriteLine(monster.cheat());
                 Console.WriteLine(mainCharacter.cheat());
+            }
+            else if (commandUsed == keyword.ListOfKeywords[18].ToUpper())
+            {
+                //Stats
+                Console.WriteLine("\n" + mainCharacter.Name + " Statboard" + "\n" + "\n"+ "Species: " + mainCharacter.Species + "\n" + "Faction: " + mainCharacter.Alignment + "\n" + "Strength: " + mainCharacter.Strength + "\n" + "Health: " + mainCharacter.HealthPoints + "\n" + "Number of Medkits: " + mainCharacter.numMedkits + "\n");
+                foreach (PetTemplate pet in mainCharacter.Pets)
+                {
+                    Console.WriteLine("\n"+pet.Name + " Statboard"+"\n"+"\n" + "Species: " + pet.Species + "\n" + "Owner: " + mainCharacter.Name +"\n" + "Strength: " + pet.Strength + "\n" + "Health: " + pet.HealthPoints + "\n");
+                }
             }
             else
             {
@@ -292,7 +321,7 @@ namespace Final_Project.Commands
             return petStrength;
         }
 
-        public void Commands(string commandUsed, ref CharacterTemplate enemy,ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save)
+        public void Commands(string commandUsed, ref CharacterTemplate enemy,ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save,ref bool ranAway)
         {
             
             if (mainCharacter.HealthPoints <= 0)
@@ -320,7 +349,7 @@ namespace Final_Project.Commands
 
                 if (random > probability)
                 {
-                    Console.WriteLine("You lost the fight against" + enemy.Name + "!");
+                    Console.WriteLine("You lost the fight against " + enemy.Name + "!");
                 }
                 else
                 {
@@ -342,13 +371,33 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
             {
                 //Flee
-                if (((enemy.HealthPoints > mainCharacter.HealthPoints / 3) || enemy.Strength > mainCharacter.Strength / 2))
+                double strengthComparison = (mainCharacter.Strength) / (enemy.Strength);
+                if (strengthComparison >= 1)
                 {
-                    Console.WriteLine(enemy.Name + " is too strong. You cannot flee!");
+                    Console.WriteLine("You have successfully fled from " + enemy.Name + "!");
+                    ranAway = true;
                 }
                 else
                 {
-                    Console.WriteLine("You have fled " + enemy.Name + "!");
+                    Random rand = new Random();
+                    int duuble = rand.Next(1, 100);
+                    double duublePercentage = duuble / 100;
+                    if (duublePercentage >= strengthComparison)
+                    {
+                        Console.WriteLine("You have successfully fled from " + enemy.Name + "!");
+                        ranAway = true;
+                    }
+                    else
+                    {
+                        int amountLost = 0;
+                        int duuuble = rand.Next(1, 100);
+                        double duuublePercentage = duuuble / 100;
+                        double duuubleLost = duuublePercentage * enemy.Strength;
+                        amountLost = (int)duuubleLost;
+                        Console.WriteLine("You have failed to flee from " + enemy.Name + "!");
+                        Console.WriteLine("You have taken " + amountLost + " damage.");
+                        ranAway = false;
+                    }
                 }
 
             }
@@ -478,6 +527,17 @@ namespace Final_Project.Commands
                 PetTemplate test = new PetTemplate("bob", "dragon", 34, 1, mainCharacter);
                 mainCharacter.Pets.Add(test);
                 Console.WriteLine(mainCharacter.cheat());
+            }
+            else if (commandUsed == keyword.ListOfKeywords[18].ToUpper())
+            {
+                //Stats
+                Console.WriteLine("\n" + mainCharacter.Name + " Statboard" + "\n" + "\n" + "Species: " + mainCharacter.Species + "\n" + "Faction: " + mainCharacter.Alignment + "\n" + "Strength: " + mainCharacter.Strength + "\n" + "Health: " + mainCharacter.HealthPoints + "\n" + "Number of Medkits: " + mainCharacter.numMedkits + "\n");
+                Console.WriteLine("Health: " + mainCharacter.HealthPoints);
+                Console.WriteLine("Number of Medkits: " + mainCharacter.numMedkits);
+                foreach (PetTemplate pet in mainCharacter.Pets)
+                {
+                    Console.WriteLine("\n" + pet.Name + " Statboard" + "\n" + "\n" + "Species: " + pet.Species + "\n" + "Owner: " + mainCharacter.Name + "\n" + "Strength: " + pet.Strength + "\n" + "Health: " + pet.HealthPoints);
+                }
             }
             else
             {

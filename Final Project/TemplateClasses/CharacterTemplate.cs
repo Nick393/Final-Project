@@ -105,7 +105,47 @@ namespace Final_Project.TemplateClasses
         {
 
         }*/
-
+        public void updateHealth(int gameStage)
+        {
+            int newStage = gameStage - 1;
+            switch (newStage)
+            {
+                case 0:
+                    this.HealthPoints = 15;
+                    this.Strength = 20;
+                    break;
+                case 1:
+                    this.HealthPoints = 22.5;
+                    this.Strength = 30;
+                    break;
+                case 2:
+                    this.HealthPoints = 30;
+                    this.Strength = 40;
+                    break;
+                case 3:
+                    this.HealthPoints = 37.5;
+                    this.Strength = 50;
+                    break;
+                case 4:
+                    this.HealthPoints = 45;
+                    this.Strength = 60;
+                    break;
+                case 5:
+                    this.HealthPoints = 52.5;
+                    this.Strength = 70;
+                    break;
+                case 6:
+                    this.HealthPoints = 60;
+                    this.Strength = 80;
+                    break;
+                default:
+                    this.HealthPoints = 60;
+                    this.Strength = 80;
+                    break;
+            }
+            this.Strength = this.Strength * 2;
+            this.HealthPoints = this.HealthPoints * 2;
+        }
         public override string ToString()
         {
             return "Character*" + this.Name + " " + _Alignment + " " + HealthPoints;
