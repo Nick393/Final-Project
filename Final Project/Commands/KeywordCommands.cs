@@ -43,7 +43,7 @@ namespace Final_Project.Commands
                 }
                 else if (response == "N" || response == "NO")
                 {
-                    Environment.Exit(0);
+                    Environment.Exit(1);
                 }
             }
 
@@ -58,8 +58,7 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[15].ToUpper())
             {
                 //Load
-                Console.WriteLine("Please enter the file name exactly.");
-                Save.loadState();
+                
 
             }
 
@@ -71,7 +70,7 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine("You lost!"); Console.WriteLine("Press any key to admit defeat");
                 Console.ReadKey();
-                Environment.Exit(0);
+                Environment.Exit(1);
             }
             Keywords keyword = new Keywords();
             commandUsed = commandUsed.ToUpper();
@@ -82,21 +81,40 @@ namespace Final_Project.Commands
                 newPets = modifyPetHealth(monster.HealthPoints, monster.Strength, mainCharacter);
                 mainCharacter.Pets.Clear();
                 mainCharacter.Pets = newPets;
-                double probability = (mainCharacter.HealthPoints / monster.HealthPoints) * 100;
                 Random rand = new Random();
-                int intprob = (int)probability;
-                //int intprob=(int)((mainCharacter.HealthPoints)/(int)monster.HealthPoints)*100;
-                int loseRand = rand.Next(0, intprob);
-                mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
-                double random = rand.Next(0, 101);
-
-                if (random > probability)
+                int randomizer = rand.Next(0, 101);
+                double randomizerPercentage = randomizer / 100;
+                double strengthComparison = (mainCharacter.Strength) / (monster.Strength);
+                if (strengthComparison >= 1.125)
                 {
-                    Console.WriteLine("You Lost the fight against " + monster.Name + "!");
+                    Console.WriteLine("You won the fight against " + monster.Name + " with no injuries!");
+                }
+                else if (strengthComparison >= 1)
+                {
+                    double healthLost = monster.Strength * randomizerPercentage * 0.5;
+                    int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
+                    Console.WriteLine("You won the fight against " + monster.Name + "!");
+                    Console.WriteLine("You have lost " + amountLost + " hit points.");
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
                 }
                 else
                 {
-                    Console.WriteLine("You won the fight againt " + monster.Name + "!");
+                    if (strengthComparison > randomizerPercentage)
+                    {
+                        double healthLost = monster.Strength * randomizerPercentage;
+                        int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
+                        Console.WriteLine("You won the fight against " + monster.Name + "!");
+                        Console.WriteLine("You have lost " + amountLost + " hit points.");
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
+                    }
+                    else
+                    {
+                        double healthLost = monster.Strength * randomizerPercentage * 2;
+                        int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
+                        Console.WriteLine("You lost the fight against " + monster.Name + "!");
+                        Console.WriteLine("You have lost " + amountLost + " hit points.");
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
+                    }
                 }
                 // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
                 //Fight
@@ -109,7 +127,7 @@ namespace Final_Project.Commands
                 //Save
                 Save.saveState(mainCharacter, monster, name);
                 Console.WriteLine("Game saved.  Press any key to exit.");
-                Environment.Exit(0);
+                Environment.Exit(1);
             }
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
             {
@@ -170,7 +188,7 @@ namespace Final_Project.Commands
                     Save.saveState(mainCharacter, monster, name);
                     Console.WriteLine("Game saved.  Press any key to exit");
                     Console.ReadKey();
-                    Environment.Exit(0);
+                    Environment.Exit(1);
                 }
 
             }
@@ -244,7 +262,7 @@ namespace Final_Project.Commands
                             Console.WriteLine("You lost");
                             Console.WriteLine("press any key to admit defeat");
                             Console.ReadKey();
-                            Environment.Exit(0);
+                            Environment.Exit(1);
                         }
 
                     }
@@ -263,7 +281,7 @@ namespace Final_Project.Commands
                         Console.WriteLine("You lost");
                         Console.WriteLine("press any key to admit defeat");
                         Console.ReadKey();
-                        Environment.Exit(0);
+                        Environment.Exit(1);
                     }
 
 
@@ -328,9 +346,10 @@ namespace Final_Project.Commands
 
             if (mainCharacter.HealthPoints <= 0)
             {
-                Console.WriteLine("You lost!"); Console.WriteLine("Press any key to admit defeat");
+                Console.WriteLine("You lost!"+" Your final health was "+mainCharacter.HealthPoints); 
+                Console.WriteLine("Press any key to admit defeat");
                 Console.ReadKey();
-                Environment.Exit(0);
+                Environment.Exit(1);
             }
             Keywords keyword = new Keywords();
             commandUsed = commandUsed.ToUpper();
@@ -341,14 +360,46 @@ namespace Final_Project.Commands
                 newPets = modifyPetHealth(enemy.HealthPoints, enemy.Strength, mainCharacter);
                 mainCharacter.Pets.Clear();
                 mainCharacter.Pets = newPets;
-                double probability = (mainCharacter.HealthPoints / enemy.HealthPoints) * 100;
+                Random rand = new Random();
+                int randomizer = rand.Next(0, 101);
+                double randomizerPercentage = randomizer / 100;
+                double strengthComparison = ( mainCharacter.Strength) / ( enemy.Strength);
+                if (strengthComparison >= 1.125)
+                {
+                    Console.WriteLine("You won the fight against " + enemy.Name + " with no injuries!");
+                } else if (strengthComparison >= 1)
+                {
+                    double healthLost = enemy.Strength * randomizerPercentage * 0.5;
+                    int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
+                    Console.WriteLine("You won the fight against " + enemy.Name + "!");
+                    Console.WriteLine("You have lost " + amountLost + " hit points.");
+                    mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
+                } else
+                {
+                    if (strengthComparison > randomizerPercentage)
+                    {
+                        double healthLost = enemy.Strength * randomizerPercentage;
+                        int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
+                        Console.WriteLine("You won the fight against " + enemy.Name + "!");
+                        Console.WriteLine("You have lost " + amountLost + " hit points.");
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
+                    } else
+                    {
+                        double healthLost = enemy.Strength * randomizerPercentage * 2;
+                        int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
+                        Console.WriteLine("You lost the fight against " + enemy.Name + "!");
+                        Console.WriteLine("You have lost " + amountLost + " hit points.");
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
+                    }
+                }
+                /*double probability = (mainCharacter.HealthPoints / enemy.HealthPoints) * 100;
                 Random rand = new Random();
                 int intprob = (int)probability;
                 //int intprob=(int)((mainCharacter.HealthPoints)/(int)monster.HealthPoints)*100;
                 int loseRand = rand.Next(0, intprob);
-                mainCharacter.HealthPoints = mainCharacter.HealthPoints - loseRand;
+                double realLoseRand = loseRand / 100;
+                mainCharacter.HealthPoints = mainCharacter.HealthPoints - realLoseRand;
                 double random = rand.Next(0, 101);
-
                 if (random > probability)
                 {
                     Console.WriteLine("You lost the fight against " + enemy.Name + "!");
@@ -357,7 +408,7 @@ namespace Final_Project.Commands
                 {
                     Console.WriteLine("You won the fight against " + enemy.Name + "!");
                 }
-                // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
+                 Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");*/
                 //Fight
 
             }
@@ -368,7 +419,7 @@ namespace Final_Project.Commands
                 //Save
                 Save.saveState(mainCharacter, enemy, name);
                 Console.WriteLine("Game saved. Press any key to exit.");
-                Environment.Exit(0);
+                Environment.Exit(1);
             }
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
             {
@@ -421,7 +472,7 @@ namespace Final_Project.Commands
                     Save.saveState(mainCharacter, enemy, name);
                     Console.WriteLine("Game saved.  Press any key to exit");
                     Console.ReadKey();
-                    Environment.Exit(0);
+                    Environment.Exit(1);
                 }
 
             }
@@ -479,7 +530,7 @@ namespace Final_Project.Commands
                             Console.WriteLine("You lost");
                             Console.WriteLine("press any key to admit defeat");
                             Console.ReadKey();
-                            Environment.Exit(0);
+                            Environment.Exit(1);
                         }
 
                     }
@@ -498,7 +549,7 @@ namespace Final_Project.Commands
                         Console.WriteLine("You lost");
                         Console.WriteLine("press any key to admit defeat");
                         Console.ReadKey();
-                        Environment.Exit(0);
+                        Environment.Exit(1);
                     }
 
 

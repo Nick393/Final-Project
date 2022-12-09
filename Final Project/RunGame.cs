@@ -3,6 +3,7 @@ using Final_Project.Databases;
 using Final_Project.TemplateClasses;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Final_Project
@@ -23,98 +24,52 @@ namespace Final_Project
             //starts the story make this recursive
             StartScreen();
             bool isNotWorking = true;
-            while (isNotWorking)
+            while (isNotWorking==true)
             {
-
+                bool gameNotEnded = true;
+                bool isBoss = false;
+                int PositiveEnd = 100000;
+                int NegativeEnd = -100000;
+                int multiplier = 1;
+                double sMult = 1;
+                bool startgame = true;
+                
                 string userCommand = Console.ReadLine().ToUpper();
                 if ((userCommand == keyword.ListOfKeywords[13].ToUpper()) || (userCommand == keyword.ListOfKeywords[14].ToUpper()))
                 {
-                    double sMult = 1;
-                    bool startgame = true;
-                    isNotWorking = false;
                     CharacterTemplate mainCharacter = story.createMainCharacter(sMult);
                     saveData.addObject(mainCharacter);
                     story.startStory(mainCharacter);
-                    bool gameNotEnded = true;
-                    bool isBoss = false;
-                    int PositiveEnd = 100000;
-                    int NegativeEnd = -100000;
-                    int multiplier = 1;
-                    while (gameNotEnded)
+                    while (gameNotEnded==true)
                     {
-                        int randNum = rand.Next(0, 501);
-                        if (randNum > 450)
-                        {
-                            gameStage++;
-                            mainCharacter.updateHealth(gameStage);
-                            Console.WriteLine("You have levelled up! Your stats have grown and your health has recovered.");
-                        }
-                        if (mainCharacter.HealthPoints <= 0)
-                        {
-                            gameNotEnded = false;
-                        }
-                        else if (randNum >= 251)
-                        {
-
-                            startgame = false;
-                            CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, PositiveEnd), mainCharacter.Alignment, gameStage, sMult);
-                            
-                            story.runEncounter(ref newVillian, mainCharacter.Alignment, isBoss, ref mainCharacter, ref saveData, ref save);
-                            if (isBoss)
-                            {
-                                endGame(newVillian);
-                            }
-                        }
-                        else if (randNum < 251)
-                        {
-                            MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(NegativeEnd, -2), mainCharacter.Alignment, gameStage, sMult);
-                            
-                            story.runEncounter(ref newMonster, mainCharacter.Alignment, isBoss, ref mainCharacter, ref save, ref saveData);
-                            if (isBoss)
-                            {
-                                endGame(newMonster);
-                            }
-                        }
-                        /*else if (startgame == true)
-                        {
-                            string newUserCommand = Console.ReadLine();
-                            string commandUsed = keyword.detectKeyword(newUserCommand);
-
-                            if (commandUsed != null)
-                            {
-                                commands.Commands(commandUsed, ref saveData, ref save);
-                            }
-                        }*/
-                        else
-                        {
-                            //Console.WriteLine("Please Enter a Valid Command"); //don't know what this was for, but its currently useless
-                        }
-                        for (int i = multiplier * 10; i > 0; i--)
-                        {
-                            PositiveEnd++;
-                            NegativeEnd--;
-                        }
-                        if (isBoss)
-                        {
-                            gameNotEnded = false;
-                        }
-                        multiplier = multiplier * 2;
-                        if (multiplier >= 32768)
-                        {
-                            isBoss = true;
-                        }
+                        RunTheGame(ref PositiveEnd, ref NegativeEnd, ref multiplier, ref gameStage, ref sMult, ref mainCharacter, ref story, ref save, ref saveData, ref isBoss, ref gameNotEnded, ref startgame);
                     }
+                    isNotWorking = false;
                 }
                 else if ((userCommand == keyword.ListOfKeywords[15].ToUpper()))
                 {
+                    Console.WriteLine("Please enter the file name exactly.");
+                    List<object> characters = new List<object>();
+                    characters = Save.loadState();
+                    
+                    
+                        MonsterTemplate character = (MonsterTemplate)characters[0];
+                    
+                    //object monsterTemplate = (MonsterTemplate)characters[0];
+                    CharacterTemplate mainCharacter = (CharacterTemplate)characters[1];
+                    story.runEncounter(ref character, mainCharacter.Alignment, isBoss, ref mainCharacter, ref save, ref saveData);
+                    while (gameNotEnded)
+                    {
+                        RunTheGame(ref PositiveEnd, ref NegativeEnd, ref multiplier, ref gameStage, ref sMult, ref mainCharacter, ref story, ref save, ref saveData, ref isBoss, ref gameNotEnded, ref startgame);
+                    }//Leave this to the loaded;
                     isNotWorking = false;
-                    //Leave this to the loaded
                 }
                 else
                 {
                     Console.WriteLine("Please enter a valid Command");
                     StartScreen();
                 }
+
             }
             //creates the main character
         }
@@ -141,7 +96,7 @@ namespace Final_Project
 
             }
             Console.WriteLine("Your high score is " + hscore);
-           // Console.WriteLine(mode);
+            // Console.WriteLine(mode);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Black;
@@ -196,6 +151,75 @@ namespace Final_Project
         public static void endGame(MonsterTemplate finalBoss)
         {
             Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
+        }
+
+
+        public static void RunTheGame(ref int PositiveEnd, ref int NegativeEnd, ref int multiplier, ref int gameStage, ref double sMult, ref CharacterTemplate mainCharacter, ref Story story, ref Save save, ref SaveData saveData, ref bool isBoss, ref bool gameNotEnded, ref bool startgame)
+        {
+            Random rand = new Random();
+            KeywordCommands commands = new KeywordCommands();
+            int randNum = rand.Next(0, 501);
+            if (randNum > 450)
+            {
+                gameStage++;
+                mainCharacter.updateHealth(gameStage);
+                Console.WriteLine("You have levelled up! Your stats have grown and your health has recovered.");
+            }
+            if (mainCharacter.HealthPoints <= 0)
+            {
+                bool doesNotMatter = false;
+                commands.Commands(null, ref mainCharacter, ref mainCharacter, ref saveData, ref save, ref doesNotMatter);
+            }
+            else if (randNum >= 251)
+            {
+
+                startgame = false;
+                CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(rand.Next(2, PositiveEnd), mainCharacter.Alignment, gameStage, sMult);
+
+                story.runEncounter(ref newVillian, mainCharacter.Alignment, isBoss, ref mainCharacter, ref saveData, ref save);
+                if (isBoss)
+                {
+                    endGame(newVillian);
+                }
+            }
+            else if (randNum < 251)
+            {
+                MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(rand.Next(NegativeEnd, -2), mainCharacter.Alignment, gameStage, sMult);
+
+                story.runEncounter(ref newMonster, mainCharacter.Alignment, isBoss, ref mainCharacter, ref save, ref saveData);
+                if (isBoss)
+                {
+                    endGame(newMonster);
+                }
+            }
+            /*else if (startgame == true)
+            {
+                string newUserCommand = Console.ReadLine();
+                string commandUsed = keyword.detectKeyword(newUserCommand);
+
+                if (commandUsed != null)
+                {
+                    commands.Commands(commandUsed, ref saveData, ref save);
+                }
+            }*/
+            else
+            {
+                //Console.WriteLine("Please Enter a Valid Command"); //don't know what this was for, but its currently useless
+            }
+            for (int i = multiplier * 10; i > 0; i--)
+            {
+                PositiveEnd++;
+                NegativeEnd--;
+            }
+            if (isBoss)
+            {
+                //gameNotEnded = false;
+            }
+            multiplier = multiplier * 2;
+            if (multiplier >= 32768)
+            {
+                isBoss = true;
+            }
         }
     }
 }
