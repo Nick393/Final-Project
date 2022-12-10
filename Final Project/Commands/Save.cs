@@ -30,7 +30,7 @@ namespace Final_Project.Commands
                 int nextWordLoc = use.IndexOf(",") + 1;//this finds the start of the next word
                 if (z == 0)
                 {
-                    properties.Add(use.Substring(0, nextWordLoc-1));
+                    properties.Add(use.Substring(0, nextWordLoc - 1));
                 }
                 //nextWordLoc++;//this sets the location to the first letter of the word
                 string tempWordTwo = use.Substring(nextWordLoc);//this stores the full end of the string so it can be fed back to the while loop
@@ -56,7 +56,7 @@ namespace Final_Project.Commands
             }
             foreach (string porperty in properties)
             {
-                Console.WriteLine(porperty);
+                //Console.WriteLine(porperty);
             }
             CharacterTemplate character = new CharacterTemplate();
             character.Name = properties[0];
@@ -70,6 +70,21 @@ namespace Final_Project.Commands
             //////////////////////////////////////////////////////////
             //Console.WriteLine(properties[4]);
             character.HealthPoints = double.Parse(properties[4]);
+            try
+            {
+                character.numMedkits = int.Parse(properties[5]);
+            }
+            catch
+            {
+                try
+                {
+                    Console.WriteLine("number medkits = " + properties[5] + " expected int");
+                }
+                catch
+                {
+                    Console.WriteLine("that didn't work");
+                }
+            }
             return character;
         }
         private static object loadEnemy(string fileName)
@@ -86,7 +101,7 @@ namespace Final_Project.Commands
                 int nextWordLoc = monsterData.IndexOf(",");//this finds the start of the next word
                 if (i == 0)
                 {
-                    properties.Add(monsterData.Substring(0, nextWordLoc-1));
+                    properties.Add(monsterData.Substring(0, nextWordLoc));
                 }
                 nextWordLoc++;//this sets the location to the first letter of the word
                 string tempWordTwo = monsterData.Substring(nextWordLoc);//this stores the full end of the string so it can be fed back to the while loop
@@ -131,25 +146,25 @@ namespace Final_Project.Commands
                 StreamReader p = new StreamReader(fileName + it + " pet.csv");
                 string PlayerData = p.ReadToEnd();
                 int z = 0;
-                int index = PlayerData.IndexOf("/");
+                //int index = PlayerData.IndexOf("/");
                 string use;
                 bool hasPets;
-                if (index == 0 || index == -1)
-                {
-                    hasPets = false;
-                    use = PlayerData;
-                }
-                else
-                {
-                    hasPets = true;
-                    use = PlayerData.Substring(0, PlayerData.IndexOf("/"));
-                }
+                //if (index == 0 || index == -1)
+                //{
+                // hasPets = false;
+                //    use = PlayerData;
+                //}
+                //else
+                //{
+                hasPets = true;
+                use = PlayerData;
+                //}
                 while (use.Contains(","))//this while loop formats each word in a city name beyond the first two.  
                 {
                     int nextWordLoc = use.IndexOf(",") + 1;//this finds the start of the next word
                     if (z == 0)
                     {
-                        properties.Add(use.Substring(0, nextWordLoc-1));
+                        properties.Add(use.Substring(0, nextWordLoc - 1));
                     }
                     //nextWordLoc++;//this sets the location to the first letter of the word
                     string tempWordTwo = use.Substring(nextWordLoc);//this stores the full end of the string so it can be fed back to the while loop
@@ -164,7 +179,7 @@ namespace Final_Project.Commands
 
                     //string rebuiltWord = letterOne + endOfWord;//this reassembles the word
                     string save;
-                    if(tempWordTwo.Contains(","))
+                    if (tempWordTwo.Contains(","))
                     {
                         save = tempWordTwo.Substring(0, tempWordTwo.IndexOf(","));
                     }
@@ -174,7 +189,7 @@ namespace Final_Project.Commands
                 }
                 foreach (string porperty in properties)
                 {
-                    Console.WriteLine(porperty+"modifies");
+                    Console.WriteLine(porperty + "modifies");
                 }
                 PetTemplate character = new PetTemplate();
                 character.Name = properties[0];
@@ -184,204 +199,207 @@ namespace Final_Project.Commands
                 //////////////////////////////////////////////////////////
                 //Console.WriteLine(properties[4]);
                 character.HealthPoints = double.Parse(properties[3]);
+
                 it++;
             }
             return pets;
         }
         public static List<object> loadState()
         {
-            try { 
-            StreamReader reader = new StreamReader("names.data");
-            List<string> names = new List<string>();
+            try {
+                StreamReader reader = new StreamReader("names.data");
+                List<string> names = new List<string>();
 
-            string path = "names.data";
-            var a = File.ReadAllLines(path);
-            string[] text = a;
-            /*foreach (string s in text)
-            {
-                Console.WriteLine(s);
-            }
-            //a.Close();
-            //List <string>other=new List<string> ();
-            /*try
-            {
-                int e = 0;
-                while(true)
+                string path = "names.data";
+                var a = File.ReadAllLines(path);
+                string[] text = a;
+                /*foreach (string s in text)
                 {
-                    
-                    
-                   string[]data= File.ReadAllLines("names"+e+".data");
-                    foreach (string s in data)
-                    {
-                        other.Add(s);
-                    }
-                    e++;
+                    Console.WriteLine(s);
                 }
-            }
-            catch (Exception ex)
-            {
-                return null;
-                //do nothing, exception expected
-            }*/
-
-
-            Console.WriteLine("Please pick a save from below.  type exactly as shown.");
-            foreach (string line in text)
-            {
-                Console.WriteLine(line);
-            }
-            /*foreach (string line in other)
-            {
-                Console.WriteLine(line);
-            }*/
-
-            string fileName = Console.ReadLine();
-
-            for (int g = 0; g < text.Length; g++)
-            {
-
-                Console.WriteLine(text[g]);
-            }
-            object curMonster = loadEnemy(fileName);
-
-            List<object> list = new List<object>();
-            list.Add(curMonster);
-            CharacterTemplate character = (CharacterTemplate)loadCharacter(fileName);
-            int numPets = 0;
-            List<PetTemplate> pets = new List<PetTemplate>();
-            if (File.Exists(fileName + " numPets.pet"))
-            {
-                var read = File.OpenText(fileName + " numPets.pet");
-                numPets = int.Parse(read.ReadLine());
-            }
-            if (numPets != 0)
-            {
-                pets = loadPets(fileName, numPets);
-            }
-            character.Pets = pets;
-            list.Add(character);
-
-            //Console.WriteLine(curMonster.ToString());
-            /////////////////////////////////////////
-            ///
-            /*try
-            {
-
-            if (hasPets == true)
-            { 
-                string petData = PlayerData.Substring(PlayerData.IndexOf("/"));
-                if (petData.Contains("*"))
-
+                //a.Close();
+                //List <string>other=new List<string> ();
+                /*try
                 {
-                    string curpet;
-                    int length = petData.Length;
-                    length--;
-                    if (petData.Substring(petData.IndexOf("*" + 1), length).Contains("*"))
+                    int e = 0;
+                    while(true)
                     {
 
-                        List<PetTemplate> listPet = new List<PetTemplate>();
-                        while (petData.Contains('*'))
+
+                       string[]data= File.ReadAllLines("names"+e+".data");
+                        foreach (string s in data)
                         {
-                            curpet = petData.Substring(1, petData.IndexOf("*" + 1));
-                            petData = petData.Substring(petData.IndexOf('*') + 1);
-
-                            List<string> curPetProperties = new List<string>();
-                            while (curpet.Contains(","))//this while loop formats each word in a city name beyond the first two.  
-                            {
-
-
-                                int petloc = curpet.IndexOf(",");//this finds the start of the next word
-                                if (z == 0)
-                                {
-                                    curPetProperties.Add(curpet.Substring(0, petloc));
-                                }
-                                petloc++;//this sets the location to the first letter of the word
-                                string tempetloc = curpet.Substring(petloc);//this stores the full end of the string so it can be fed back to the while loop
-                                string processpet;//this variable holds the word while it is being processed
-                                curpet = tempetloc;
-                                if (tempetloc.Contains(",")) { processpet = tempetloc.Substring(0, tempetloc.IndexOf(",")); }//this determines whether the word is the last word in a string and selects the word.
-                                else { processpet = tempetloc; }//if it is the program doesn't need to remove the ending of the string.
-
-                                //string letterOne = process.Substring(0, 1);//this gets the first letter in the word
-                                //string endOfWord = process.Substring(1);//this gets the end of the word
-                                //letterOne = letterOne.ToUpper();//this changes the first letter to uppercase.  
-
-                                //string rebuiltWord = letterOne + endOfWord;//this reassembles the word
-                                properties.Add(tempetloc);
-                            }
-                            PetTemplate thispet = new PetTemplate();
-                            thispet.Name = properties[0];
-                            thispet.Species = properties[1];
-                            thispet.Strength = int.Parse(properties[2]);
-                            thispet.HealthPoints = int.Parse(properties[3]);
-                            listPet.Add(thispet);
-
-
+                            other.Add(s);
                         }
-                        character.Pets = listPet;
+                        e++;
                     }
-                    else
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                    //do nothing, exception expected
+                }*/
+
+
+                Console.WriteLine("Please pick a save from below.  type exactly as shown.");
+                foreach (string line in text)
+                {
+                    Console.WriteLine(line);
+                }
+                /*foreach (string line in other)
+                {
+                    Console.WriteLine(line);
+                }*/
+
+                string fileName = Console.ReadLine();
+
+                for (int g = 0; g < text.Length; g++)
+                {
+
+                    Console.WriteLine(text[g]);
+                }
+                object curMonster = loadEnemy(fileName);
+
+                List<object> list = new List<object>();
+                list.Add(curMonster);
+                CharacterTemplate character = (CharacterTemplate)loadCharacter(fileName);
+                int numPets = 0;
+                List<PetTemplate> pets = new List<PetTemplate>();
+                if (File.Exists(fileName + " numPets.pet"))
+                {
+                    var read = File.OpenText(fileName + " numPets.pet");
+                    numPets = int.Parse(read.ReadLine());
+                }
+                if (numPets != 0)
+                {
+
+
+                    pets = loadPets(fileName, numPets);
+                }
+                character.Pets = pets;
+                list.Add(character);
+
+                //Console.WriteLine(curMonster.ToString());
+                /////////////////////////////////////////
+                ///
+                /*try
+                {
+
+                if (hasPets == true)
+                { 
+                    string petData = PlayerData.Substring(PlayerData.IndexOf("/"));
+                    if (petData.Contains("*"))
+
                     {
-                        List<PetTemplate> listPet = new List<PetTemplate>();
-                        while (petData.Contains('*'))
+                        string curpet;
+                        int length = petData.Length;
+                        length--;
+                        if (petData.Substring(petData.IndexOf("*" + 1), length).Contains("*"))
                         {
-                            curpet = petData.Substring(1, petData.IndexOf("*" + 1));
-                            petData = petData.Substring(petData.IndexOf('*') + 1);
 
-                            List<string> curPetProperties = new List<string>();
-                            while (curpet.Contains(","))//this while loop formats each word in a city name beyond the first two.  
+                            List<PetTemplate> listPet = new List<PetTemplate>();
+                            while (petData.Contains('*'))
                             {
+                                curpet = petData.Substring(1, petData.IndexOf("*" + 1));
+                                petData = petData.Substring(petData.IndexOf('*') + 1);
 
-
-                                int petloc = curpet.IndexOf(",");//this finds the start of the next word
-                                if (z == 0)
+                                List<string> curPetProperties = new List<string>();
+                                while (curpet.Contains(","))//this while loop formats each word in a city name beyond the first two.  
                                 {
-                                    curPetProperties.Add(curpet.Substring(0, petloc));
+
+
+                                    int petloc = curpet.IndexOf(",");//this finds the start of the next word
+                                    if (z == 0)
+                                    {
+                                        curPetProperties.Add(curpet.Substring(0, petloc));
+                                    }
+                                    petloc++;//this sets the location to the first letter of the word
+                                    string tempetloc = curpet.Substring(petloc);//this stores the full end of the string so it can be fed back to the while loop
+                                    string processpet;//this variable holds the word while it is being processed
+                                    curpet = tempetloc;
+                                    if (tempetloc.Contains(",")) { processpet = tempetloc.Substring(0, tempetloc.IndexOf(",")); }//this determines whether the word is the last word in a string and selects the word.
+                                    else { processpet = tempetloc; }//if it is the program doesn't need to remove the ending of the string.
+
+                                    //string letterOne = process.Substring(0, 1);//this gets the first letter in the word
+                                    //string endOfWord = process.Substring(1);//this gets the end of the word
+                                    //letterOne = letterOne.ToUpper();//this changes the first letter to uppercase.  
+
+                                    //string rebuiltWord = letterOne + endOfWord;//this reassembles the word
+                                    properties.Add(tempetloc);
                                 }
-                                petloc++;//this sets the location to the first letter of the word
-                                string tempetloc = curpet.Substring(petloc);//this stores the full end of the string so it can be fed back to the while loop
-                                string processpet;//this variable holds the word while it is being processed
-                                curpet = tempetloc;
-                                if (tempetloc.Contains(",")) { processpet = tempetloc.Substring(0, tempetloc.IndexOf(",")); }//this determines whether the word is the last word in a string and selects the word.
-                                else { processpet = tempetloc; }//if it is the program doesn't need to remove the ending of the string.
+                                PetTemplate thispet = new PetTemplate();
+                                thispet.Name = properties[0];
+                                thispet.Species = properties[1];
+                                thispet.Strength = int.Parse(properties[2]);
+                                thispet.HealthPoints = int.Parse(properties[3]);
+                                listPet.Add(thispet);
 
-                                //string letterOne = process.Substring(0, 1);//this gets the first letter in the word
-                                //string endOfWord = process.Substring(1);//this gets the end of the word
-                                //letterOne = letterOne.ToUpper();//this changes the first letter to uppercase.  
 
-                                //string rebuiltWord = letterOne + endOfWord;//this reassembles the word
-                                properties.Add(tempetloc);
                             }
-                            PetTemplate thispet = new PetTemplate();
-                            thispet.Name = properties[0];
-                            thispet.Species = properties[1];
-                            thispet.Strength = int.Parse(properties[2]);
-                            thispet.HealthPoints = int.Parse(properties[3]);
-                            listPet.Add(thispet);
+                            character.Pets = listPet;
                         }
-                        character.Pets = listPet;
-                    }
-                    }
-                    list.Add(character);*/
-            //return list;
-            //}
-            return list;
+                        else
+                        {
+                            List<PetTemplate> listPet = new List<PetTemplate>();
+                            while (petData.Contains('*'))
+                            {
+                                curpet = petData.Substring(1, petData.IndexOf("*" + 1));
+                                petData = petData.Substring(petData.IndexOf('*') + 1);
 
+                                List<string> curPetProperties = new List<string>();
+                                while (curpet.Contains(","))//this while loop formats each word in a city name beyond the first two.  
+                                {
+
+
+                                    int petloc = curpet.IndexOf(",");//this finds the start of the next word
+                                    if (z == 0)
+                                    {
+                                        curPetProperties.Add(curpet.Substring(0, petloc));
+                                    }
+                                    petloc++;//this sets the location to the first letter of the word
+                                    string tempetloc = curpet.Substring(petloc);//this stores the full end of the string so it can be fed back to the while loop
+                                    string processpet;//this variable holds the word while it is being processed
+                                    curpet = tempetloc;
+                                    if (tempetloc.Contains(",")) { processpet = tempetloc.Substring(0, tempetloc.IndexOf(",")); }//this determines whether the word is the last word in a string and selects the word.
+                                    else { processpet = tempetloc; }//if it is the program doesn't need to remove the ending of the string.
+
+                                    //string letterOne = process.Substring(0, 1);//this gets the first letter in the word
+                                    //string endOfWord = process.Substring(1);//this gets the end of the word
+                                    //letterOne = letterOne.ToUpper();//this changes the first letter to uppercase.  
+
+                                    //string rebuiltWord = letterOne + endOfWord;//this reassembles the word
+                                    properties.Add(tempetloc);
+                                }
+                                PetTemplate thispet = new PetTemplate();
+                                thispet.Name = properties[0];
+                                thispet.Species = properties[1];
+                                thispet.Strength = int.Parse(properties[2]);
+                                thispet.HealthPoints = int.Parse(properties[3]);
+                                listPet.Add(thispet);
+                            }
+                            character.Pets = listPet;
+                        }
+                        }
+                        list.Add(character);*/
+                //return list;
+                //}
+                return list;
+
+            }
+
+            catch (MissingFieldException)
+            {
+                Console.WriteLine("Error loading file ");
+                return null;
+            }
         }
 
-        catch (MissingFieldException)
-        {
-            Console.WriteLine("Error loading file ");
-            return null;
-        }
-    }
+        // catch
+        //{
+        //  Console.WriteLine("error");
+        //return null;
+        //}
 
-           // catch
-            //{
-              //  Console.WriteLine("error");
-                //return null;
-            //}
-        
         public static void saveState(CharacterTemplate character, MonsterTemplate monster, string name)
         {
             if (name != "")
@@ -416,7 +434,7 @@ namespace Final_Project.Commands
             if (!File.Exists(name + " character.csv"))
             {
                 StreamWriter w = new StreamWriter(name + " character.csv");
-                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints + "," + character.numMedkits);
                 //w.Write("/");
                 if (character.Pets.Count != 0)
                 {
@@ -424,13 +442,13 @@ namespace Final_Project.Commands
                     //w.Write("*");
                     foreach (PetTemplate pet in character.Pets)
                     {
-                        var petsci=File.CreateText((name + iterator.ToString() + " pet.csv"));
+                        var petsci = File.CreateText((name + iterator.ToString() + " pet.csv"));
                         //w.Write("*");
                         petsci.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
                         petsci.Close();
                         iterator++;
                     }
-                    var p = File.CreateText(name+" numPets.pet");
+                    var p = File.CreateText(name + " numPets.pet");
                     p.Write(iterator);
                     p.Close();
                 }
@@ -440,17 +458,19 @@ namespace Final_Project.Commands
             else
             {
                 StreamWriter w = new StreamWriter(DateTime.Now.ToString() + " " + name + " character.csv");
-                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints + "," + character.numMedkits);
                 if (character.Pets.Count != 0)
                 {
                     w.Write("/");
                     int iterator = 0;
                     foreach (PetTemplate pet in character.Pets)
                     {
-                        File.CreateText((DateTime.Now.ToString() + " " + name + iterator + " pet.csv"));
+                        var petscii = File.CreateText((DateTime.Now.ToString() + " " + name + iterator + " pet.csv"));
                         //w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
                         iterator++;
+                        petscii.Close();
                     }
+
                     var p = File.CreateText(DateTime.Now.ToString() + " " + name + " numPets.pet");
                     p.Write(iterator);
                     p.Close();
@@ -509,7 +529,7 @@ namespace Final_Project.Commands
             if (!File.Exists(name + " character.csv"))
             {
                 StreamWriter w = new StreamWriter(name + " character.csv");
-                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints + "," + character.numMedkits);
                 //w.Write("/");
                 if (character.Pets.Count != 0)
                 {
@@ -522,7 +542,7 @@ namespace Final_Project.Commands
                         petsci.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
                         iterator++;
                     }
-                    var p = File.CreateText(name+" numPets.pet");
+                    var p = File.CreateText(name + " numPets.pet");
                     p.Write(iterator);
                     p.Close();
                 }
@@ -532,7 +552,7 @@ namespace Final_Project.Commands
             else
             {
                 StreamWriter w = new StreamWriter(DateTime.Now.ToString() + " " + name + " character.csv");
-                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints);
+                w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints + "," + character.numMedkits);
                 if (character.Pets.Count != 0)
                 {
                     w.Write("/");
@@ -575,8 +595,8 @@ namespace Final_Project.Commands
             }
             stream.Close();
         }
-
-
+    }
+        /*
         public static List<object> GetObjects()//this method formats the strings for output
         {
             StreamReader r = new StreamReader("save.txt");
@@ -756,10 +776,10 @@ namespace Final_Project.Commands
             {
                 List<Object> error = new List<object>();
                 return error;
-            }
+            }*/
 
-        }
-    }
+       // }
+    //}
 }
 
 
