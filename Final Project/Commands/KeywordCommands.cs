@@ -366,11 +366,21 @@ namespace Final_Project.Commands
                 double strengthComparison = ( mainCharacter.Strength) / ( enemy.Strength);
                 if (strengthComparison >= 1.125)
                 {
+                    int doSlightHurt = rand.Next(0, 3);
+                    if (doSlightHurt < 3)
+                    {
+                        int slightHurt = rand.Next(1, 5);
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - slightHurt;
+                        Console.WriteLine("You have won the fight, but have been hurt slightly.  You lost " + slightHurt + " hitpoints.");
+
+                    }
+                    else { 
                     Console.WriteLine("You won the fight against " + enemy.Name + " with no injuries!");
+                    }
                 } else if (strengthComparison >= 1)
                 {
                     double healthLost = enemy.Strength * randomizerPercentage * 0.5;
-                    int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
+                    int amountLost = (int)(mainCharacter.HealthPoints - healthLost*10);
                     Console.WriteLine("You won the fight against " + enemy.Name + "!");
                     Console.WriteLine("You have lost " + amountLost + " hit points.");
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;

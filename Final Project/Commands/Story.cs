@@ -23,6 +23,11 @@ namespace Final_Project.Commands
             StreamReader r = new StreamReader("highScore.json");
             if (mc.Name == "HaCKEr")
             {
+                mc.Name = "Developer";
+                Console.Write("Developer mode " );
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("enabled");
+                Console.ForegroundColor= ConsoleColor.Green;
                 mc.HealthPoints = 10000;
                 mc.Strength = 10000;
             }

@@ -12,6 +12,7 @@ namespace Final_Project
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             //declares all of the classes for easy method use
             Save save = new Save();
             Story story = new Story();

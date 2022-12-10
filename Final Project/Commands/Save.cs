@@ -184,21 +184,31 @@ namespace Final_Project.Commands
                         save = tempWordTwo.Substring(0, tempWordTwo.IndexOf(","));
                     }
                     else { save = tempWordTwo; }
+                    //Console.WriteLine("Adding " + save);
                     properties.Add(save);//this adds the word to the list
                     z++;
                 }
                 foreach (string porperty in properties)
                 {
-                    Console.WriteLine(porperty + "modifies");
+                    //Console.WriteLine(porperty + "modifies");
                 }
-                PetTemplate character = new PetTemplate();
-                character.Name = properties[0];
 
-                character.Species = properties[1];
-                character.Strength = int.Parse(properties[2]);
-                //////////////////////////////////////////////////////////
-                //Console.WriteLine(properties[4]);
-                character.HealthPoints = double.Parse(properties[3]);
+                PetTemplate character = new PetTemplate();
+                try
+                {
+                    character.Name = properties[0];
+
+                    character.Species = properties[1];
+                    character.Strength = int.Parse(properties[2]);
+                    //////////////////////////////////////////////////////////
+                    //Console.WriteLine(properties[4]);
+                    character.HealthPoints = double.Parse(properties[3]);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("pet restore fail....198-205, save.cs");
+                }
+                pets.Add(character);
 
                 it++;
             }
@@ -206,7 +216,8 @@ namespace Final_Project.Commands
         }
         public static List<object> loadState()
         {
-            try {
+            try
+            {
                 StreamReader reader = new StreamReader("names.data");
                 List<string> names = new List<string>();
 
@@ -256,7 +267,7 @@ namespace Final_Project.Commands
                 for (int g = 0; g < text.Length; g++)
                 {
 
-                    Console.WriteLine(text[g]);
+                    //Console.WriteLine(text[g]);
                 }
                 object curMonster = loadEnemy(fileName);
 
@@ -457,7 +468,9 @@ namespace Final_Project.Commands
             }
             else
             {
-                StreamWriter w = new StreamWriter(DateTime.Now.ToString() + " " + name + " character.csv");
+                Random random = new Random();
+                int rand=random.Next(0, 100);
+                StreamWriter w = new StreamWriter("1" + " " + name + " character.csv");
                 w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints + "," + character.numMedkits);
                 if (character.Pets.Count != 0)
                 {
@@ -465,13 +478,13 @@ namespace Final_Project.Commands
                     int iterator = 0;
                     foreach (PetTemplate pet in character.Pets)
                     {
-                        var petscii = File.CreateText((DateTime.Now.ToString() + " " + name + iterator + " pet.csv"));
-                        //w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                        var petscii = File.CreateText((rand + " " + name + iterator + " pet.csv"));
+                        w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
                         iterator++;
                         petscii.Close();
                     }
 
-                    var p = File.CreateText(DateTime.Now.ToString() + " " + name + " numPets.pet");
+                    var p = File.CreateText("1"+ " " + name + " numPets.pet");
                     p.Write(iterator);
                     p.Close();
                 }
@@ -486,7 +499,7 @@ namespace Final_Project.Commands
             }
             else
             {
-                StreamWriter m = new StreamWriter(DateTime.Now.ToString() + " " + name + " enemy.csv");
+                StreamWriter m = new StreamWriter("1" + " " + name + " enemy.csv");
                 m.Write(monster.Name + "," + monster.Species + "," + monster.Strength + "," + monster.HealthPoints);
                 m.Close();
             }
@@ -540,6 +553,7 @@ namespace Final_Project.Commands
                         var petsci = File.CreateText((name + iterator + " pet.csv"));
                         //w.Write("*");
                         petsci.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                        petsci.Close();
                         iterator++;
                     }
                     var p = File.CreateText(name + " numPets.pet");
@@ -551,7 +565,7 @@ namespace Final_Project.Commands
             }
             else
             {
-                StreamWriter w = new StreamWriter(DateTime.Now.ToString() + " " + name + " character.csv");
+                StreamWriter w = new StreamWriter("1" + " " + name + " character.csv");
                 w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints + "," + character.numMedkits);
                 if (character.Pets.Count != 0)
                 {
@@ -559,11 +573,12 @@ namespace Final_Project.Commands
                     int iterator = 0;
                     foreach (PetTemplate pet in character.Pets)
                     {
-                        File.CreateText((DateTime.Now.ToString() + " " + name + iterator + " pet.csv"));
-                        //w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                        File.CreateText(("1" + " " + name + iterator + " pet.csv"));
+                        w.Write(pet.Name + "," + pet.Species + "," + pet.Strength + "," + pet.HealthPoints);
+                        w.Close();
                         iterator++;
                     }
-                    var p = File.CreateText(DateTime.Now.ToString() + " " + name + " numPets.pet");
+                    var p = File.CreateText("1" + " " + name + " numPets.pet");
                     p.Write(iterator);
                     p.Close();
                 }
@@ -578,13 +593,13 @@ namespace Final_Project.Commands
             }
             else
             {
-                StreamWriter m = new StreamWriter(DateTime.Now.ToString() + " " + name + " enemy.csv");
+                StreamWriter m = new StreamWriter("1" + " " + name + " enemy.csv");
                 m.Write(enemy.Name + "," + enemy.Species + "," + enemy.Strength + "," + enemy.HealthPoints);
                 m.Close();
             }
         }
 
-        public static void SaveObjects(List<object> objects)
+        /*public static void SaveObjects(List<object> objects)
         {
             StreamWriter stream = new StreamWriter("save.txt");
             foreach (object obj in objects)
@@ -595,7 +610,7 @@ namespace Final_Project.Commands
             }
             stream.Close();
         }
-    }
+    }*/
         /*
         public static List<object> GetObjects()//this method formats the strings for output
         {
@@ -778,8 +793,9 @@ namespace Final_Project.Commands
                 return error;
             }*/
 
-       // }
-    //}
+        // }
+        //}
+    }
 }
 
 
