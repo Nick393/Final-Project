@@ -148,10 +148,16 @@ namespace Final_Project
         public static void endGame(CharacterTemplate finalBoss)
         {
             Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+            Environment.Exit(2);
         }
         public static void endGame(MonsterTemplate finalBoss)
         {
             Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+            Environment.Exit(2);
         }
 
 
