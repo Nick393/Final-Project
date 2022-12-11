@@ -18,8 +18,22 @@ namespace Final_Project.Commands
         public CharacterTemplate createMainCharacter(double sMult)
         {
             string name = RequestInformation("Name");
+            List<string> speciesList = new List<string>();
+            speciesList = names.getList(3);
+            Console.WriteLine("The available species are: ");
+                foreach (string Species in speciesList )
+            {
+                Console.WriteLine(Species);
+            }
             string species = RequestInformation("Species");
-            string alignment = RequestInformation("Faction");
+            List<string> factions = new List<string>();
+            factions = names.getList(8);
+            Console.WriteLine("The available factions are: ");
+            foreach (string faction in factions)
+            {
+                Console.WriteLine(faction);
+            }
+                string alignment = RequestInformation("Faction");
             const int START_STAGE = 0;
             CharacterTemplate mc = new CharacterTemplate(name, alignment, species, 4, START_STAGE, sMult);
             StreamReader r = new StreamReader("highScore.json");
@@ -48,6 +62,8 @@ namespace Final_Project.Commands
         public void startStory(CharacterTemplate mainCharacter)
         {
             Console.WriteLine("Welcome " + mainCharacter.Name + " of the " + mainCharacter.Species + " species. You are now a member of the " + mainCharacter.Alignment + " side. We shall now begin!");
+            Console.WriteLine("Your starting health is: " + mainCharacter.HealthPoints);
+            Console.WriteLine("Your starting strength is: " + mainCharacter.Strength);
         }
 
         public string RequestInformation(string infoName)
