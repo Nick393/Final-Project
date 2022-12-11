@@ -11,6 +11,7 @@ namespace Final_Project.TemplateClasses
         private int _numMedkits;
         private int _Score;
         private int _highScore;
+        Random rand = new Random();
         private List<PetTemplate> _Pets = new List<PetTemplate>();
         public CharacterTemplate()//default constructor
         {
@@ -35,7 +36,11 @@ namespace Final_Project.TemplateClasses
             _Alignment = Alignment;
             _Species = Species;
             //_Score = 0;
-
+            //slightly varies enemy health so all the values aren't the same
+            int variable = rand.Next(0,(11*(gameStage+1))+1);
+            variable = variable - (variable/2 - 1);
+            int variable2 = rand.Next(0, (11 * (gameStage + 1))+1);
+            variable2 = variable2 - (variable2 / 2 - 1);
             double multiplier;
             switch (strengthValue)
             {
@@ -58,8 +63,8 @@ namespace Final_Project.TemplateClasses
             double health = 0;
             double strength = 0;
             determineDefault(gameStage, ref health, ref strength);
-            this.HealthPoints = health * multiplier * nicksMultiplier;
-            this.Strength = strength * multiplier * nicksMultiplier;
+            this.HealthPoints = health * multiplier * nicksMultiplier+ variable;
+            this.Strength = strength * multiplier * nicksMultiplier+ variable2;
             this.numMedkits = 0;
         }
         public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters

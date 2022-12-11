@@ -54,3 +54,17 @@ C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp
 C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.dll
 C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.pdb
 C:\Users\cmgke\Documents\GitHub\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.genruntimeconfig.cache
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.csproj.AssemblyReference.cache
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.AssemblyInfoInputs.cache
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.AssemblyInfo.cs
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.csproj.CoreCompileInputs.cache
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.dll
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.pdb
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.exe
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.deps.json
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.runtimeconfig.json
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.runtimeconfig.dev.json
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.dll
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\bin\Debug\netcoreapp3.1\Final Project.pdb
+C:\Users\othel\OneDrive\Desktop\Code\Final-Project\Final Project\obj\Debug\netcoreapp3.1\Final Project.genruntimeconfig.cache

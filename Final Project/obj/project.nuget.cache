@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "6brIrKfmGHtTRkgRnhJdR3ISZrhNutzO+SeZ31/JSB+MXHrnSLgch8djYt1MPFwQW99j29GL5zPL2xBeCsSlXg==",
+  "dgSpecHash": "+nsLEfMuHp0xtQcBSZn4BguQgm5/yCKPJlziv8GfRD0xpyP7bg2ifVCsB5DNNBlPIiGiXetiW3t1PfZ9Yr3dgQ==",
   "success": true,
-  "projectFilePath": "/Users/nicholasguyette/Documents/GitHub/Final-Project/Final Project/Final Project.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\othel\\OneDrive\\Desktop\\Code\\Final-Project\\Final Project\\Final Project.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\othel\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\othel\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\othel\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\othel\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.31\\microsoft.netcore.app.host.win-x64.3.1.31.nupkg.sha512"
+  ],
   "logs": []
 }

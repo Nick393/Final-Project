@@ -13,6 +13,7 @@ namespace Final_Project.Commands
         private NameList names = new NameList();
         private SaveData saveData = new SaveData();
         private Save save = new Save();
+        Random rand = new Random();
         public CharacterTemplate createMainCharacter(double sMult)
         {
             string name = RequestInformation("Name");
@@ -142,10 +143,10 @@ namespace Final_Project.Commands
 
         public object RandomEncounter(int randNum, string mcAlignment, int gameStage, double sMult)
         {
-            if (randNum == 0)
+                        if (randNum == 0)
             {
 
-                Random rand = new Random();
+                
                 int sign = rand.Next(1, 2);
                 int multiplier = 0;
                 if (sign == 1)

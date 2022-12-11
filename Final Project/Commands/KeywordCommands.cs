@@ -195,7 +195,7 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
             {
                 //Tame
-                if ((monster.HealthPoints > mainCharacter.HealthPoints / 2) || monster.Strength > mainCharacter.Strength / 2)
+                if ((monster.HealthPoints > mainCharacter.HealthPoints / 2) || (monster.Strength > mainCharacter.Strength / 2))
                 {
                     Console.WriteLine("You cannot tame " + monster.Name + ". It is too powerful");
                 }
