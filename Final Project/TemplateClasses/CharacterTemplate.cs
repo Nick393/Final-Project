@@ -113,43 +113,58 @@ namespace Final_Project.TemplateClasses
         public void updateHealth(int gameStage)
         {
             int newStage = gameStage - 1;
+            double health = 15;
+            int strength = 20;
             switch (newStage)
             {
                 case 0:
-                    this.HealthPoints = 15;
-                    this.Strength = 20;
+                    health = 15;
+                    strength = 20;
                     break;
                 case 1:
-                    this.HealthPoints = 22.5;
-                    this.Strength = 30;
+                    health = 22.5;
+                    strength = 30;
                     break;
                 case 2:
-                    this.HealthPoints = 30;
-                    this.Strength = 40;
+                    health = 30;
+                    strength = 40;
                     break;
                 case 3:
-                    this.HealthPoints = 37.5;
-                    this.Strength = 50;
+                    health = 37.5;
+                    strength = 50;
                     break;
                 case 4:
-                    this.HealthPoints = 45;
-                    this.Strength = 60;
+                    health = 45;
+                    strength = 60;
                     break;
                 case 5:
-                    this.HealthPoints = 52.5;
-                    this.Strength = 70;
+                    health = 52.5;
+                    strength = 70;
                     break;
                 case 6:
-                    this.HealthPoints = 60;
-                    this.Strength = 80;
+                    health = 60;
+                    strength = 80;
                     break;
                 default:
-                    this.HealthPoints = 60;
-                    this.Strength = 80;
+                    health = 60;
+                    strength = 80;
                     break;
             }
-            this.Strength = this.Strength * 2;
-            this.HealthPoints = this.HealthPoints * 2;
+            this.Strength = strength * 2;
+            this.HealthPoints = health * 2;
+            foreach (PetTemplate pet in Pets)
+            {
+                if (pet != null)
+                {
+                    if (pet.Strength <= strength) {
+                        pet.Strength = strength;
+                        pet.HealthPoints = health; }
+                    else if (pet.HealthPoints <= health) 
+                    {
+                        pet.HealthPoints = health;
+                    }
+                }
+            }
         }
         public override string ToString()
         {

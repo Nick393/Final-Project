@@ -342,12 +342,13 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || (command == "flee" && ranAway) || ((enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || ((command == "flee" && ranAway)) || ((enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
                     Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
                     Console.WriteLine("Your strength is " + mainCharacter.Strength);
                 }
+
                 else
                 {
                     Console.WriteLine("You are facing " + enemy.Name);
@@ -442,16 +443,16 @@ namespace Final_Project.Commands
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine().ToLower();
                 bool ranAway = false;
-                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway);
+                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway, isBoss);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || (command == "tame" && ranAway) || (enemy.Strength > mainCharacter.Strength / 2) || (command == "flee" && ranAway) || ((enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command == "tame" && ranAway && !(isBoss)) || (enemy.Strength > mainCharacter.Strength / 2) || (command == "flee" && ranAway) || ((enemy.Strength > mainCharacter.Strength / 2)))
                 {
                     encounterDone = true;
                     Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
-                }
+                } 
                 else
                 {
 
