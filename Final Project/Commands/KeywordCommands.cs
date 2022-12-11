@@ -178,7 +178,7 @@ namespace Final_Project.Commands
                 if (strengthComparison >= 1)
                 {
                     Console.WriteLine("You have successfully fled from " + monster.Name + "!");
-                    ranAway = true;
+                    ranAway = true; 
                 }
                 else
                 {
