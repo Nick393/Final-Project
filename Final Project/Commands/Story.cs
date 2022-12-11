@@ -29,9 +29,16 @@ namespace Final_Project.Commands
                 Console.Write("Developer mode " );
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("enabled");
-                Console.ForegroundColor= ConsoleColor.Green;
-                mc.HealthPoints = 10000;
-                mc.Strength = 10000;
+                
+                Console.ForegroundColor= ConsoleColor.Yellow;
+                Console.WriteLine("Developer Settings:");
+                Console.WriteLine("Enter your starting health");
+                double sHealth = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter your starting Strength");
+                double sStrength = int.Parse(Console.ReadLine());
+                mc.HealthPoints = sHealth;
+                mc.Strength = sStrength;
+                Console.ForegroundColor = ConsoleColor.Green;
             }
             int score = int.Parse(r.ReadLine());
             r.Close();

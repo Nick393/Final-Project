@@ -167,7 +167,7 @@ namespace Final_Project
             KeywordCommands commands = new KeywordCommands();
             int randNum = rand.Next(0, 501);
 
-            if ((randNum > 150) && !(mainCharacter.Name == "HaCKEr") && !(gameStage == 8))
+            if ((randNum > 150) && !(mainCharacter.Name == "Developer") && !(gameStage == 8))
             {
                 gameStage++;
                 mainCharacter.updateHealth(gameStage);

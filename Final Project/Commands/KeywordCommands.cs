@@ -71,6 +71,7 @@ namespace Final_Project.Commands
         {
             if (mainCharacter.HealthPoints <= 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You lost!"); Console.WriteLine("Press any key to admit defeat");
                 Console.ReadKey();
                 Environment.Exit(1);
@@ -286,7 +287,9 @@ namespace Final_Project.Commands
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
                     if (random > probability)
                     {
-                        Console.WriteLine("You Lose!"); Console.WriteLine("press any key to admit defeat!");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("You Lose!");
+                        Console.WriteLine("press any key to admit defeat!");
                         Console.ReadKey();
                         Console.ReadKey();
                         Environment.Exit(5);
@@ -297,6 +300,7 @@ namespace Final_Project.Commands
                         Console.WriteLine("You have lost " + amountLost + " hitpoints");
                         if (mainCharacter.HealthPoints <= 0)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You lost");
                             Console.WriteLine("press any key to admit defeat");
                             Console.ReadKey();
@@ -316,6 +320,7 @@ namespace Final_Project.Commands
                     //Console.WriteLine(ex);
                     if (mainCharacter.HealthPoints <= 0)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("You lost");
                         Console.WriteLine("press any key to admit defeat");
                         Console.ReadKey();
@@ -341,7 +346,9 @@ namespace Final_Project.Commands
                 }
                 else
                 {
+                    Console.ForegroundColor= ConsoleColor.Red;
                     Console.WriteLine("Unable to heal! You have no medkits");
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
             }
             else if (commandUsed == ListOfKeywords[19])
@@ -384,6 +391,7 @@ namespace Final_Project.Commands
 
             if (mainCharacter.HealthPoints <= 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You lost!"+" Your final health was "+mainCharacter.HealthPoints); 
                 Console.WriteLine("Press any key to admit defeat");
                 Console.ReadKey();
@@ -569,10 +577,12 @@ namespace Final_Project.Commands
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
                     if (random > probability)
                     {
-                        Console.WriteLine("You lost!"); Console.WriteLine("Press any key to admit defeat");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("You lost!"); 
+                        Console.WriteLine("Press any key to admit defeat");
+                        
                         Console.ReadKey();
-                        Console.ReadKey();
-                        Environment.Exit(5);
+                        Environment.Exit(1);
                     }
                     else
                     {
@@ -580,6 +590,7 @@ namespace Final_Project.Commands
                         Console.WriteLine("You have lost " + amountLost + " hitpoints");
                         if (mainCharacter.HealthPoints <= 0)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You lost");
                             Console.WriteLine("press any key to admit defeat");
                             Console.ReadKey();
@@ -599,6 +610,8 @@ namespace Final_Project.Commands
                     //Console.WriteLine(ex);
                     if (mainCharacter.HealthPoints <= 0)
                     {
+
+                        Console.ForegroundColor= ConsoleColor.Red;
                         Console.WriteLine("You lost");
                         Console.WriteLine("press any key to admit defeat");
                         Console.ReadKey();
