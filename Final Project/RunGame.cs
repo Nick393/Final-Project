@@ -166,7 +166,8 @@ namespace Final_Project
             Random rand = new Random();
             KeywordCommands commands = new KeywordCommands();
             int randNum = rand.Next(0, 501);
-            if (randNum > 450)
+
+            if ((randNum > 150) && !(mainCharacter.Name == "HaCKEr") && !(gameStage == 8))
             {
                 gameStage++;
                 mainCharacter.updateHealth(gameStage);

@@ -67,7 +67,7 @@ namespace Final_Project.Commands
 
         }
 
-        public void Commands(string commandUsed, ref MonsterTemplate monster, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save, ref bool ranAway)
+        public void Commands(string commandUsed, ref MonsterTemplate monster, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save, ref bool ranAway, bool isBoss)
         {
             if (mainCharacter.HealthPoints <= 0)
             {
@@ -228,22 +228,26 @@ namespace Final_Project.Commands
             }
             else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
             {
-                //Tame
-                if ((monster.HealthPoints > mainCharacter.HealthPoints / 2) || monster.Strength > mainCharacter.Strength / 2)
-                {
-                    Console.WriteLine("You cannot tame " + monster.Name + ". It is too powerful");
-                }
+                if (!isBoss){//Tame
+                    if ((monster.HealthPoints > mainCharacter.HealthPoints / 2) || (monster.Strength > mainCharacter.Strength / 2))
+                    {
+                        Console.WriteLine("You cannot tame " + monster.Name + ". It is too powerful");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You have tamed " + monster.Name);
+                        Random rand = new Random();
+                        double healthLost = monster.Strength * (rand.Next(1, 11) * 0.1);
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
+                        Console.WriteLine("Unfortunately, you have lost " + healthLost + " hitpoints.");
+                        PetTemplate pet = new PetTemplate(monster, mainCharacter);
+                        pet.HealthPoints = pet.HealthPoints * 0.75;
+                        mainCharacter.Pets.Add(pet);
+                        ranAway = true;
+                    } }
                 else
                 {
-                    Console.WriteLine("You have tamed " + monster.Name);
-                    Random rand = new Random();
-                    double healthLost = monster.Strength * (rand.Next(1, 11) * 0.1);
-                    mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
-                    Console.WriteLine("Unfortunately, you have lost " + healthLost + " hitpoints.");
-                    PetTemplate pet = new PetTemplate(monster, mainCharacter);
-                    pet.HealthPoints = pet.HealthPoints * 0.75;
-                    mainCharacter.Pets.Add(pet);
-                    ranAway = true;
+                    Console.WriteLine("You cannot tame a boss.");
                 }
             }
             else if (commandUsed == keyword.ListOfKeywords[3].ToUpper())
