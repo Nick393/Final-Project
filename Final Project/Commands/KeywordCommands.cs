@@ -2,6 +2,7 @@
 using Final_Project.TemplateClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Final_Project.Commands
 {
@@ -32,33 +33,35 @@ namespace Final_Project.Commands
                 }
                 Console.WriteLine(listOfWords);
             }
-            else if ((commandUsed == keyword.ListOfKeywords[6].ToUpper()) || (commandUsed == keyword.ListOfKeywords[7].ToUpper()))
-            {
-                //Exit or Close
-                Console.WriteLine("Would you like to Save? Y/N");
-                string response = Console.ReadLine().ToUpper();
-                if (response == "Y" || response == "YES")
-                {
-                    Commands("Save", ref saveData, ref save);
-                }
-                else if (response == "N" || response == "NO")
-                {
-                    Environment.Exit(1);
-                }
-            }
+            
 
             else if (commandUsed == keyword.ListOfKeywords[8].ToUpper())
             {
-                //Reset
+                try
+                {
+                    Process.Start("Final Project.exe");
+                    Environment.Exit(1);
+                }
+                catch 
+                {
+                    try
+                    {
+                        Process.Start("Final Project");
+                        Environment.Exit(1);
+                    }
+                    catch { Console.WriteLine("Unknown failure.  Do not rename the executable; possible platform incompatibility"); }
+                }
+                
             }
             else if ((commandUsed == keyword.ListOfKeywords[13].ToUpper()) || (commandUsed == keyword.ListOfKeywords[14].ToUpper()))
             {
                 //Begin/Start
+                Console.WriteLine("This command is unavailable during this stage.");
             }
             else if (commandUsed == keyword.ListOfKeywords[15].ToUpper())
             {
                 //Load
-                
+                Console.WriteLine("This command is unavailable during this stage.");
 
             }
 
@@ -119,6 +122,37 @@ namespace Final_Project.Commands
                 // Console.WriteLine("Your health is now " + mainCharacter.HealthPoints+" hitpoints");
                 //Fight
 
+            }
+            else if ((commandUsed == keyword.ListOfKeywords[6].ToUpper()) || (commandUsed == keyword.ListOfKeywords[7].ToUpper()))
+            {
+                string response = "";
+                while (response != "Y" || response != "N")
+                {
+                    //Exit or Close
+                    Console.WriteLine("Would you like to Save? Y/N");
+                    response = Console.ReadLine().ToUpper();
+                    if (response == "Y" || response == "YES")
+                    {
+                        Console.WriteLine("What would you like to call this save?");
+                        string name = Console.ReadLine();
+                        Save.saveState(mainCharacter, monster, name);
+                        Console.WriteLine("Game saved.  Press any key to continue");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                        response = "Y";
+                    }
+                    else if (response == "N" || response == "NO")
+                    {
+                        response = "N";
+                        Console.WriteLine("Game terminated without saving.  Press any key to continue.");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unknown response");
+                    }
+                }
             }
             else if (commandUsed == keyword.ListOfKeywords[17].ToUpper())
             {
@@ -467,7 +501,7 @@ namespace Final_Project.Commands
             else if ((commandUsed == keyword.ListOfKeywords[6]) || (commandUsed == keyword.ListOfKeywords[7]))
             {
                 string determine = "";
-                //Exit or CloseC
+                //Exit or Close
                 while (determine != "Y" || determine != "N")
                 {
                     Console.WriteLine("Would you like to save? (y/n)");
@@ -482,6 +516,11 @@ namespace Final_Project.Commands
                     Save.saveState(mainCharacter, enemy, name);
                     Console.WriteLine("Game saved.  Press any key to exit");
                     Console.ReadKey();
+                    Environment.Exit(1);
+                }
+                else
+                {
+                    Console.WriteLine("Game terminated without saving.  Press any key to continue.");
                     Environment.Exit(1);
                 }
 

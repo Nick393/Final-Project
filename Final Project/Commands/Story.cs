@@ -3,6 +3,7 @@ using Final_Project.TemplateClasses;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Final_Project.Commands
 {
@@ -335,6 +336,18 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine().ToLower();
+                if (!(Keywords.keywordsVerify.Contains(command.ToUpper())) )
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid Command.  Type help for a list of valid commands");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else if(command == "")
+                {
+                    Console.ForegroundColor= ConsoleColor.Red;
+                    Console.WriteLine("You must enter a command.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
                 bool ranAway = false;
                 keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway);
                 if (mainCharacter.HealthPoints <= 0)
@@ -440,6 +453,18 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine().ToLower();
+                if (!(Keywords.keywordsVerify.Contains(command.ToUpper())))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid Command.  Type help for a list of valid commands");
+                    Console.ForegroundColor=ConsoleColor.Green;
+                }
+                else if (command == "")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("You must enter a command.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
                 bool ranAway = false;
                 keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway);
                 if (mainCharacter.HealthPoints <= 0)

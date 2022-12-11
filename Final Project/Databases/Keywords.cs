@@ -5,7 +5,7 @@
         private string[] keywords = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "", "", "", "", "Begin", "Start", "Load", "Help", "Save", "Stats", "Cheat" };
         private const int startSystem = 5;
         private string[] returnkeys = { "Fight", "Flee", "Tame", "Kill", "Heal", "Keywords", "Exit", "Close", "Reset", "", "", "", "", "Begin", "Start", "Load", "Help", "Save", "Stats" };
-
+        public static string[] keywordsVerify = { "FIGHT", "FLEE", "TAME", "KILL", "HEAL", "KEYWORDS", "EXIT", "CLOSE", "RESET", "", "", "", "", "BEGIN", "START", "LOAD", "HELP", "SAVE", "STATS", "CHEAT" };
         //detects if the word is a keyword, should be used before detectKeyword
         public bool isKeyword(string input)
         {
