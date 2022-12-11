@@ -340,13 +340,13 @@ namespace Final_Project.Commands
                 if (!(Keywords.keywordsVerify.Contains(command.ToUpper())) )
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid Command.  Type help for a list of valid commands");
+                    Console.WriteLine("Invalid Command.  Type \"help\" for a list of valid commands");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 else if(command == "")
                 {
                     Console.ForegroundColor= ConsoleColor.Red;
-                    Console.WriteLine("You must enter a command.");
+                    Console.WriteLine("You must enter a command. Type \"help\" for a list of valid commands");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 bool ranAway = false;
@@ -458,13 +458,13 @@ namespace Final_Project.Commands
                 if (!(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid Command.  Type help for a list of valid commands");
+                    Console.WriteLine("Invalid Command.  Type \"help\" for a list of valid commands");
                     Console.ForegroundColor=ConsoleColor.Green;
                 }
                 else if (command == "")
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You must enter a command.");
+                    Console.WriteLine("You must enter a command. Type \"help\" for a list of valid commands");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 bool ranAway = false;
