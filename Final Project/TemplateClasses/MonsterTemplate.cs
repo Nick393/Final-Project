@@ -20,7 +20,7 @@ namespace Final_Project.TemplateClasses
             this.Species = species;
             double multiplier = 1;
             this.HealthPoints = health;
-            int variable = rand.Next(0, 12 );
+            int variable = rand.Next(0, 12);
             variable = variable - (variable / 2 - 1);
             int variable2 = rand.Next(0, 12);
             variable2 = variable2 - (variable2 / 2 - 1);
@@ -51,7 +51,7 @@ namespace Final_Project.TemplateClasses
             this.Name = name;
             this.Species = species;
             double multiplier = 1;
-            int variable = rand.Next(0, (11* (gameStage+1)) + 1);
+            int variable = rand.Next(0, (11 * (gameStage + 1)) + 1);
             variable = variable - (variable / 2 - 1);
             int variable2 = rand.Next(0, (11 * (gameStage + 1)) + 1);
             variable2 = variable2 - (variable2 / 2 - 1);

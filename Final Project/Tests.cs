@@ -50,7 +50,7 @@ namespace Final_Project
             saveData.addObject(Tom);*/
             List<object> save1 = new List<object>();
             save1 = saveData.getSaveData();
-           // Save.SaveObjects(save1);
+            // Save.SaveObjects(save1);
 
             foreach (string place in nameList.getList(4))
             {

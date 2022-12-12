@@ -33,7 +33,7 @@ namespace Final_Project.Commands
                 }
                 Console.WriteLine(listOfWords);
             }
-            
+
 
             else if (commandUsed == keyword.ListOfKeywords[8].ToUpper())
             {
@@ -42,7 +42,7 @@ namespace Final_Project.Commands
                     Process.Start("Final Project.exe");
                     Environment.Exit(1);
                 }
-                catch 
+                catch
                 {
                     try
                     {
@@ -51,7 +51,7 @@ namespace Final_Project.Commands
                     }
                     catch { Console.WriteLine("Unknown failure.  Do not rename the executable; possible platform incompatibility"); }
                 }
-                
+
             }
             else if ((commandUsed == keyword.ListOfKeywords[13].ToUpper()) || (commandUsed == keyword.ListOfKeywords[14].ToUpper()))
             {
@@ -175,35 +175,41 @@ namespace Final_Project.Commands
                 {
                     Console.WriteLine("You have fled " + monster.Name + "!");
                 }*/
-                double strengthComparison = (mainCharacter.HealthPoints + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength);
-                if (strengthComparison >= 1)
+                if (!isBoss)
                 {
-                    Console.WriteLine("You have successfully fled from " + monster.Name + "!");
-                    ranAway = true; 
-                }
-                else
-                {
-                    Random rand = new Random();
-                    int duuble = rand.Next(1, 100);
-                    double duublePercentage = duuble / 100;
-                    if (duublePercentage >= strengthComparison)
+                    double strengthComparison = (mainCharacter.HealthPoints + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength);
+                    if (strengthComparison >= 1)
                     {
                         Console.WriteLine("You have successfully fled from " + monster.Name + "!");
                         ranAway = true;
                     }
                     else
                     {
-                        int amountLost = 0;
-                        int duuuble = rand.Next(1, 100);
-                        double duuublePercentage = duuuble / 100;
-                        double duuubleLost = duuublePercentage * monster.Strength;
-                        amountLost = (int)duuubleLost;
-                        Console.WriteLine("You have failed to flee from " + monster.Name + "!");
-                        Console.WriteLine("You have taken " + amountLost + " damage.");
-                        ranAway = false;
+                        Random rand = new Random();
+                        int duuble = rand.Next(1, 100);
+                        double duublePercentage = duuble / 100;
+                        if (duublePercentage >= strengthComparison)
+                        {
+                            Console.WriteLine("You have successfully fled from " + monster.Name + "!");
+                            ranAway = true;
+                        }
+                        else
+                        {
+                            int amountLost = 0;
+                            int duuuble = rand.Next(1, 100);
+                            double duuublePercentage = duuuble / 100;
+                            double duuubleLost = duuublePercentage * monster.Strength;
+                            amountLost = (int)duuubleLost;
+                            Console.WriteLine("You have failed to flee from " + monster.Name + "!");
+                            Console.WriteLine("You have taken " + amountLost + " damage.");
+                            ranAway = false;
+                        }
                     }
                 }
-
+                else
+                {
+                    Console.WriteLine("You cannot flee from a boss!");
+                }
             }
             else if ((commandUsed == keyword.ListOfKeywords[6]) || (commandUsed == keyword.ListOfKeywords[7]))
             {
@@ -229,10 +235,12 @@ namespace Final_Project.Commands
             }
             else if (commandUsed == keyword.ListOfKeywords[2].ToUpper())
             {
-                if (!isBoss){//Tame
+                if (!isBoss)
+                {//Tame
                     if ((monster.HealthPoints > mainCharacter.HealthPoints / 2) || (monster.Strength > mainCharacter.Strength / 2))
                     {
                         Console.WriteLine("You cannot tame " + monster.Name + ". It is too powerful");
+                        ranAway = false;
                     }
                     else
                     {
@@ -245,7 +253,8 @@ namespace Final_Project.Commands
                         pet.HealthPoints = pet.HealthPoints * 0.75;
                         mainCharacter.Pets.Add(pet);
                         ranAway = true;
-                    } }
+                    }
+                }
                 else
                 {
                     Console.WriteLine("You cannot tame a boss.");
@@ -346,7 +355,7 @@ namespace Final_Project.Commands
                 }
                 else
                 {
-                    Console.ForegroundColor= ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Unable to heal! You have no medkits");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
@@ -386,13 +395,13 @@ namespace Final_Project.Commands
             return petStrength;
         }
 
-        public void Commands(string commandUsed, ref CharacterTemplate enemy, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save, ref bool ranAway)
+        public void Commands(string commandUsed, ref CharacterTemplate enemy, ref CharacterTemplate mainCharacter, ref SaveData saveData, ref Save save, ref bool ranAway, bool isBoss)
         {
 
             if (mainCharacter.HealthPoints <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("You lost!"+" Your final health was "+mainCharacter.HealthPoints); 
+                Console.WriteLine("You lost!" + " Your final health was " + mainCharacter.HealthPoints);
                 Console.WriteLine("Press any key to admit defeat");
                 Console.ReadKey();
                 Environment.Exit(1);
@@ -409,7 +418,7 @@ namespace Final_Project.Commands
                 Random rand = new Random();
                 int randomizer = rand.Next(0, 101);
                 double randomizerPercentage = randomizer / 100;
-                double strengthComparison = ( mainCharacter.Strength) / ( enemy.Strength);
+                double strengthComparison = (mainCharacter.Strength) / (enemy.Strength);
                 if (strengthComparison >= 1.125)
                 {
                     int doSlightHurt = rand.Next(0, 3);
@@ -420,17 +429,20 @@ namespace Final_Project.Commands
                         Console.WriteLine("You have won the fight, but have been hurt slightly.  You lost " + slightHurt + " hitpoints.");
 
                     }
-                    else { 
-                    Console.WriteLine("You won the fight against " + enemy.Name + " with no injuries!");
+                    else
+                    {
+                        Console.WriteLine("You won the fight against " + enemy.Name + " with no injuries!");
                     }
-                } else if (strengthComparison >= 1)
+                }
+                else if (strengthComparison >= 1)
                 {
                     double healthLost = enemy.Strength * randomizerPercentage * 0.5;
-                    int amountLost = (int)(mainCharacter.HealthPoints - healthLost*10);
+                    int amountLost = (int)(mainCharacter.HealthPoints - healthLost * 10);
                     Console.WriteLine("You won the fight against " + enemy.Name + "!");
                     Console.WriteLine("You have lost " + amountLost + " hit points.");
                     mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
-                } else
+                }
+                else
                 {
                     if (strengthComparison > randomizerPercentage)
                     {
@@ -439,7 +451,8 @@ namespace Final_Project.Commands
                         Console.WriteLine("You won the fight against " + enemy.Name + "!");
                         Console.WriteLine("You have lost " + amountLost + " hit points.");
                         mainCharacter.HealthPoints = mainCharacter.HealthPoints - amountLost;
-                    } else
+                    }
+                    else
                     {
                         double healthLost = enemy.Strength * randomizerPercentage * 2;
                         int amountLost = (int)(mainCharacter.HealthPoints - healthLost);
@@ -480,35 +493,41 @@ namespace Final_Project.Commands
             else if (commandUsed == keyword.ListOfKeywords[1].ToUpper())
             {
                 //Flee
-                double strengthComparison = (mainCharacter.Strength) / (enemy.Strength);
-                if (strengthComparison >= 1)
+                if (!isBoss)
                 {
-                    Console.WriteLine("You have successfully fled from " + enemy.Name + "!");
-                    ranAway = true;
-                }
-                else
-                {
-                    Random rand = new Random();
-                    int duuble = rand.Next(1, 100);
-                    double duublePercentage = duuble / 100;
-                    if (duublePercentage >= strengthComparison)
+                    double strengthComparison = (mainCharacter.Strength) / (enemy.Strength);
+                    if (strengthComparison >= 1)
                     {
                         Console.WriteLine("You have successfully fled from " + enemy.Name + "!");
                         ranAway = true;
                     }
                     else
                     {
-                        int amountLost = 0;
-                        int duuuble = rand.Next(1, 100);
-                        double duuublePercentage = duuuble / 100;
-                        double duuubleLost = duuublePercentage * enemy.Strength;
-                        amountLost = (int)duuubleLost;
-                        Console.WriteLine("You have failed to flee from " + enemy.Name + "!");
-                        Console.WriteLine("You have taken " + amountLost + " damage.");
-                        ranAway = false;
+                        Random rand = new Random();
+                        int duuble = rand.Next(1, 100);
+                        double duublePercentage = duuble / 100;
+                        if (duublePercentage >= strengthComparison)
+                        {
+                            Console.WriteLine("You have successfully fled from " + enemy.Name + "!");
+                            ranAway = true;
+                        }
+                        else
+                        {
+                            int amountLost = 0;
+                            int duuuble = rand.Next(1, 100);
+                            double duuublePercentage = duuuble / 100;
+                            double duuubleLost = duuublePercentage * enemy.Strength;
+                            amountLost = (int)duuubleLost;
+                            Console.WriteLine("You have failed to flee from " + enemy.Name + "!");
+                            Console.WriteLine("You have taken " + amountLost + " damage.");
+                            ranAway = false;
+                        }
                     }
                 }
-
+                else
+                {
+                    Console.WriteLine("You cannot flee from a boss!");
+                }
             }
             else if ((commandUsed == keyword.ListOfKeywords[6]) || (commandUsed == keyword.ListOfKeywords[7]))
             {
@@ -578,9 +597,9 @@ namespace Final_Project.Commands
                     if (random > probability)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("You lost!"); 
+                        Console.WriteLine("You lost!");
                         Console.WriteLine("Press any key to admit defeat");
-                        
+
                         Console.ReadKey();
                         Environment.Exit(1);
                     }
@@ -611,7 +630,7 @@ namespace Final_Project.Commands
                     if (mainCharacter.HealthPoints <= 0)
                     {
 
-                        Console.ForegroundColor= ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("You lost");
                         Console.WriteLine("press any key to admit defeat");
                         Console.ReadKey();
@@ -639,7 +658,7 @@ namespace Final_Project.Commands
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Unable to heal! You have no medkits");
-                    Console.ForegroundColor=ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
             }
             else if (commandUsed == ListOfKeywords[19])

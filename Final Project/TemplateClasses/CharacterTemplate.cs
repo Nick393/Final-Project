@@ -40,9 +40,9 @@ namespace Final_Project.TemplateClasses
             _Species = Species;
             //_Score = 0;
             //slightly varies enemy health so all the values aren't the same
-            int variable = rand.Next(0,(11*(gameStage+1))+1);
-            variable = variable - (variable/2 - 1);
-            int variable2 = rand.Next(0, (11 * (gameStage + 1))+1);
+            int variable = rand.Next(0, (11 * (gameStage + 1)) + 1);
+            variable = variable - (variable / 2 - 1);
+            int variable2 = rand.Next(0, (11 * (gameStage + 1)) + 1);
             variable2 = variable2 - (variable2 / 2 - 1);
             double multiplier;
             switch (strengthValue)
@@ -66,8 +66,8 @@ namespace Final_Project.TemplateClasses
             double health = 0;
             double strength = 0;
             determineDefault(gameStage, ref health, ref strength);
-            this.HealthPoints = health * multiplier * nicksMultiplier+ variable;
-            this.Strength = strength * multiplier * nicksMultiplier+ variable2;
+            this.HealthPoints = health * multiplier * nicksMultiplier + variable;
+            this.Strength = strength * multiplier * nicksMultiplier + variable2;
             this.numMedkits = 0;
         }
         public CharacterTemplate(string Name, string Alignment, string Species, int gameStage)//non-default constructor, makes friendly NPC Characters
@@ -110,7 +110,7 @@ namespace Final_Project.TemplateClasses
         }
         public int numRounds
         {
-            get { return _numRounds; }  
+            get { return _numRounds; }
             set { _numRounds = value; }
         }
 
@@ -164,10 +164,12 @@ namespace Final_Project.TemplateClasses
             {
                 if (pet != null)
                 {
-                    if (pet.Strength <= strength) {
+                    if (pet.Strength <= strength)
+                    {
                         pet.Strength = strength;
-                        pet.HealthPoints = health; }
-                    else if (pet.HealthPoints <= health) 
+                        pet.HealthPoints = health;
+                    }
+                    else if (pet.HealthPoints <= health)
                     {
                         pet.HealthPoints = health;
                     }

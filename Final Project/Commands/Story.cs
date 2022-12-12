@@ -21,7 +21,7 @@ namespace Final_Project.Commands
             List<string> speciesList = new List<string>();
             speciesList = names.getList(3);
             Console.WriteLine("The available species are: ");
-                foreach (string Species in speciesList )
+            foreach (string Species in speciesList)
             {
                 Console.WriteLine(Species);
             }
@@ -33,22 +33,25 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine(faction);
             }
-                string alignment = RequestInformation("Faction");
+            string alignment = RequestInformation("Faction");
             const int START_STAGE = 0;
             CharacterTemplate mc = new CharacterTemplate(name, alignment, species, 4, START_STAGE, sMult);
             StreamReader r = new StreamReader("highScore.json");
             if (mc.Name == "HaCKEr")
             {
                 mc.Name = "Developer";
-                Console.Write("Developer mode " );
+                Console.Write("Developer mode ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("enabled");
-                
-                Console.ForegroundColor= ConsoleColor.Yellow;
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Developer Settings:");
                 Console.WriteLine("Enter your starting health");
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 double sHealth = int.Parse(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Enter your starting Strength");
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 double sStrength = int.Parse(Console.ReadLine());
                 mc.HealthPoints = sHealth;
                 mc.Strength = sStrength;
@@ -69,7 +72,9 @@ namespace Final_Project.Commands
         public string RequestInformation(string infoName)
         {
             Console.WriteLine("Please enter your " + infoName);
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string tempReturn = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             if (commands.isKeyword(tempReturn))
             {
                 if (commands.isSystemKeyword(tempReturn))
@@ -155,7 +160,9 @@ namespace Final_Project.Commands
         public bool listInputsPrompt(string infoName)
         {
             Console.WriteLine("Would you like to see a list of Valid " + infoName + "? Y/N");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string test = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             if (commands.isKeyword(test))
             {
                 commands.Commands(test, ref saveData, ref save);
@@ -167,10 +174,8 @@ namespace Final_Project.Commands
 
         public object RandomEncounter(int randNum, string mcAlignment, int gameStage, double sMult)
         {
-                        if (randNum == 0)
+            if (randNum == 0)
             {
-
-                
                 int sign = rand.Next(1, 2);
                 int multiplier = 0;
                 if (sign == 1)
@@ -182,7 +187,6 @@ namespace Final_Project.Commands
                     multiplier = 1;
                 }
                 return RandomEncounter(multiplier, mcAlignment, gameStage, sMult);
-
             }
             else if (randNum < 0)
             {
@@ -190,6 +194,19 @@ namespace Final_Project.Commands
                 {
                     //put boss method here
                     const int BUFF_POWER = 3;
+                    sMult = sMult * 4;
+                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, sMult);
+                    return encounter;
+                }
+                else if (Math.Abs(randNum) < 100)
+                {
+                    const int BUFF_POWER = 2;
+                    MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, sMult);
+                    return encounter;
+                }
+                else if (Math.Abs(randNum) < 10000)
+                {
+                    const int BUFF_POWER = 1;
                     MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, sMult);
                     return encounter;
                 }
@@ -207,6 +224,7 @@ namespace Final_Project.Commands
                 {
                     //put boss method here
                     const int BUFF_POWER = 3;
+                    sMult = sMult * 4;
                     CharacterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, mcAlignment, sMult);
                     return encounter;
                 }
@@ -232,7 +250,7 @@ namespace Final_Project.Commands
             }
         }
 
-        public MonsterTemplate makeEncounter(int BUFF_POWER, int gameStage,double sMult)
+        public MonsterTemplate makeEncounter(int BUFF_POWER, int gameStage, double sMult)
         {
             string name = names.getMonsterName();
             string species = names.getMonsterSpecies();
@@ -245,7 +263,7 @@ namespace Final_Project.Commands
             string name = names.getHumanName();
             string species = names.getHumanSpecies();
             string alignment = names.getOpposingFaction(mcAlignment);
-            CharacterTemplate returnCharacter = new CharacterTemplate(name, alignment, species, BUFF_POWER, gameStage,  sMult);
+            CharacterTemplate returnCharacter = new CharacterTemplate(name, alignment, species, BUFF_POWER, gameStage, sMult);
             return returnCharacter;
         }
 
@@ -359,8 +377,9 @@ namespace Final_Project.Commands
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?  (type \"help\" for help.)");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 string command = Console.ReadLine().ToLower();
-
+                Console.ForegroundColor = ConsoleColor.Green;
                 if (!(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -374,12 +393,12 @@ namespace Final_Project.Commands
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
                 bool ranAway = false;
-                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway);
+                keywords.Commands(command, ref enemy, ref mainCharacter, ref saveData, ref save, ref ranAway, isBoss);
                 if (mainCharacter.HealthPoints <= 0)
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || ((command == "flee" && ranAway)) || ((enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || ((command == "flee" && ranAway && !isBoss)))
                 {
                     encounterDone = true;
                     Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
@@ -404,7 +423,6 @@ namespace Final_Project.Commands
                 if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close" || !(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
                     encounterDone = false;
-                    Console.WriteLine("You are facing " + enemy.Name);
                 }
 
 
@@ -422,7 +440,7 @@ namespace Final_Project.Commands
 
         }
 
-        public void runEncounter(ref MonsterTemplate enemy, string mcAlignment, bool isBoss,ref CharacterTemplate mainCharacter, ref Save save, ref SaveData saveData)
+        public void runEncounter(ref MonsterTemplate enemy, string mcAlignment, bool isBoss, ref CharacterTemplate mainCharacter, ref Save save, ref SaveData saveData)
         {
             Random rando = new Random();
             int add = rando.Next(0, 12);
@@ -484,12 +502,14 @@ namespace Final_Project.Commands
             while (encounterDone == false)
             {
                 Console.WriteLine("What would you like to do next?  (type \"help\" for help.)");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 string command = Console.ReadLine().ToLower();
+                Console.ForegroundColor = ConsoleColor.Green;
                 if (!(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid Command.  Type \"help\" for a list of valid commands");
-                    Console.ForegroundColor=ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
                 else if (command == "")
                 {
@@ -503,11 +523,11 @@ namespace Final_Project.Commands
                 {
                     encounterDone = true;
                 }
-                else if (command == "kill" || command == "fight" || (command == "tame" && ranAway && !(isBoss)) || (enemy.Strength > mainCharacter.Strength / 2) || (command == "flee" && ranAway) || ((enemy.Strength > mainCharacter.Strength / 2)))
+                else if (command == "kill" || command == "fight" || (command == "tame" && ranAway && !(isBoss)) || (command == "flee" && ranAway && !isBoss))
                 {
                     encounterDone = true;
                     Console.WriteLine("Your health is now " + mainCharacter.HealthPoints.ToString());
-                } 
+                }
                 else
                 {
 
@@ -515,10 +535,9 @@ namespace Final_Project.Commands
                     Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
                     Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
                 }
-                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close" || !(Keywords.keywordsVerify.Contains(command.ToUpper())))
+                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close" || !(commands.isKeyword(command)))
                 {
                     encounterDone = false;
-                    Console.WriteLine("You are facing "+enemy.Name);
                 }
             }
             mainCharacter.score = mainCharacter.score + 1;

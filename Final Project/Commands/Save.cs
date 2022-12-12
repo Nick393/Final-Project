@@ -469,7 +469,7 @@ namespace Final_Project.Commands
             else
             {
                 Random random = new Random();
-                int rand=random.Next(0, 100);
+                int rand = random.Next(0, 100);
                 StreamWriter w = new StreamWriter("1" + " " + name + " character.csv");
                 w.Write(character.Name + "," + character.Alignment + "," + character.Species + "," + character.Strength + "," + character.HealthPoints + "," + character.numMedkits);
                 if (character.Pets.Count != 0)
@@ -484,7 +484,7 @@ namespace Final_Project.Commands
                         petscii.Close();
                     }
 
-                    var p = File.CreateText("1"+ " " + name + " numPets.pet");
+                    var p = File.CreateText("1" + " " + name + " numPets.pet");
                     p.Write(iterator);
                     p.Close();
                 }
