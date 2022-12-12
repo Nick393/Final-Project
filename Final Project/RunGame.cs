@@ -185,6 +185,8 @@ namespace Final_Project
                 gameStage++;
                 mainCharacter.updateHealth(gameStage);
                 Console.WriteLine("You have levelled up! Your stats have grown and your health has recovered.");
+                Console.WriteLine("Your new health is " + mainCharacter.HealthPoints);
+                Console.WriteLine("Your new strength is " + mainCharacter.Strength);
             }
             else if (!(File.Exists("1.now")))
             {
