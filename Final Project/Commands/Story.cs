@@ -401,7 +401,7 @@ namespace Final_Project.Commands
                     }
 
                 }
-                if (command == ""||command=="save"||command=="load"||command=="start"||command=="begin"||command== "stats"||command=="keywords"||command=="exit"||command=="reset"||command=="help"||command=="heal"||command=="close"||!(Keywords.keywordsVerify.Contains(command)))
+                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close" || !(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
                     encounterDone = false;
                     Console.WriteLine("You are facing " + enemy.Name);
@@ -515,7 +515,7 @@ namespace Final_Project.Commands
                     Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
                     Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
                 }
-                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close" || !(Keywords.keywordsVerify.Contains(command)))
+                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close" || !(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
                     encounterDone = false;
                     Console.WriteLine("You are facing "+enemy.Name);
