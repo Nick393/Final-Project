@@ -1,5 +1,7 @@
 ﻿<Properties StartupConfiguration="{E45FD283-3051-483C-98A8-5B955A0D3518}|Default">
-  <MonoDevelop.Ide.ItemProperties.Final_220Project PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Final Project/RunGame.cs">
@@ -29,7 +31,5 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Final_220Project PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
