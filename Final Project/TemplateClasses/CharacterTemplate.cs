@@ -120,6 +120,7 @@ namespace Final_Project.TemplateClasses
         }*/
         public void updateHealth(int gameStage)
         {
+
             int newStage = gameStage - 1;
             double health = 15;
             int strength = 20;
@@ -153,13 +154,22 @@ namespace Final_Project.TemplateClasses
                     health = 60;
                     strength = 80;
                     break;
+                case 7:
+                    health = 67.5;
+                    strength = 90;
+                    break;
                 default:
-                    health = 60;
-                    strength = 80;
+                    health = 75;
+                    strength = 100;
                     break;
             }
-            this.Strength = strength * 2;
-            this.HealthPoints = health * 2;
+            if (!(this.Strength > strength))
+            {
+                this.Strength = strength;
+            }
+            if (!(this.HealthPoints > health)) {
+                this.HealthPoints = health;
+            }
             foreach (PetTemplate pet in Pets)
             {
                 if (pet != null)

@@ -35,7 +35,12 @@ namespace Final_Project.Commands
             }
             string alignment = RequestInformation("Faction");
             const int START_STAGE = 0;
-            CharacterTemplate mc = new CharacterTemplate(name, alignment, species, 4, START_STAGE, sMult);
+            CharacterTemplate mc = new CharacterTemplate();
+            mc.Name = name;
+            mc.Species = species;
+            mc.Alignment = alignment;
+            mc.Strength = 60;
+            mc.HealthPoints = 45;
             StreamReader r = new StreamReader("highScore.json");
             if (mc.Name == "HaCKEr")
             {
@@ -201,12 +206,14 @@ namespace Final_Project.Commands
                 else if (Math.Abs(randNum) < 100)
                 {
                     const int BUFF_POWER = 2;
+                    sMult = sMult * 3;
                     MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, sMult);
                     return encounter;
                 }
                 else if (Math.Abs(randNum) < 10000)
                 {
                     const int BUFF_POWER = 1;
+                    sMult = sMult * 2;
                     MonsterTemplate encounter = makeEncounter(BUFF_POWER, gameStage, sMult);
                     return encounter;
                 }

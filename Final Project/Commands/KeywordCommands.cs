@@ -88,7 +88,7 @@ namespace Final_Project.Commands
                 Random rand = new Random();
                 int randomizer = rand.Next(0, 101);
                 double randomizerPercentage = randomizer / 100;
-                double strengthComparison = (mainCharacter.Strength) / (monster.Strength);
+                double strengthComparison = (mainCharacter.Strength + getStrengthValue(mainCharacter)) / (monster.Strength);
                 if (strengthComparison >= 1.125)
                 {
                     Console.WriteLine("You won the fight against " + monster.Name + " with no injuries!");
@@ -177,7 +177,7 @@ namespace Final_Project.Commands
                 }*/
                 if (!isBoss)
                 {
-                    double strengthComparison = (mainCharacter.HealthPoints + mainCharacter.Strength) / (monster.HealthPoints + monster.Strength);
+                    double strengthComparison = (mainCharacter.Strength + getStrengthValue(mainCharacter)) / (monster.Strength);
                     if (strengthComparison >= 1)
                     {
                         Console.WriteLine("You have successfully fled from " + monster.Name + "!");
@@ -237,22 +237,32 @@ namespace Final_Project.Commands
             {
                 if (!isBoss)
                 {//Tame
-                    if ((monster.HealthPoints > mainCharacter.HealthPoints / 2) || (monster.Strength > mainCharacter.Strength / 2))
+                    Random rand = new Random();
+                    double strengthValue = (mainCharacter.Strength + getStrengthValue(mainCharacter)) / monster.Strength;
+                    double randomInPercent = rand.Next(0, 301);
+                    randomInPercent = randomInPercent / 100;
+                    double randomInPercent2 = rand.Next(0, 101);
+                    randomInPercent2 = randomInPercent2 / 100;
+                    if (strengthValue >= 3)
                     {
-                        Console.WriteLine("You cannot tame " + monster.Name + ". It is too powerful");
-                        ranAway = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("You have tamed " + monster.Name);
-                        Random rand = new Random();
-                        double healthLost = monster.Strength * (rand.Next(1, 11) * 0.1);
-                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - healthLost;
-                        Console.WriteLine("Unfortunately, you have lost " + healthLost + " hitpoints.");
+                        Console.WriteLine("You have successfully tamed " + monster.Name);
                         PetTemplate pet = new PetTemplate(monster, mainCharacter);
-                        pet.HealthPoints = pet.HealthPoints * 0.75;
                         mainCharacter.Pets.Add(pet);
                         ranAway = true;
+                    } else if (strengthValue > randomInPercent)
+                    {
+                        double damageTaken = monster.Strength * randomInPercent2;
+                        Console.WriteLine("You have successfully tamed " + monster.Name + ". However, you have lost " + damageTaken + " Hit Points.");
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - damageTaken;
+                        PetTemplate pet = new PetTemplate(monster, mainCharacter);
+                        mainCharacter.Pets.Add(pet);
+                        ranAway = true;
+                    } else
+                    {
+                        double damageTaken = monster.Strength * randomInPercent2;
+                        Console.WriteLine("You have failed to tame " + monster.Name + ". You have lost " + (damageTaken) + " Hit Points.");
+                        ranAway = false;
+                        mainCharacter.HealthPoints = mainCharacter.HealthPoints - damageTaken;
                     }
                 }
                 else
@@ -277,7 +287,7 @@ namespace Final_Project.Commands
 
                     double intprob = (mainCharacter.HealthPoints) / monster.HealthPoints * 100;
                     int intProbPercentage = (int)intprob;
-                    if ((mainCharacter.HealthPoints + mainCharacter.Strength) > (monster.HealthPoints + monster.Strength))
+                    if ((getStrengthValue(mainCharacter)+ mainCharacter.Strength) > ( monster.Strength))
                     {
                         loseRand = 7.5;
                     }
@@ -300,7 +310,7 @@ namespace Final_Project.Commands
                         Console.WriteLine("You Lose!");
                         Console.WriteLine("press any key to admit defeat!");
                         Console.ReadKey();
-                        Console.ReadKey();
+                        
                         Environment.Exit(5);
                     }
                     else
@@ -418,7 +428,7 @@ namespace Final_Project.Commands
                 Random rand = new Random();
                 int randomizer = rand.Next(0, 101);
                 double randomizerPercentage = randomizer / 100;
-                double strengthComparison = (mainCharacter.Strength) / (enemy.Strength);
+                double strengthComparison = (mainCharacter.Strength + getStrengthValue(mainCharacter)) / (enemy.Strength);
                 if (strengthComparison >= 1.125)
                 {
                     int doSlightHurt = rand.Next(0, 3);
@@ -495,7 +505,7 @@ namespace Final_Project.Commands
                 //Flee
                 if (!isBoss)
                 {
-                    double strengthComparison = (mainCharacter.Strength) / (enemy.Strength);
+                    double strengthComparison = (mainCharacter.Strength + getStrengthValue(mainCharacter)) / (enemy.Strength);
                     if (strengthComparison >= 1)
                     {
                         Console.WriteLine("You have successfully fled from " + enemy.Name + "!");
@@ -571,13 +581,13 @@ namespace Final_Project.Commands
                     newPets = modifyPetHealth(enemy.HealthPoints, enemy.Strength, mainCharacter);
                     mainCharacter.Pets.Clear();
                     mainCharacter.Pets = newPets;
-                    double probability = ((getStrengthValue(mainCharacter) + mainCharacter.HealthPoints + mainCharacter.Strength) / (enemy.HealthPoints + enemy.Strength)) * 100;
+                    double probability = ((getStrengthValue(mainCharacter)  + mainCharacter.Strength) / ( enemy.Strength)) * 100;
                     Random rand = new Random();
                     double loseRand = 0;
 
                     double intprob = (mainCharacter.HealthPoints) / enemy.HealthPoints * 100;
                     int intProbPercentage = (int)intprob;
-                    if ((mainCharacter.HealthPoints + mainCharacter.Strength) > (enemy.HealthPoints + enemy.Strength))
+                    if ( (mainCharacter.Strength + getStrengthValue(mainCharacter)) >  enemy.Strength)
                     {
                         loseRand = 7.5;
                     }
@@ -673,8 +683,6 @@ namespace Final_Project.Commands
             {
                 //Stats
                 Console.WriteLine("\n" + mainCharacter.Name + " Statboard" + "\n" + "\n" + "Species: " + mainCharacter.Species + "\n" + "Faction: " + mainCharacter.Alignment + "\n" + "Strength: " + mainCharacter.Strength + "\n" + "Health: " + mainCharacter.HealthPoints + "\n" + "Number of Medkits: " + mainCharacter.numMedkits + "\n");
-                Console.WriteLine("Health: " + mainCharacter.HealthPoints);
-                Console.WriteLine("Number of Medkits: " + mainCharacter.numMedkits);
                 foreach (PetTemplate pet in mainCharacter.Pets)
                 {
                     Console.WriteLine("\n" + pet.Name + " Statboard" + "\n" + "\n" + "Species: " + pet.Species + "\n" + "Owner: " + mainCharacter.Name + "\n" + "Strength: " + pet.Strength + "\n" + "Health: " + pet.HealthPoints);

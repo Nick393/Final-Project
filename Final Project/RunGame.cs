@@ -154,19 +154,32 @@ namespace Final_Project
             Console.WriteLine("If you are ready to begin your adventure, press enter. If you would like to load a previous save, please type Load");
         }
 
-        public static void endGame(CharacterTemplate finalBoss)
+        public static void endGame(CharacterTemplate finalBoss, CharacterTemplate mainCharacter)
         {
-            Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
-            Environment.Exit(2);
+            if (mainCharacter.HealthPoints > 0)
+            {
+                Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
+                Console.WriteLine("Press any key to exit");
+                Console.ReadKey();
+                Environment.Exit(2);
+            } else
+            {
+                Console.WriteLine("You have lost");
+            }
         }
-        public static void endGame(MonsterTemplate finalBoss)
+        public static void endGame(MonsterTemplate finalBoss, CharacterTemplate mainCharacter)
         {
-            Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
-            Environment.Exit(2);
+            if (mainCharacter.HealthPoints > 0)
+            {
+                Console.WriteLine("You have defeated " + finalBoss.Name + ". Congradulations on your victory. However, you have only finished the BETA. If you are a true warrior, you shall finish the released version");
+                Console.WriteLine("Press any key to exit");
+                Console.ReadKey();
+                Environment.Exit(2);
+            }
+            else
+            {
+                Console.WriteLine("You have lost");
+            }
         }
 
 
@@ -184,7 +197,7 @@ namespace Final_Project
             if ((randNum < 150) && !(mainCharacter.Name == "Developer") && !(gameStage == 8) && (File.Exists("1.now")))
             {
                 gameStage++;
-                mainCharacter.updateHealth(gameStage);
+                mainCharacter.updateHealth(gameStage+5);
                 Console.WriteLine("You have levelled up! Your stats have grown and your health has recovered.");
                 Console.WriteLine("Your new health is " + mainCharacter.HealthPoints);
                 Console.WriteLine("Your new strength is " + mainCharacter.Strength);
@@ -211,7 +224,7 @@ namespace Final_Project
                 {
                     CharacterTemplate newVillian = (CharacterTemplate)story.RandomEncounter(1, mainCharacter.Alignment, gameStage, sMult);
                     story.runEncounter(ref newVillian, mainCharacter.Alignment, isBoss, ref mainCharacter, ref saveData, ref save);
-                    endGame(newVillian);
+                    endGame(newVillian,mainCharacter);
                 }
                 else
                 {
@@ -225,7 +238,7 @@ namespace Final_Project
                 {
                     MonsterTemplate newMonster = (MonsterTemplate)story.RandomEncounter(-1, mainCharacter.Alignment, gameStage, sMult);
                     story.runEncounter(ref newMonster, mainCharacter.Alignment, isBoss, ref mainCharacter, ref save, ref saveData);
-                    endGame(newMonster);
+                    endGame(newMonster,mainCharacter);
                 }
                 else
                 {
