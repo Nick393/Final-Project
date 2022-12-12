@@ -358,7 +358,7 @@ namespace Final_Project.Commands
             KeywordCommands keywords = new KeywordCommands();
             while (encounterDone == false)
             {
-                Console.WriteLine("What would you like to do next?");
+                Console.WriteLine("What would you like to do next?  (type \"help\" for help.)");
                 string command = Console.ReadLine().ToLower();
 
                 if (!(Keywords.keywordsVerify.Contains(command.ToUpper())))
@@ -401,7 +401,7 @@ namespace Final_Project.Commands
                     }
 
                 }
-                if (command == ""||command=="save"||command=="load"||command=="start"||command=="begin"||command== "stats"||command=="keywords"||command=="exit"||command=="reset"||command=="help"||command=="heal"||command=="close")
+                if (command == ""||command=="save"||command=="load"||command=="start"||command=="begin"||command== "stats"||command=="keywords"||command=="exit"||command=="reset"||command=="help"||command=="heal"||command=="close"||!(Keywords.keywordsVerify.Contains(command)))
                 {
                     encounterDone = false;
                     Console.WriteLine("You are facing " + enemy.Name);
@@ -483,7 +483,7 @@ namespace Final_Project.Commands
             enemy.Strength = enemy.Strength;
             while (encounterDone == false)
             {
-                Console.WriteLine("What would you like to do next?");
+                Console.WriteLine("What would you like to do next?  (type \"help\" for help.)");
                 string command = Console.ReadLine().ToLower();
                 if (!(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
@@ -515,7 +515,7 @@ namespace Final_Project.Commands
                     Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
                     Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
                 }
-                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close")
+                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close" || !(Keywords.keywordsVerify.Contains(command)))
                 {
                     encounterDone = false;
                     Console.WriteLine("You are facing "+enemy.Name);

@@ -172,7 +172,7 @@ namespace Final_Project
         public static void RunTheGame(ref int PositiveEnd, ref int NegativeEnd, ref int multiplier, ref int gameStage, ref double sMult, ref CharacterTemplate mainCharacter, ref Story story, ref Save save, ref SaveData saveData, ref bool isBoss, ref bool gameNotEnded, ref bool startgame)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("ran rungame");
+            //Console.WriteLine("ran rungame");
             Console.ForegroundColor = ConsoleColor.Green;
             Random rand = new Random();
             KeywordCommands commands = new KeywordCommands();
