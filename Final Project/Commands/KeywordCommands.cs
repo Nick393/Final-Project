@@ -637,7 +637,9 @@ namespace Final_Project.Commands
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Unable to heal! You have no medkits");
+                    Console.ForegroundColor=ConsoleColor.Green;
                 }
             }
             else if (commandUsed == ListOfKeywords[19])

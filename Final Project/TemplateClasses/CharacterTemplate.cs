@@ -11,10 +11,12 @@ namespace Final_Project.TemplateClasses
         private int _numMedkits;
         private int _Score;
         private int _highScore;
+        private int _numRounds;
         Random rand = new Random();
         private List<PetTemplate> _Pets = new List<PetTemplate>();
         public CharacterTemplate()//default constructor
         {
+            _numRounds = 0;
             this.Name = "";
             _Score = 0;
             _Alignment = "";
@@ -32,6 +34,7 @@ namespace Final_Project.TemplateClasses
 
         public CharacterTemplate(string Name, string Alignment, string Species, int strengthValue, int gameStage, double nicksMultiplier)//non-default constructor, makes enemy NPC characters
         {
+            _numRounds = 0;
             this.Name = Name;
             _Alignment = Alignment;
             _Species = Species;
@@ -104,6 +107,11 @@ namespace Final_Project.TemplateClasses
         {
             get { return _numMedkits; }
             set { _numMedkits = value; }
+        }
+        public int numRounds
+        {
+            get { return _numRounds; }  
+            set { _numRounds = value; }
         }
 
         /*public void addPets(MonsterTemplate newPet)

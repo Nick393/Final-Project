@@ -10,8 +10,10 @@ namespace Final_Project
 {
     class RunGame
     {
+        public static int rounds = 0;
         static void Main(string[] args)
         {
+            
             Console.ForegroundColor = ConsoleColor.Green;
             //declares all of the classes for easy method use
             Save save = new Save();
@@ -170,12 +172,14 @@ namespace Final_Project
             KeywordCommands commands = new KeywordCommands();
             int randNum = rand.Next(0, 501);
 
-            if ((randNum < 150) && !(mainCharacter.Name == "Developer") && !(gameStage == 8))
+            if ((randNum < 150) && !(mainCharacter.Name == "Developer") && !(gameStage == 8&&rounds>0))
             {
                 gameStage++;
                 mainCharacter.updateHealth(gameStage);
                 Console.WriteLine("You have levelled up! Your stats have grown and your health has recovered.");
             }
+            rounds++;
+            mainCharacter.numRounds++;
             if (mainCharacter.HealthPoints <= 0)
             {
                 bool doesNotMatter = false;
@@ -231,6 +235,7 @@ namespace Final_Project
             {
                 isBoss = true;
             }
+           // mainCharacter.numRounds++;
         }
     }
 }

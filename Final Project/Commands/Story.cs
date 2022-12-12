@@ -360,15 +360,16 @@ namespace Final_Project.Commands
             {
                 Console.WriteLine("What would you like to do next?");
                 string command = Console.ReadLine().ToLower();
-                if (!(Keywords.keywordsVerify.Contains(command.ToUpper())) )
+
+                if (!(Keywords.keywordsVerify.Contains(command.ToUpper())))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid Command.  Type \"help\" for a list of valid commands");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                else if(command == "")
+                else if (command == "")
                 {
-                    Console.ForegroundColor= ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You must enter a command. Type \"help\" for a list of valid commands");
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
@@ -400,6 +401,12 @@ namespace Final_Project.Commands
                     }
 
                 }
+                if (command == ""||command=="save"||command=="load"||command=="start"||command=="begin"||command== "stats"||command=="keywords"||command=="exit"||command=="reset"||command=="help"||command=="heal"||command=="close")
+                {
+                    encounterDone = false;
+                    Console.WriteLine("You are facing " + enemy.Name);
+                }
+
 
             }
             mainCharacter.score = mainCharacter.score + 1;
@@ -508,12 +515,18 @@ namespace Final_Project.Commands
                     Console.WriteLine(enemy.Name + "'s health is " + enemy.HealthPoints);
                     Console.WriteLine(enemy.Name + "'s strength is " + enemy.Strength);
                 }
+                if (command == "" || command == "save" || command == "load" || command == "start" || command == "begin" || command == "stats" || command == "keywords" || command == "exit" || command == "reset" || command == "help" || command == "heal" || command == "close")
+                {
+                    encounterDone = false;
+                    Console.WriteLine("You are facing "+enemy.Name);
+                }
             }
             mainCharacter.score = mainCharacter.score + 1;
 
             //treamWriter W = new StreamWriter("highScore.json");
             //W.Write(mainCharacter.score);
             //W.Close();
+
         }
         //Use this to put to start the game from the save data
         public void loadSave()
