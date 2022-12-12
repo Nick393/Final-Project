@@ -13,7 +13,13 @@ namespace Final_Project
         public static int rounds = 0;
         static void Main(string[] args)
         {
-            
+            if(File.Exists("1.now"))
+            {
+                File.Delete("1.now");
+            }
+            //var n=File.CreateText("allow.now");
+            //n.Write("0");
+            //n.Close();
             Console.ForegroundColor = ConsoleColor.Green;
             //declares all of the classes for easy method use
             Save save = new Save();
@@ -171,13 +177,23 @@ namespace Final_Project
             Random rand = new Random();
             KeywordCommands commands = new KeywordCommands();
             int randNum = rand.Next(0, 501);
-
-            if ((randNum < 150) && !(mainCharacter.Name == "Developer") && !(gameStage == 8&&rounds>0))
+            var p = File.OpenText("allow.now");
+            int a=int.Parse(p.ReadLine());
+            p.Close();
+            if ((randNum < 150) && !(mainCharacter.Name == "Developer") && !(gameStage == 8 )&& (File.Exists("1.now")))
             {
                 gameStage++;
                 mainCharacter.updateHealth(gameStage);
                 Console.WriteLine("You have levelled up! Your stats have grown and your health has recovered.");
             }
+            else if (!(File.Exists("1.now")))
+            {
+                File.Create("1.now");
+            }
+            //File.Delete("open.now");
+
+            //var d = File.CreateText("open.now");
+           // d.Write("1");
             rounds++;
             mainCharacter.numRounds++;
             if (mainCharacter.HealthPoints <= 0)
