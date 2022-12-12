@@ -11,8 +11,8 @@ namespace Final_Project.TemplateClasses
         private List<string> playerSpecies = new List<string>() { "Human", "Elf", "Dwarf" };
         private List<string> monsterSpecies = new List<string>() { "Eagle", "Fish", "Dragon" };
         private List<string> cityNames = new List<string>() { "Des Moines", "Long John Silvers", "Jerryville" };
-        private List<string> placeNames = new List<string>() { "Deertrack", "Sevii", "Kevin", "Typhoon" };
-        private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" };
+        private List<string> placeNames = new List<string>() { "Deertrack", "Sevii", "Kevin", "Typhoon" }; //Remain unused
+        private List<string> placeSuffixes = new List<string>() { "Forest", "Desert", "Ocean" }; //Remain unused
         private List<string> factions = new List<string>() { "Good", "Neutral", "Evil" };
 
 
